@@ -1,1 +1,52 @@
+# Ignore build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]ist/
+[Dd]istros/
+[Dd]ebug/  # For older MSBuild projects
+[Dd]ebug-x64/
+[Dd]ebug-x86/
+[Dd]ebug-AnyCPU/
+Release/
+Release-x64/
+Release-x86/
+Release-AnyCPU/
+
+# Ignore object files
 *.obj
+*.o
+*.pdb
+*.idb
+*.ipdb
+
+# Ignore binary files
+*.dll
+*.exe
+*.lib
+*.a
+*.so
+*.app
+
+# Ignore Visual Studio files
+.vs/
+.vscode/
+.idea/
+
+# Ignore NuGet packages
+*.nupkg
+# If you have a directory that stores the NuGet cache, add it too:
+.nuget/
+packages/
+
+# Ignore configuration and user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore ASP.NET temporary files
+# ASP.NET generates a few temporary files/folders that aren't needed in source control
+# These can be added if your project includes ASP.NET.
+# Temp folder used by ASP.NET applications in development
+# for compiled views and related temporary files.
+App_Data/
