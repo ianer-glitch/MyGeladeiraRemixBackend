@@ -8,3 +8,13 @@
     build:
       context: .
       dockerfile: src/Presentation/Fridge.API/Dockerfile
+  
+  statistic.api:
+    image: statistic.api
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - $STATISTIC_API_EXTERNAL_PORT:8080
+    build:
+      context: .
+      dockerfile: src/Presentation/Statistic.API/Dockerfile
