@@ -1,18 +1,52 @@
 ﻿services:
+  fridge.api:
+    image: fridge.api
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - $FRIDGE_API_EXTERNAL_PORT:8080
+    build:
+      context: .
+      dockerfile: src/Presentation/Fridge.API/Dockerfile
+
+  statistic.api:
+    image: statistic.api
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - $STATISTIC_API_EXTERNAL_PORT:8080
+    build:
+      context: .
+      dockerfile: src/Presentation/Statistic.API/Dockerfile
+      
   user.service:
     image: user.service
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - $USER_API_EXTERNAL_PORT:8080  
     build:
       context: .
       dockerfile: src/Presentation/Identity/User.Service/Dockerfile
 
   plan.service:
     image: plan.service
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - $PLAN_API_EXTERNAL_PORT:8080  
     build:
       context: .
       dockerfile: src/Presentation/Identity/Plan.Service/Dockerfile
 
   identity.api:
     image: identity.api
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - $IDENTITY_API_EXTERNAL_PORT:8080  
     build:
       context: .
       dockerfile: src/Presentation/Identity/Identity.API/Dockerfile
+
+  
