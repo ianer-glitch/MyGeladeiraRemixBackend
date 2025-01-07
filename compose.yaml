@@ -4,3 +4,9 @@
     build:
       context: .
       dockerfile: src/Presentation/Identity/User.Service/Dockerfile
+
+  plan.service:
+    image: plan.service
+    build:
+      context: .
+      dockerfile: src/Presentation/Identity/Plan.Service/Dockerfile
