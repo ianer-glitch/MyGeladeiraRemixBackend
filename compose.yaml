@@ -8,6 +8,8 @@
     build:
       context: .
       dockerfile: src/Presentation/Fridge.API/Dockerfile
+    networks:
+      default:
 
   statistic.api:
     image: statistic.api
@@ -18,6 +20,8 @@
     build:
       context: .
       dockerfile: src/Presentation/Statistic.API/Dockerfile
+    networks:
+      default:
       
   user.service:
     image: user.service
@@ -28,6 +32,8 @@
     build:
       context: .
       dockerfile: src/Presentation/Identity/User.Service/Dockerfile
+    networks:
+      default:
 
   plan.service:
     image: plan.service
@@ -38,6 +44,8 @@
     build:
       context: .
       dockerfile: src/Presentation/Identity/Plan.Service/Dockerfile
+    networks:
+      default:
 
   identity.api:
     image: identity.api
@@ -48,5 +56,24 @@
     build:
       context: .
       dockerfile: src/Presentation/Identity/Identity.API/Dockerfile
+    networks:
+      default:
 
-  
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
+    
+    volumes:
+      - ./Volumes/database:/var/lib/postgresql/data
+    ports:
+      - 5011:5432
+    networks:
+      default:
+        
+networks:
+  default:
+    driver: "bridge"
