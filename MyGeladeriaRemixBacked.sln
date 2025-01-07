@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statistic.Application", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statistic.Infrastructure", "src\Core\Statistic\Statistic.Infrastructure\Statistic.Infrastructure.csproj", "{3D5FEAAC-1446-44AC-B2BD-01F2BD443960}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User.Service", "src\Presentation\Identity\User.Service\User.Service.csproj", "{A925B64B-3D83-4962-A56C-2FDBEAA5E4C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,5 +62,9 @@ Global
 		{3D5FEAAC-1446-44AC-B2BD-01F2BD443960}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D5FEAAC-1446-44AC-B2BD-01F2BD443960}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D5FEAAC-1446-44AC-B2BD-01F2BD443960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A925B64B-3D83-4962-A56C-2FDBEAA5E4C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A925B64B-3D83-4962-A56C-2FDBEAA5E4C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A925B64B-3D83-4962-A56C-2FDBEAA5E4C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A925B64B-3D83-4962-A56C-2FDBEAA5E4C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

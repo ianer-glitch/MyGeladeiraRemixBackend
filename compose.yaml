@@ -1,0 +1,6 @@
+﻿services:
+  user.service:
+    image: user.service
+    build:
+      context: .
+      dockerfile: src/Presentation/Identity/User.Service/Dockerfile
