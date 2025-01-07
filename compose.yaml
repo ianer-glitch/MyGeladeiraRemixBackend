@@ -10,3 +10,9 @@
     build:
       context: .
       dockerfile: src/Presentation/Identity/Plan.Service/Dockerfile
+
+  identity.api:
+    image: identity.api
+    build:
+      context: .
+      dockerfile: src/Presentation/Identity/Identity.API/Dockerfile
