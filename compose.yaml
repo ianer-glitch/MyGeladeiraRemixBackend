@@ -73,9 +73,21 @@
       POSTGRES_DB: $POSTGRES_DB
     
     volumes:
-      - ./Volumes/database:/var/lib/postgresql/data
+      - ./volumes/database:/var/lib/postgresql/data
     ports:
       - 5011:5432
+    networks:
+      default:
+  
+  service-bus:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 5004:5672
+      - 5005:15672
+    volumes:
+      - ./volumes/ServiceBus/data/:/var/lib/rabbitmq/
+      - ./volumes/ServiceBus/log/:/var/log/rabbitmq
+    
     networks:
       default:
         
