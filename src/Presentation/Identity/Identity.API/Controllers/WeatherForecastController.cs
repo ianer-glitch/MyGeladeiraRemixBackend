@@ -1,4 +1,7 @@
+using Grpc.Net.Client;
+using Identity.Grpc;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace Identity.API.Controllers;
 
@@ -28,5 +31,29 @@ public class WeatherForecastController : ControllerBase
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+    }
+
+    [HttpGet]
+    [Route("SendGreetingsMessage")]
+    public ActionResult<string> SendGreetingsMessage(string message)
+    {
+        try
+        {
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+            var channel = GrpcChannel.ForAddress("http://user-service:8083", new GrpcChannelOptions { HttpHandler = handler });
+
+            var client =  new Greeter.GreeterClient(channel);
+            var request = new HelloRequest { Name = message };  
+            return Ok(client.SayHelloAsync(request));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return BadRequest();
+        }    
     }
 }

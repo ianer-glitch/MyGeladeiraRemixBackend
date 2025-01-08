@@ -1,5 +1,3 @@
-using Grpc.Core;
-using User.Service;
 
 namespace User.Service.Services;
 

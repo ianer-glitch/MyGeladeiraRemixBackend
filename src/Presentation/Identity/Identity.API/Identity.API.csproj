@@ -17,4 +17,8 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\Grpc\Identity.Grpc\Identity.Grpc.csproj" />
+    </ItemGroup>
+
 </Project>

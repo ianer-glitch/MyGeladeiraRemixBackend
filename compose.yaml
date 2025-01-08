@@ -2,10 +2,10 @@
   fridge.api:
     image: fridge.api
     environment:
-      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTP_PORTS=8081
       - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
     ports:
-      - $FRIDGE_API_EXTERNAL_PORT:8080
+      - $FRIDGE_API_EXTERNAL_PORT:8081
     build:
       context: .
       dockerfile: src/Presentation/Fridge.API/Dockerfile
@@ -15,10 +15,10 @@
   statistic.api:
     image: statistic.api
     environment:
-      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTP_PORTS=8082
       - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
     ports:
-      - $STATISTIC_API_EXTERNAL_PORT:8080
+      - $STATISTIC_API_EXTERNAL_PORT:8082
     build:
       context: .
       dockerfile: src/Presentation/Statistic.API/Dockerfile
@@ -28,10 +28,10 @@
   user.service:
     image: user.service
     environment:
-      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTP_PORTS=8083
       - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
     ports:
-      - $USER_API_EXTERNAL_PORT:8080  
+      - $USER_API_EXTERNAL_PORT:8083
     build:
       context: .
       dockerfile: src/Presentation/Identity/User.Service/Dockerfile
@@ -41,10 +41,10 @@
   plan.service:
     image: plan.service
     environment:
-      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTP_PORTS=8084
       - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
     ports:
-      - $PLAN_API_EXTERNAL_PORT:8080  
+      - $PLAN_API_EXTERNAL_PORT:8084
     build:
       context: .
       dockerfile: src/Presentation/Identity/Plan.Service/Dockerfile
@@ -54,10 +54,10 @@
   identity.api:
     image: identity.api
     environment:
-      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTP_PORTS=8085
       - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
     ports:
-      - $IDENTITY_API_EXTERNAL_PORT:8080  
+      - $IDENTITY_API_EXTERNAL_PORT:8085
     build:
       context: .
       dockerfile: src/Presentation/Identity/Identity.API/Dockerfile
