@@ -35,7 +35,7 @@ public class WeatherForecastController : ControllerBase
 
     [HttpGet]
     [Route("SendGreetingsMessage")]
-    public ActionResult<string> SendGreetingsMessage(string message)
+    public async Task<ActionResult<string>> SendGreetingsMessage(string message)
     {
         try
         {
@@ -44,11 +44,11 @@ public class WeatherForecastController : ControllerBase
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            var channel = GrpcChannel.ForAddress("http://user-service:8083", new GrpcChannelOptions { HttpHandler = handler });
+            var channel = GrpcChannel.ForAddress("http://user.service:8083", new GrpcChannelOptions { HttpHandler = handler });
 
             var client =  new Greeter.GreeterClient(channel);
             var request = new HelloRequest { Name = message };  
-            return Ok(client.SayHelloAsync(request));
+            return Ok(await client.SayHelloAsync(request));
         }
         catch (Exception ex)
         {
