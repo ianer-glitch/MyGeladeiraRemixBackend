@@ -3,6 +3,7 @@
     image: fridge.api
     environment:
       - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
     ports:
       - $FRIDGE_API_EXTERNAL_PORT:8080
     build:
@@ -15,6 +16,7 @@
     image: statistic.api
     environment:
       - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
     ports:
       - $STATISTIC_API_EXTERNAL_PORT:8080
     build:
@@ -27,6 +29,7 @@
     image: user.service
     environment:
       - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
     ports:
       - $USER_API_EXTERNAL_PORT:8080  
     build:
@@ -39,6 +42,7 @@
     image: plan.service
     environment:
       - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
     ports:
       - $PLAN_API_EXTERNAL_PORT:8080  
     build:
@@ -51,6 +55,7 @@
     image: identity.api
     environment:
       - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
     ports:
       - $IDENTITY_API_EXTERNAL_PORT:8080  
     build:
