@@ -9,7 +9,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IIdentityGrpcConnection, Connection>();
+
+var userServiceUrl = builder.Configuration.GetSection("ConnectionStrings").GetSection("UserService").Value ?? string.Empty;
+ArgumentException.ThrowIfNullOrEmpty(userServiceUrl);
+builder.Services.AddScoped<IIdentityGrpcConnection>(provider => new Connection(userServiceUrl));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

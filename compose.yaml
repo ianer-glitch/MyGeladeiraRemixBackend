@@ -56,6 +56,7 @@
     environment:
       - ASPNETCORE_HTTP_PORTS=8085
       - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
+      - ConnectionStrings_UserService = $CONNECTION_STRINGS_USER-SERVICE
     ports:
       - $IDENTITY_API_EXTERNAL_PORT:8085
     build:
