@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grpc.Adapter", "src\Adapter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Domain", "src\Core\Identity\Identity.Domain\Identity.Domain.csproj", "{B4395D97-4C83-4237-9D9F-B92048DA237E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grpc.Adapter.UnitTests", "tests\Adapters\Grpc.Adapter.UnitTests\Grpc.Adapter.UnitTests.csproj", "{DABF7C9E-B71F-414A-81B7-84CBC09C267C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,5 +131,9 @@ Global
 		{B4395D97-4C83-4237-9D9F-B92048DA237E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4395D97-4C83-4237-9D9F-B92048DA237E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4395D97-4C83-4237-9D9F-B92048DA237E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DABF7C9E-B71F-414A-81B7-84CBC09C267C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DABF7C9E-B71F-414A-81B7-84CBC09C267C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DABF7C9E-B71F-414A-81B7-84CBC09C267C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DABF7C9E-B71F-414A-81B7-84CBC09C267C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
