@@ -7,13 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddGrpc();
 
-builder.WebHost.ConfigureKestrel(op =>
-{
-    op.ListenAnyIP(8083, li =>
-    {
-        li.Protocols = HttpProtocols.Http2;
-    });
-});
+// builder.WebHost.ConfigureKestrel(op =>
+// {
+//     op.ListenAnyIP(8083, li =>
+//     {
+//         li.Protocols = HttpProtocols.Http2;
+//     });
+// });
 
 var app = builder.Build();
 

@@ -43,7 +43,7 @@ public class WeatherForecastController : ControllerBase
         try
         {
 
-           var client =  _con.GetGrpcClient<GreeterUseCase.GreeterUseCaseClient>("http://user.service:8083");
+            var client =  _con.GetGrpcClient<GreeterUseCase.GreeterUseCaseClient>("http://user.service:8083");
             var request = new HelloRequest { Name = message };  
             return Ok(await client.SayHelloAsync(request));
         }
