@@ -6,10 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
-
-<!--    <ItemGroup>-->
-<!--        <Protobuf Include="..\..\..\Shared\Grpc\Identity.Grpc\Protos\*" GrpcServices="both"/>-->
-<!--    </ItemGroup>-->
+    
 
     <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
@@ -24,7 +21,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Core\Identity\Identity.Domain\Identity.Domain.csproj" />
       <ProjectReference Include="..\..\..\Core\User\User.Application\User.Application.csproj" />
-      <ProjectReference Include="..\..\..\Shared\Grpc\Identity.Grpc\Identity.Grpc.csproj" />
     </ItemGroup>
 
 </Project>
