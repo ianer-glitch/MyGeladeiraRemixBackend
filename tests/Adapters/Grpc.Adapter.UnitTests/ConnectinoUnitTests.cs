@@ -5,7 +5,7 @@ namespace Grpc.Adapter.UnitTests;
 public class ConnectinoUnitTests
 {
     [Fact]
-    public void GetGrpcClient_WhenClientIstanceIsCorrect_ShouldReturnClient()
+    public void GetGrpcClient_WhenClientInstanceIsCorrect_ShouldReturnClient()
     {
         var adapter = new Connection();
         string mockServiceUrl = "http://service-name:5000";
@@ -17,7 +17,7 @@ public class ConnectinoUnitTests
     
     private class InvalidMockGrpcClient();
     [Fact]
-    public void GetGrpcClient_WhenClientIstanceIsInvalid_ThrowException()
+    public void GetGrpcClient_WhenClientInstanceIsInvalid_ThrowException()
     {
         var adapter = new Connection();
         string mockServiceUrl = "http://service-name:5000";
