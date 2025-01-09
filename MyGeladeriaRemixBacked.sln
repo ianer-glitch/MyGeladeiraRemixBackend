@@ -41,6 +41,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User.Infrastructure", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Grpc", "src\Shared\Grpc\Identity.Grpc\Identity.Grpc.csproj", "{8E8047FB-5CE1-40DC-860E-ED06DBAB2AEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grpc.Adapter", "src\Adapters\Grpc.Adapter\Grpc.Adapter.csproj", "{8320CFD5-1AF1-4C8B-A931-A44BC153C466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Domain", "src\Core\Identity\Identity.Domain\Identity.Domain.csproj", "{B4395D97-4C83-4237-9D9F-B92048DA237E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -119,5 +123,13 @@ Global
 		{8E8047FB-5CE1-40DC-860E-ED06DBAB2AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E8047FB-5CE1-40DC-860E-ED06DBAB2AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E8047FB-5CE1-40DC-860E-ED06DBAB2AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8320CFD5-1AF1-4C8B-A931-A44BC153C466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8320CFD5-1AF1-4C8B-A931-A44BC153C466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8320CFD5-1AF1-4C8B-A931-A44BC153C466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8320CFD5-1AF1-4C8B-A931-A44BC153C466}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4395D97-4C83-4237-9D9F-B92048DA237E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4395D97-4C83-4237-9D9F-B92048DA237E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4395D97-4C83-4237-9D9F-B92048DA237E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4395D97-4C83-4237-9D9F-B92048DA237E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

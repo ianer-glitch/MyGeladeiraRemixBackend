@@ -18,6 +18,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Adapters\Grpc.Adapter\Grpc.Adapter.csproj" />
+      <ProjectReference Include="..\..\..\Core\Identity\Identity.Domain\Identity.Domain.csproj" />
       <ProjectReference Include="..\..\..\Shared\Grpc\Identity.Grpc\Identity.Grpc.csproj" />
     </ItemGroup>
 

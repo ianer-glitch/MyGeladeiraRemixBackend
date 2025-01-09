@@ -1,4 +1,5 @@
 using Grpc.Net.Client;
+using Identity.Domain.Ports;
 using Identity.Grpc;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +16,12 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IIdentityGrpcConnection _con;  
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IIdentityGrpcConnection con)
     {
         _logger = logger;
+        _con = con;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
@@ -39,14 +42,8 @@ public class WeatherForecastController : ControllerBase
     {
         try
         {
-            var handler = new HttpClientHandler
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
 
-            var channel = GrpcChannel.ForAddress("http://user.service:8083", new GrpcChannelOptions { HttpHandler = handler });
-
-            var client =  new Greeter.GreeterClient(channel);
+           var client =  _con.GetGrpcClient<GreeterUseCase.GreeterUseCaseClient>("http://user.service:8083");
             var request = new HelloRequest { Name = message };  
             return Ok(await client.SayHelloAsync(request));
         }
