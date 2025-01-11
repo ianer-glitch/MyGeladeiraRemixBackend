@@ -1,4 +1,5 @@
 using Grpc.Adapter;
+using Identity.Application.Helpers;
 using Identity.Domain.Ports;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,9 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var userServiceUrl = builder.Configuration.GetSection("ConnectionStrings").GetSection("UserService").Value ?? string.Empty;
-ArgumentException.ThrowIfNullOrEmpty(userServiceUrl);
-builder.Services.AddScoped<IIdentityGrpcConnection>(provider => new Connection(userServiceUrl));
+
+builder.Services.AddScoped<IIdentityGrpcConnection, Connection>();
+builder.Services.AddScoped<IConnectionHelper, ConnectionHelper>();
 
 var app = builder.Build();
 

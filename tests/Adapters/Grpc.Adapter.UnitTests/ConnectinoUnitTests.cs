@@ -8,8 +8,8 @@ public class ConnectinoUnitTests
     public void GetGrpcClient_WhenClientInstanceIsCorrect_ShouldReturnClient()
     {
         string mockServiceUrl = "http://service-name:5000";
-        var adapter = new Connection(mockServiceUrl);
-        var client = adapter.GetGrpcClient<GreeterUseCase.GreeterUseCaseClient>();
+        var adapter = new Connection();
+        var client = adapter.GetGrpcClient<GreeterUseCase.GreeterUseCaseClient>(mockServiceUrl);
         
         Assert.NotNull(client);
         Assert.IsType<GreeterUseCase.GreeterUseCaseClient>(client);
@@ -20,9 +20,9 @@ public class ConnectinoUnitTests
     public void GetGrpcClient_WhenClientInstanceIsInvalid_ThrowException()
     {
         string mockServiceUrl = "http://service-name:5000";
-        var adapter = new Connection(mockServiceUrl);
+        var adapter = new Connection();
 
-        var act = () => adapter.GetGrpcClient<InvalidMockGrpcClient>();
+        var act = () => adapter.GetGrpcClient<InvalidMockGrpcClient>(mockServiceUrl);
 
         Assert.Throws<MissingMethodException>(act);
     }

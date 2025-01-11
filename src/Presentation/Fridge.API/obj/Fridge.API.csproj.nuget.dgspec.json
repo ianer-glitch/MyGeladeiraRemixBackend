@@ -4,14 +4,14 @@
     "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/Fridge.API.csproj": {}
   },
   "projects": {
-    "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/Fridge.API.csproj": {
+    "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Infrastructure/Fridge.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/Fridge.API.csproj",
-        "projectName": "Fridge.API",
-        "projectPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/Fridge.API.csproj",
+        "projectUniqueName": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Infrastructure/Fridge.Infrastructure.csproj",
+        "projectName": "Fridge.Infrastructure",
+        "projectPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Infrastructure/Fridge.Infrastructure.csproj",
         "packagesPath": "/home/ianerglitch/.nuget/packages/",
-        "outputPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/obj/",
+        "outputPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/ianerglitch/.nuget/NuGet/NuGet.Config"
@@ -38,6 +38,87 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.111/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/Fridge.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/Fridge.API.csproj",
+        "projectName": "Fridge.API",
+        "projectPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/Fridge.API.csproj",
+        "packagesPath": "/home/ianerglitch/.nuget/packages/",
+        "outputPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ianerglitch/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Infrastructure/Fridge.Infrastructure.csproj": {
+                "projectPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Infrastructure/Fridge.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"

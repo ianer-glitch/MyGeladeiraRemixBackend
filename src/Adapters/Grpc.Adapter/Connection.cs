@@ -4,9 +4,9 @@ using Identity.Domain.Ports;
 
 namespace Grpc.Adapter;
 
-public class Connection(string clientUrl) : IIdentityGrpcConnection
+public class Connection() : IIdentityGrpcConnection
 {
-    public TClient GetGrpcClient<TClient>() where TClient : class
+    public TClient GetGrpcClient<TClient>(string clientUrl) where TClient : class
     {
         try
         {

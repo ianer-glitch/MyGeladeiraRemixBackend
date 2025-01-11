@@ -1,6 +1,8 @@
 ﻿services:
   fridge.api:
     image: fridge.api
+    depends_on:
+      - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8081
       - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
@@ -14,6 +16,8 @@
 
   statistic.api:
     image: statistic.api
+    depends_on:
+      - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8082
       - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
@@ -27,6 +31,8 @@
       
   user.service:
     image: user.service
+    depends_on:
+      - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8083
       - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
@@ -40,6 +46,8 @@
 
   plan.service:
     image: plan.service
+    depends_on:
+      - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8084
       - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
@@ -53,10 +61,12 @@
 
   identity.api:
     image: identity.api
+    depends_on:
+      - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8085
-      - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
-      - ConnectionStrings_UserService = $CONNECTION_STRINGS_USER-SERVICE
+      - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
+      - ConnectionStrings__UserService=$CONNECTION_STRINGS_USERSERVICE
     ports:
       - $IDENTITY_API_EXTERNAL_PORT:8085
     build:

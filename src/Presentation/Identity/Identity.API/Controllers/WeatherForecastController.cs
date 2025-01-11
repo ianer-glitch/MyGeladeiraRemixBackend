@@ -16,9 +16,9 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
-    private readonly IIdentityGrpcConnection _con;  
+    private readonly IConnectionHelper _con;  
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, IIdentityGrpcConnection con)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IConnectionHelper con)
     {
         _logger = logger;
         _con = con;
@@ -42,8 +42,7 @@ public class WeatherForecastController : ControllerBase
     {
         try
         {
-
-            var client =  _con.GetGrpcClient<GreeterUseCase.GreeterUseCaseClient>();
+            var client =  _con.GetUserConnection<GreeterUseCase.GreeterUseCaseClient>();
             var request = new HelloRequest { Name = message };  
             return Ok(await client.SayHelloAsync(request));
         }

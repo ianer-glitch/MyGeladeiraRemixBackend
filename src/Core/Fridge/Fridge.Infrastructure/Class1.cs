@@ -1,5 +1,10 @@
-﻿namespace Fridge.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
 
-public class Class1
+namespace Fridge.Infrastructure;
+public class FridgeContext : DbContext
 {
+    public FridgeContext(DbContextOptions<FridgeContext> options) : base(options)   
+    {
+        
+    }
 }
