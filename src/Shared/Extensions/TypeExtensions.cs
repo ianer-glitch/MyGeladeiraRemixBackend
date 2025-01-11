@@ -7,7 +7,7 @@ public static class TypeExtensions
         return string.IsNullOrEmpty(value);
     }
 
-    public static bool IsEmpty<T>(this IEnumerable<T>? list)
+    public static bool IsNullOrEmpty<T>(this IEnumerable<T>? list)
     {
         return list == null || !list.Any(); 
     }
