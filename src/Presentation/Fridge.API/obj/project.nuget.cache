@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "PSJBQ488zN0=",
+  "dgSpecHash": "kptljqmeqHE=",
   "success": true,
   "projectFilePath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/Fridge.API.csproj",
   "expectedPackageFiles": [
@@ -23,6 +23,7 @@
     "/home/ianerglitch/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "/home/ianerglitch/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.0/microsoft.extensions.caching.abstractions.9.0.0.nupkg.sha512",
     "/home/ianerglitch/.nuget/packages/microsoft.extensions.caching.memory/9.0.0/microsoft.extensions.caching.memory.9.0.0.nupkg.sha512",
+    "/home/ianerglitch/.nuget/packages/microsoft.extensions.configuration/9.0.0/microsoft.extensions.configuration.9.0.0.nupkg.sha512",
     "/home/ianerglitch/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.0/microsoft.extensions.configuration.abstractions.9.0.0.nupkg.sha512",
     "/home/ianerglitch/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.0/microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
     "/home/ianerglitch/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.0/microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",

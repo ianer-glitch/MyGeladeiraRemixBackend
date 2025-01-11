@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Core\Fridge\Fridge.Infrastructure\Fridge.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Shared\Extensions\Extensions.csproj" />
     </ItemGroup>
 
 </Project>

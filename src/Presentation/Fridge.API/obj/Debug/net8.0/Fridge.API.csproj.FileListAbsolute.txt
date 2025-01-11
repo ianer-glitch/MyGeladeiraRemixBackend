@@ -135,3 +135,6 @@
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Fridge.Infrastructure.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Fridge.Infrastructure.pdb
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.Extensions.Configuration.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Extensions.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Extensions.pdb
