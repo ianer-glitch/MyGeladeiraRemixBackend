@@ -1,11 +1,17 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using User.Application.UseCases;
+using User.Infrastructure;
 using GreeterUseCase = User.Application.UseCases.GreeterUseCase;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+builder.Services.AddIdentity<User.Domain.Models.User,IdentityRole>()
+    .AddEntityFrameworkStores<UserContext>()   
+    .AddDefaultTokenProviders();
+
 
 var app = builder.Build();
 

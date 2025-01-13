@@ -1,0 +1,16 @@
+namespace Models;
+
+public interface IEntity
+{
+    public Guid Id { get; set; }    
+    public DateTime Inclusion { get; set; }
+    public DateTime Modified { get; set; }
+    public bool IsActive { get; set; }
+    public Guid UserInclusionId { get; set; }
+    public Guid UserModifiedId { get; set; }    
+    
+    public void SetActive();
+    public void SetInactive();
+    public bool Equals();
+
+}

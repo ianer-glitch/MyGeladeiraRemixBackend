@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "src\Shared\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionUnitTests", "tests\Shared\ExtensionUnitTests\ExtensionUnitTests.csproj", "{27479D1D-EF40-4F0D-8009-0064F13CBB16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "src\Shared\Models\Models.csproj", "{397B7BEF-5AE4-453A-97C4-40267845038A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,5 +155,9 @@ Global
 		{27479D1D-EF40-4F0D-8009-0064F13CBB16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27479D1D-EF40-4F0D-8009-0064F13CBB16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27479D1D-EF40-4F0D-8009-0064F13CBB16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{397B7BEF-5AE4-453A-97C4-40267845038A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{397B7BEF-5AE4-453A-97C4-40267845038A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{397B7BEF-5AE4-453A-97C4-40267845038A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{397B7BEF-5AE4-453A-97C4-40267845038A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
