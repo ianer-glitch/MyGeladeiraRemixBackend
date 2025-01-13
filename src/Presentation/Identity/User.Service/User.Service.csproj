@@ -22,6 +22,7 @@
       <ProjectReference Include="..\..\..\Core\Identity\Identity.Domain\Identity.Domain.csproj" />
       <ProjectReference Include="..\..\..\Core\User\User.Application\User.Application.csproj" />
       <ProjectReference Include="..\..\..\Core\User\User.Infrastructure\User.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\..\Shared\Extensions\Extensions.csproj" />
     </ItemGroup>
 
 </Project>
