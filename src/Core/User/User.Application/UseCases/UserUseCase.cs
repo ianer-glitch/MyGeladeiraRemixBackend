@@ -18,10 +18,11 @@ public class UserUseCase(UserManager<Domain.Models.User> userManager)
             // ArgumentNullException.ThrowIfNull(user);    
             //
             throw new NotImplementedException();
-            return new();
+            
         }
         catch (Exception e)
         {
+            throw new NotImplementedException();
             throw;
         }   
     }
