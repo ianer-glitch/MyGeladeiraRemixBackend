@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceExtensions
 {
-    public static void AddDbContext<TContext>(this IServiceCollection services,
+    public static IServiceCollection AddDbContext<TContext>(this IServiceCollection services,
         IConfiguration configuration, string databaseKey) where TContext : DbContext
     {
         services.AddDbContext<TContext>(options =>
@@ -17,10 +17,13 @@ public static class ServiceExtensions
                     .GetSection(databaseKey)
                     .Value ?? string.Empty;
 
-            ArgumentNullException.ThrowIfNull(dbConnectionString);
+            ArgumentException.ThrowIfNullOrEmpty(dbConnectionString);
 
             options.UseNpgsql(dbConnectionString);
         });
+
+        return services;
+
     }
 
 }

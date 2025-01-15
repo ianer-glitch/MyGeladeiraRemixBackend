@@ -1,24 +1,25 @@
-﻿namespace Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Models;
 
-public class Entity : IEntity,IId
+namespace User.Domain;
+
+public class User : IdentityUser<Guid>, IEntity
 {
-    public Guid Id { get; set; }
     public DateTime Inclusion { get; set; }
     public DateTime Modified { get; set; }
     public bool IsActive { get; set; }
     public Guid UserInclusionId { get; set; }
     public Guid UserModifiedId { get; set; }
-
     public void SetActive()
     {
         IsActive = true;
-        Modified = DateTime.UtcNow;
+        Modified = DateTime.Now;
     }
 
     public void SetInactive()
     {
         IsActive = false;
-        Modified = DateTime.UtcNow;
+        Modified = DateTime.Now;
     }
 
     public bool Equals()

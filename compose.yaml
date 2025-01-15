@@ -35,7 +35,7 @@
       - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8083
-      - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
+      - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
     ports:
       - $USER_API_EXTERNAL_PORT:8083
     build:
@@ -50,7 +50,7 @@
       - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8084
-      - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
+      - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
     ports:
       - $PLAN_API_EXTERNAL_PORT:8084
     build:
@@ -65,7 +65,6 @@
       - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8085
-      - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
       - ConnectionStrings__UserService=$CONNECTION_STRINGS_USERSERVICE
     ports:
       - $IDENTITY_API_EXTERNAL_PORT:8085

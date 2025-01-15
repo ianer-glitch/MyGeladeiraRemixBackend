@@ -2,7 +2,7 @@ namespace Models;
 
 public interface IEntity
 {
-    public Guid Id { get; set; }    
+    
     public DateTime Inclusion { get; set; }
     public DateTime Modified { get; set; }
     public bool IsActive { get; set; }
