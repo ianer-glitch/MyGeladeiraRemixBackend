@@ -5,6 +5,11 @@ namespace User.Domain.Models;
 
 public class User : IdentityUser<Guid> , IEntity
 {
+    public string Name { get; set; }
+    public string LastName { get; set; }    
+    public DateTime BirthDate { get; set; } 
+    public bool IsFirstAcess { get; set; }
+
     public DateTime Inclusion { get; set; }
     public DateTime Modified { get; set; }
     public bool IsActive { get; set; }

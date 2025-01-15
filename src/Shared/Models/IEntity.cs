@@ -2,7 +2,6 @@ namespace Models;
 
 public interface IEntity
 {
-    
     public DateTime Inclusion { get; set; }
     public DateTime Modified { get; set; }
     public bool IsActive { get; set; }
