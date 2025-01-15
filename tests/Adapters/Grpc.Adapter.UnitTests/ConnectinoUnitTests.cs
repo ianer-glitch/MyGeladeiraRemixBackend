@@ -1,4 +1,6 @@
-using Identity.Grpc;
+
+
+using Identity.Domain.Protos;
 
 namespace Grpc.Adapter.UnitTests;
 

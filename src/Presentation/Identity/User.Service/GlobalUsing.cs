@@ -1,2 +1,2 @@
 global using Grpc.Core;
-global using Identity.Grpc;
+global using Identity.Domain.Protos;

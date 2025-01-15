@@ -1,6 +1,6 @@
 using Grpc.Net.Client;
 using Identity.Domain.Ports;
-using Identity.Grpc;
+using Identity.Domain.Protos;
 using Microsoft.AspNetCore.Mvc;
 
 

@@ -6,6 +6,7 @@ using Extensions;
 using Microsoft.EntityFrameworkCore;
 using User.Domain.Models;
 using GreeterUseCase = User.Application.UseCases.GreeterUseCase;
+using UserUseCase = User.Application.UseCases.UserUseCase;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ using (var scope = app.Services.CreateScope())
 }
 // Configure the HTTP request pipeline.
 app.MapGrpcService<GreeterUseCase>();
+app.MapGrpcService<UserUseCase>();
 app.MapGet("/",
     () =>
         "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");

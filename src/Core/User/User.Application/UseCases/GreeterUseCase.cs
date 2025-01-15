@@ -1,10 +1,10 @@
 using Grpc.Core;
-using Identity.Grpc;
+using Identity.Domain.Protos;
 using Microsoft.Extensions.Logging;
 
 namespace User.Application.UseCases;
 
-public class GreeterUseCase : Identity.Grpc.GreeterUseCase.GreeterUseCaseBase
+public class GreeterUseCase : Identity.Domain.Protos.GreeterUseCase.GreeterUseCaseBase
 {
     private readonly ILogger<GreeterUseCase> _logger;
 
