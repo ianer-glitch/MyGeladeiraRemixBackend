@@ -4,5 +4,5 @@ namespace User.Application.UseCases;
 
 public interface IUserUseCase
 {
-  public Task<bool> LoginAsync(PLoginIn request);
+  public Task<bool> IsUserPasswordValidAsync(PLoginIn request);
 }

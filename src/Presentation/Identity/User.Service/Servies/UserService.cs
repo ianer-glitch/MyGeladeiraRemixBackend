@@ -10,9 +10,7 @@ public class UserService(IUserUseCase userUseCase) : Identity.Domain.Protos.User
     {
         try
         {
-            var sucess =  await _userUseCase.LoginAsync(request);
-            
-            
+            var sucess =  await _userUseCase.IsUserPasswordValidAsync(request);
             return new PLoginOut()
             {
                 Token = sucess ? GenerateJWTToken() : ""

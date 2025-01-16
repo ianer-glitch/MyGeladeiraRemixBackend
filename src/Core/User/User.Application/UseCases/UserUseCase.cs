@@ -10,14 +10,13 @@ public class UserUseCase(UserManager<Domain.Models.User> userManager) : IUserUse
 {
     private readonly UserManager<Domain.Models.User> _userManager = userManager;
 
-    public async Task<PLoginOut> LoginAsync(PLoginIn request)
+    public async Task<bool> IsUserPasswordValidAsync(PLoginIn request)
     {
         try
         {
-            // var user = await _userManager.FindByEmailAsync(request.Email);
-            // ArgumentNullException.ThrowIfNull(user);    
-            //
-            throw new NotImplementedException();
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            ArgumentNullException.ThrowIfNull(user);    
+            return await _userManager.CheckPasswordAsync(user, request.Password);    
             
         }
         catch (Exception e)
