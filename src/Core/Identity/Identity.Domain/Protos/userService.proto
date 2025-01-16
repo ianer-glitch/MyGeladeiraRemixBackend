@@ -4,7 +4,7 @@ option csharp_namespace = "Identity.Domain.Protos";
 
 package User;
 
-service UserUseCase{
+service UserService{
   rpc Login(PLoginIn)returns(PLoginOut);
 }
 
@@ -14,5 +14,5 @@ message PLoginIn{
 }
 
 message PLoginOut{
-  bool sucess= 1; 
+  string token = 1;
 }

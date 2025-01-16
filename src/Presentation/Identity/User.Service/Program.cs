@@ -5,8 +5,10 @@ using User.Infrastructure;
 using Extensions;
 using Microsoft.EntityFrameworkCore;
 using User.Domain.Models;
+using User.Service.Servies;
 using GreeterUseCase = User.Application.UseCases.GreeterUseCase;
 using UserUseCase = User.Application.UseCases.UserUseCase;
+using UserService = User.Service.Servies.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,7 @@ builder.Services.AddIdentity<User.Domain.Models.User,UserRoles>()
     .AddEntityFrameworkStores<UserContext>()   
     .AddDefaultTokenProviders();
 
+builder.Services.AddScoped<IUserUseCase, UserUseCase>();
 
 
 var app = builder.Build();
@@ -28,7 +31,7 @@ using (var scope = app.Services.CreateScope())
 }
 // Configure the HTTP request pipeline.
 app.MapGrpcService<GreeterUseCase>();
-app.MapGrpcService<UserUseCase>();
+app.MapGrpcService<UserService>();
 app.MapGet("/",
     () =>
         "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");

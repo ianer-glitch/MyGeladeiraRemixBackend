@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace User.Application.UseCases;
 
-public class UserUseCase(UserManager<Domain.Models.User> userManager)
-    : Identity.Domain.Protos.UserUseCase.UserUseCaseBase
+public class UserUseCase(UserManager<Domain.Models.User> userManager) : IUserUseCase
+    
 {
     private readonly UserManager<Domain.Models.User> _userManager = userManager;
 
-    public override async Task<PLoginOut> Login(PLoginIn request, ServerCallContext context)
+    public async Task<PLoginOut> LoginAsync(PLoginIn request)
     {
         try
         {
