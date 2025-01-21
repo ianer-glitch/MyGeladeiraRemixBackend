@@ -15,7 +15,9 @@ public class UserUseCase(UserManager<Domain.Models.User> userManager) : IUserUse
         try
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
-            ArgumentNullException.ThrowIfNull(user);    
+            if (user is null)
+                return false;
+            
             return await _userManager.CheckPasswordAsync(user, request.Password);    
             
         }

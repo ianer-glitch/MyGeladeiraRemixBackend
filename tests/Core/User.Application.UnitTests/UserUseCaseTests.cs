@@ -8,11 +8,6 @@ namespace User.Application.UnitTests;
 
 public class UserUseCaseTests
 {
-    
-    
-    
-    
-
     [Fact]
     public async Task Login_WhenUser_NotFound_ShouldReturnFalse()
     {
@@ -28,6 +23,7 @@ public class UserUseCaseTests
         mockUserManager.Setup(x=>x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(null as Domain.Models.User);
         mockUserManager.Setup(x => x.CheckPasswordAsync(It.IsAny<Domain.Models.User>(), It.IsAny<string>()))
             .ReturnsAsync(false);
+        
         
         var userUseCase = new UserUseCase(mockUserManager.Object);
         var request = new PLoginIn
