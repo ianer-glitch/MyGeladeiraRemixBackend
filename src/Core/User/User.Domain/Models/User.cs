@@ -44,6 +44,7 @@ public class User : IdentityUser<Guid> , IEntity
         if(string.IsNullOrEmpty(email) || !email.Contains('@'))
             throw new ArgumentException("Invalid email");   
         Email = email;
+        UserName = email;
     }
 
 

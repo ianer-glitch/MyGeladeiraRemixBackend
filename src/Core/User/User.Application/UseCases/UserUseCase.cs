@@ -45,12 +45,14 @@ public class UserUseCase(UserManager<Domain.Models.User> userManager) : IUserUse
                 req.Email);
 
             var success = await _userManager.CreateAsync(user, req.Password);
-
-            return success == IdentityResult.Success;
+            if(success == IdentityResult.Success)
+                return true;
+            
+            throw new ArgumentException(string.Join(";",success.Errors.Select(s=>s.Description))); 
         }
         catch (Exception e)
         {
-            throw e;
+            throw ;
         }
     }
 }
