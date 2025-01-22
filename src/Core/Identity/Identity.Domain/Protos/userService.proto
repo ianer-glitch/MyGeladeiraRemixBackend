@@ -5,14 +5,14 @@ option csharp_namespace = "Identity.Domain.Protos";
 package User;
 
 service UserService{
-  rpc Login(PLoginIn)returns(PLoginOut);
+  rpc IsUserPasswordValid(PIsUserPasswordValidIn)returns(PIsUserPasswordValidOut);
 }
 
-message PLoginIn{
+message PIsUserPasswordValidIn{
   string email = 1;
   string password =2;
 }
 
-message PLoginOut{
-  string token = 1;
+message PIsUserPasswordValidOut{
+  bool isValid = 1;
 }

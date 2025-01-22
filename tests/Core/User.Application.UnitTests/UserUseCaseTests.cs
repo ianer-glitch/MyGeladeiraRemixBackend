@@ -26,7 +26,7 @@ public class UserUseCaseTests
         
         
         var userUseCase = new UserUseCase(mockUserManager.Object);
-        var request = new PLoginIn
+        var request = new PIsUserPasswordValidIn()
         {
             Email = "some@mail.com",
             Password = "12345",
@@ -55,7 +55,7 @@ public class UserUseCaseTests
             .ReturnsAsync(true);
         
         var userUseCase = new UserUseCase(mockUserManager.Object);
-        var request = new PLoginIn
+        var request = new PIsUserPasswordValidIn
         {
             Email = "some@mail.com",
             Password = "12345",

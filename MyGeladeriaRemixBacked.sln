@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "src\Shared\Models
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User.Application.UnitTests", "tests\Core\User.Application.UnitTests\User.Application.UnitTests.csproj", "{8F687C7D-084E-494D-8BCE-9F8821A60B23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.UnitTests", "tests\Presentation\Identity.UnitTests\Identity.UnitTests.csproj", "{82F00337-9E8C-494A-B523-C427C35BAB76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,5 +167,9 @@ Global
 		{8F687C7D-084E-494D-8BCE-9F8821A60B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F687C7D-084E-494D-8BCE-9F8821A60B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F687C7D-084E-494D-8BCE-9F8821A60B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82F00337-9E8C-494A-B523-C427C35BAB76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82F00337-9E8C-494A-B523-C427C35BAB76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82F00337-9E8C-494A-B523-C427C35BAB76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82F00337-9E8C-494A-B523-C427C35BAB76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

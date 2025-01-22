@@ -10,7 +10,7 @@ public class UserUseCase(UserManager<Domain.Models.User> userManager) : IUserUse
 {
     private readonly UserManager<Domain.Models.User> _userManager = userManager;
 
-    public async Task<bool> IsUserPasswordValidAsync(PLoginIn request)
+    public async Task<bool> IsUserPasswordValidAsync(PIsUserPasswordValidIn request)
     {
         try
         {

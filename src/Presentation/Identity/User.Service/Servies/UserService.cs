@@ -6,14 +6,14 @@ namespace User.Service.Servies;
 public class UserService(IUserUseCase userUseCase) : Identity.Domain.Protos.UserService.UserServiceBase
 {
     private readonly IUserUseCase _userUseCase = userUseCase; 
-    public override async Task<PLoginOut> Login(PLoginIn request, ServerCallContext context)
+    public override async Task<PIsUserPasswordValidOut> IsUserPasswordValid(PIsUserPasswordValidIn request, ServerCallContext context)
     {
         try
         {
             var sucess =  await _userUseCase.IsUserPasswordValidAsync(request);
-            return new PLoginOut()
+            return new PIsUserPasswordValidOut()
             {
-                Token = sucess ? GenerateJWTToken() : ""
+                IsValid = sucess
             };
             
 
@@ -25,8 +25,5 @@ public class UserService(IUserUseCase userUseCase) : Identity.Domain.Protos.User
         }   
     }
 
-    private string GenerateJWTToken()
-    {
-        throw new NotImplementedException();    
-    }
+    
 }

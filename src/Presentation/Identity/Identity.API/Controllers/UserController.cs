@@ -1,3 +1,4 @@
+using Identity.API.Helpers;
 using Identity.Domain.Ports;
 using Identity.Domain.Protos;
 using Microsoft.AspNetCore.Mvc;
@@ -5,19 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 namespace Identity.API.Controllers;
 [ApiController]
 [Route("[controller]")]
-public class UserController(ILogger<UserController> logger, IConnectionHelper con) : ControllerBase
+public class UserController(
+    ILogger<UserController> logger,
+    IConnectionHelper con,
+    IConfiguration conf) : ControllerBase
 {
     private readonly ILogger<UserController> _logger = logger;
     private readonly IConnectionHelper _con = con;
 
     [HttpPost("Login")]
-    public async Task<ActionResult<string>> Login(PLoginIn request)
+    public async Task<ActionResult<string>> Login(PIsUserPasswordValidIn request)
     {
         try
         {
             var client = _con.GetUserConnection<UserService.UserServiceClient>();
-            var result = await client.LoginAsync(request); 
-            return Ok(result.Token);
+            var result = await client.IsUserPasswordValidAsync(request);
+            if (result is not null)
+                return Ok(TokenHelpers.GenerateToken(conf));
+            
+            return Empty;
         }
         catch (Exception e)
         {
