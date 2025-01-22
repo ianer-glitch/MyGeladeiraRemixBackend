@@ -17,7 +17,7 @@ public static class ServiceExtensions
                     .GetSection(databaseKey)
                     .Value ?? string.Empty;
 
-            ArgumentException.ThrowIfNullOrEmpty(dbConnectionString);
+            
 
             options.UseNpgsql(dbConnectionString);
         });
