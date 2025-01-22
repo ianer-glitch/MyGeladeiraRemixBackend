@@ -3,6 +3,7 @@ using Grpc.Core;
 using Identity.Domain.Protos;
 using Microsoft.AspNetCore.Identity;
 
+
 namespace User.Application.UseCases;
 
 public class UserUseCase(UserManager<Domain.Models.User> userManager) : IUserUseCase
@@ -26,5 +27,30 @@ public class UserUseCase(UserManager<Domain.Models.User> userManager) : IUserUse
             throw new NotImplementedException();
             throw;
         }   
+    }
+
+    public async Task<bool> CreateUserAsync(PCreateUserIn req)
+    {
+        try
+        {
+
+            var existingUser = await _userManager.FindByEmailAsync(req.Email);
+            if (existingUser is not null)
+                return false;
+
+            var user = new Domain.Models.User(
+                req.FirstName,
+                req.LastName,
+                req.BirthDate.ToDateTime(),
+                req.Email);
+
+            var success = await _userManager.CreateAsync(user, req.Password);
+
+            return success == IdentityResult.Success;
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
     }
 }

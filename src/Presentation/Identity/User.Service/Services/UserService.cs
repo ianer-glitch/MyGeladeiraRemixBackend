@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using User.Application.UseCases;
 
-namespace User.Service.Servies;
+namespace User.Service.Services;
 
 public class UserService(IUserUseCase userUseCase) : Identity.Domain.Protos.UserService.UserServiceBase
 {
@@ -14,6 +14,25 @@ public class UserService(IUserUseCase userUseCase) : Identity.Domain.Protos.User
             return new PIsUserPasswordValidOut()
             {
                 IsValid = sucess
+            };
+            
+
+        }
+        catch (Exception e)
+        {
+            throw new NotImplementedException();
+            throw;
+        }   
+    }
+    
+    public override async Task<PCreateUserOut> CreateUser(PCreateUserIn request, ServerCallContext context)
+    {
+        try
+        {
+            var success =  await _userUseCase.CreateUserAsync(request);
+            return new PCreateUserOut()
+            {
+                Success = success
             };
             
 

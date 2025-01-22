@@ -2,10 +2,13 @@ syntax = "proto3";
 
 option csharp_namespace = "Identity.Domain.Protos";
 
+import "google/protobuf/timestamp.proto";
+
 package User;
 
 service UserService{
   rpc IsUserPasswordValid(PIsUserPasswordValidIn)returns(PIsUserPasswordValidOut);
+  rpc CreateUser(PCreateUserIn)returns(PCreateUserOut);
 }
 
 message PIsUserPasswordValidIn{
@@ -16,3 +19,17 @@ message PIsUserPasswordValidIn{
 message PIsUserPasswordValidOut{
   bool isValid = 1;
 }
+
+message PCreateUserIn{
+  string first_name = 1;
+  string last_name = 2;
+  google.protobuf.Timestamp birthDate =3 ;
+  string email = 4;
+  string password = 5;
+  
+}
+
+message PCreateUserOut{
+  bool success = 1;
+}
+

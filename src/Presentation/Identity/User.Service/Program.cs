@@ -5,10 +5,10 @@ using User.Infrastructure;
 using Extensions;
 using Microsoft.EntityFrameworkCore;
 using User.Domain.Models;
-using User.Service.Servies;
+using User.Service.Services;
 using GreeterUseCase = User.Application.UseCases.GreeterUseCase;
 using UserUseCase = User.Application.UseCases.UserUseCase;
-using UserService = User.Service.Servies.UserService;
+using UserService = User.Service.Services.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -4,7 +4,7 @@ public class Entity : IEntity,IId
 {
     public Guid Id { get; set; }
     public DateTime Inclusion { get; set; }
-    public DateTime Modified { get; set; }
+    public DateTime? Modified { get; set; }
     public bool IsActive { get; set; }
     public Guid UserInclusionId { get; set; }
     public Guid UserModifiedId { get; set; }
@@ -21,8 +21,10 @@ public class Entity : IEntity,IId
         Modified = DateTime.UtcNow;
     }
 
-    public bool Equals()
+    public bool Equals<TEntity>(TEntity other) where TEntity : IEntity
     {
         throw new NotImplementedException();
     }
+
+
 }

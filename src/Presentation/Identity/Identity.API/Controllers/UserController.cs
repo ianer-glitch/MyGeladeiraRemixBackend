@@ -32,4 +32,20 @@ public class UserController(
             return BadRequest();
         }
     }
+    
+    [HttpPost("CreateUser")]
+    public async Task<ActionResult<string>> CreateUser(PCreateUserIn request)
+    {
+        try
+        {
+            var client = _con.GetUserConnection<UserService.UserServiceClient>();
+            var result = await client.CreateUserAsync(request);
+            return Ok(result.Success);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, e.Message);
+            return BadRequest();
+        }
+    }
 }
