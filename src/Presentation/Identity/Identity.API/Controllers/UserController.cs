@@ -1,6 +1,7 @@
 using Identity.API.Helpers;
 using Identity.Domain.Ports;
 using Identity.Domain.Protos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Identity.API.Controllers;
@@ -34,12 +35,29 @@ public class UserController(
     }
     
     [HttpPost("CreateUser")]
-    public async Task<ActionResult<string>> CreateUser(PCreateUserIn request)
+    public async Task<ActionResult<string>> CreateUser([FromBody]PCreateUserIn request)
     {
         try
         {
             var client = _con.GetUserConnection<UserService.UserServiceClient>();
             var result = await client.CreateUserAsync(request);
+            return Ok(result.Success);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, e.Message);
+            return BadRequest();
+        }
+    }
+    
+    [Authorize]
+    [HttpDelete("DeleteUser")]
+    public async Task<ActionResult<string>> DeleteUser([FromBody]PDeleteUserIn request)
+    {
+        try
+        {
+            var client = _con.GetUserConnection<UserService.UserServiceClient>();
+            var result = await client.DeleteUserAsync(request);
             return Ok(result.Success);
         }
         catch (Exception e)
