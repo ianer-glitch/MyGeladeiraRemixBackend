@@ -11,15 +11,25 @@ public class Item : Entity
         
     }
 
-    public Item(string name,string color, DateTime expiration,Guid userInclusionId):base(userInclusionId)
+    public Item(string name,
+                string color,
+                DateTime expiration,
+                int minimunQuantity ,
+                int defaultQuantity ,
+                Guid userInclusionId):base(userInclusionId)
     {
         SetName(name);
         SetColor(color);    
         SetExpiration(expiration);
+        MinimunQuantity = minimunQuantity;
+        DefaultQuantity = defaultQuantity;
     }
     public string Name { get; set; }
     public string Color { get; set; }
     public DateTime Expiration { get; set; }
+    
+    public int MinimunQuantity { get; set; }    
+    public int DefaultQuantity { get; set; }    
 
     public void SetName(string name)
     {

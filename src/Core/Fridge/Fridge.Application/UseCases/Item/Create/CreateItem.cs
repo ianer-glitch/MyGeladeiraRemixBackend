@@ -1,23 +1,52 @@
-using Fridge.Domain.Items;
-
 using Fridge.Domain.Items.Create;
+using Fridge.Infrastructure;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Ports;
+using ItemModel = Fridge.Domain.Items.Item;
 
 namespace Fridge.Application.UseCases.Item.Create;
 
 public class CreateItem : ICreateItem<CreateItemIn,CreateItemOut>
 {
-    
+    private readonly FridgeContext _context;
+    private readonly IRepository<ItemModel,FridgeContext> _repository;   
     
 
-    public CreateItem()
+    public CreateItem(FridgeContext context, IRepository<ItemModel,FridgeContext> repository)
     {
-        
+        _context = context; 
+        _repository = repository;   
     }
 
 
-    public Task<CreateItemOut> Execute(CreateItemIn request)
+    public async  Task<CreateItemOut> Execute(CreateItemIn request)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var isExistingItem = _repository.Get(g=>g.Name == request.Name).Any();
+            if(isExistingItem)
+                throw new ArgumentException($"Item {request.Name} already exists");
+
+            var item = new ItemModel(request.Name,
+                                     request.Color,
+                                     request.Expiration,
+                                     request.MinimumQuantity,
+                                     request.DefaultQuantity,
+                                     request.UserCreationId);
+            await _repository.InsertAsync(item);
+            
+            var sucess = await _context.SaveChangesAsync() > 0;
+            if (sucess)
+                return new CreateItemOut { Item = item };
+            
+            throw new Exception("Could not create item");   
+
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }

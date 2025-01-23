@@ -9,4 +9,5 @@ public class CreateItemIn : ICreateItemIn
     public int MinimumQuantity { get; set; }
     public int DefaultQuantity { get; set; }
     public DateTime Expiration { get; set; }
+    public Guid UserCreationId { get; set; }
 }
