@@ -119,4 +119,49 @@ public class UserUseCaseTests
         
         Assert.True(act);
     }
+
+    [Fact]
+    public async Task DeleteUser_WhenUser_NotFound_ShouldThrow()
+    {
+        var userList = new List<Domain.Models.User>() { };
+      
+        var mockUserManager = MockUserManager.Basic<Domain.Models.User>(userList);
+        mockUserManager.Setup(x=>x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(null as Domain.Models.User);
+        var userUseCase = new UserUseCase(mockUserManager.Object);
+        var request = new PDeleteUserIn()
+        {
+            UserId = Guid.NewGuid().ToString(),
+        };
+
+        var act =  () =>  userUseCase.DeleteUserAsync(request);
+        await Assert.ThrowsAsync<ArgumentNullException>(act);
+
+    }
+
+    [Fact]
+    public async Task DeleteUser_WhenUserFound_ShouldReturnTrue()
+    {
+
+        var userId = Guid.NewGuid();
+        var userList = new List<Domain.Models.User>()
+        {
+            new Domain.Models.User()
+            {
+                Id = userId,
+                Email = "email@email.com",
+            }
+        };
+        var mockUserManager = MockUserManager.Basic<Domain.Models.User>(userList);
+        mockUserManager.Setup(x=>x.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(userList.FirstOrDefault(f=>f.Id==userId));
+        mockUserManager.Setup(x=>x.DeleteAsync(It.IsAny<Domain.Models.User>())).ReturnsAsync(IdentityResult.Success);   
+        
+        var userUseCase = new UserUseCase(mockUserManager.Object);
+        var request = new PDeleteUserIn()
+        {
+            UserId = userId.ToString(), 
+        };
+
+        var act = await  userUseCase.DeleteUserAsync(request);
+        Assert.True(act);
+    }
 }

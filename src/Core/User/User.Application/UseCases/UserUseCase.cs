@@ -1,6 +1,7 @@
 
 using Grpc.Core;
 using Identity.Domain.Protos;
+using Microsoft.AspNetCore.Http.Timeouts;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -24,7 +25,6 @@ public class UserUseCase(UserManager<Domain.Models.User> userManager) : IUserUse
         }
         catch (Exception e)
         {
-            throw new NotImplementedException();
             throw;
         }   
     }
@@ -54,5 +54,26 @@ public class UserUseCase(UserManager<Domain.Models.User> userManager) : IUserUse
         {
             throw ;
         }
+    }
+
+    public async Task<bool> DeleteUserAsync(PDeleteUserIn request)
+    {
+        try
+        {
+            var user = await _userManager.FindByIdAsync(request.UserId);
+            if (user is null)
+                throw new ArgumentNullException(nameof(user));
+            
+            var result = await _userManager.DeleteAsync(user);
+
+            if (result == IdentityResult.Success)
+                return true;
+            
+            throw new ArgumentException(string.Join(';',result.Errors.Select(s=>s.Description)));
+
+        }catch (Exception e)
+        {
+            throw;
+        }   
     }
 }

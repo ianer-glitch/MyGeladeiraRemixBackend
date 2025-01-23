@@ -9,7 +9,9 @@ package User;
 service UserService{
   rpc IsUserPasswordValid(PIsUserPasswordValidIn)returns(PIsUserPasswordValidOut);
   rpc CreateUser(PCreateUserIn)returns(PCreateUserOut);
+  rpc DeleteUser(PDeleteUserIn)returns(PDeleteUserOut);
 }
+
 
 message PIsUserPasswordValidIn{
   string email = 1;
@@ -30,6 +32,14 @@ message PCreateUserIn{
 }
 
 message PCreateUserOut{
+  bool success = 1;
+}
+
+message PDeleteUserIn{
+  string userId = 1;
+}
+
+message PDeleteUserOut{
   bool success = 1;
 }
 
