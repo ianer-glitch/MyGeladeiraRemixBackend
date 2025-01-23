@@ -16,16 +16,19 @@ public class Repository<T,TContext>(TContext context) : IRepository<T,TContext>
 
     public IQueryable<T> Get(Expression<Func<T, bool>> expression)
     {
-        throw new NotImplementedException();
+        return context.Set<T>().Where(expression);  
     }
 
-    public Task<T> InsertAsync(T entity)
+    public async Task<T> InsertAsync(T entity)
     {
-        throw new NotImplementedException();
+        await context.Set<T>().AddAsync(entity);
+        return entity;
     }
 
-    public Task<T> UpdateAsync(T entity, Expression<Func<T, bool>> expression)
+    public T Update(T entity, Expression<Func<T, bool>> expression)
     {
-        throw new NotImplementedException();
+        context.Update(entity);
+        return entity;
+        
     }
 }

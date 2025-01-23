@@ -1132,6 +1132,35 @@
           "bin/placeholder/Extensions.dll": {}
         }
       },
+      "Fridge.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Fridge.Domain": "1.0.0",
+          "Fridge.Infrastructure": "1.0.0",
+          "Ports": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Fridge.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fridge.Application.dll": {}
+        }
+      },
+      "Fridge.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Extensions": "1.0.0",
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Fridge.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fridge.Domain.dll": {}
+        }
+      },
       "Fridge.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -1143,6 +1172,43 @@
         },
         "runtime": {
           "bin/placeholder/Fridge.Infrastructure.dll": {}
+        }
+      },
+      "Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Models.dll": {}
+        }
+      },
+      "Ports/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Ports.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Ports.dll": {}
+        }
+      },
+      "Postgre.Adapter/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0",
+          "Ports": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Postgre.Adapter.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Postgre.Adapter.dll": {}
         }
       }
     }
@@ -3110,19 +3176,48 @@
       "path": "../../Shared/Extensions/Extensions.csproj",
       "msbuildProject": "../../Shared/Extensions/Extensions.csproj"
     },
+    "Fridge.Application/1.0.0": {
+      "type": "project",
+      "path": "../../Core/Fridge/Fridge.Application/Fridge.Application.csproj",
+      "msbuildProject": "../../Core/Fridge/Fridge.Application/Fridge.Application.csproj"
+    },
+    "Fridge.Domain/1.0.0": {
+      "type": "project",
+      "path": "../../Core/Fridge/Fridge.Domain/Fridge.Domain.csproj",
+      "msbuildProject": "../../Core/Fridge/Fridge.Domain/Fridge.Domain.csproj"
+    },
     "Fridge.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../../Core/Fridge/Fridge.Infrastructure/Fridge.Infrastructure.csproj",
       "msbuildProject": "../../Core/Fridge/Fridge.Infrastructure/Fridge.Infrastructure.csproj"
+    },
+    "Models/1.0.0": {
+      "type": "project",
+      "path": "../../Shared/Models/Models.csproj",
+      "msbuildProject": "../../Shared/Models/Models.csproj"
+    },
+    "Ports/1.0.0": {
+      "type": "project",
+      "path": "../../Shared/Ports/Ports.csproj",
+      "msbuildProject": "../../Shared/Ports/Ports.csproj"
+    },
+    "Postgre.Adapter/1.0.0": {
+      "type": "project",
+      "path": "../../Adapters/Postgre.Adapter/Postgre.Adapter.csproj",
+      "msbuildProject": "../../Adapters/Postgre.Adapter/Postgre.Adapter.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Extensions >= 1.0.0",
+      "Fridge.Application >= 1.0.0",
+      "Fridge.Domain >= 1.0.0",
       "Fridge.Infrastructure >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 8.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.0",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 8.0.0",
+      "Ports >= 1.0.0",
+      "Postgre.Adapter >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.6.2"
     ]
   },
@@ -3151,11 +3246,23 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+            "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Adapters/Postgre.Adapter/Postgre.Adapter.csproj": {
+              "projectPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Adapters/Postgre.Adapter/Postgre.Adapter.csproj"
+            },
+            "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Application/Fridge.Application.csproj": {
+              "projectPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Application/Fridge.Application.csproj"
+            },
+            "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Domain/Fridge.Domain.csproj": {
+              "projectPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Domain/Fridge.Domain.csproj"
+            },
             "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Infrastructure/Fridge.Infrastructure.csproj": {
               "projectPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Core/Fridge/Fridge.Infrastructure/Fridge.Infrastructure.csproj"
             },
             "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Shared/Extensions/Extensions.csproj": {
               "projectPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Shared/Extensions/Extensions.csproj"
+            },
+            "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Shared/Ports/Ports.csproj": {
+              "projectPath": "/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Shared/Ports/Ports.csproj"
             }
           }
         }

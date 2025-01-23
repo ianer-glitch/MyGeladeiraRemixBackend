@@ -1,6 +1,9 @@
 using Extensions;
+using Fridge.Application.UseCases.Item.Create;
+using Fridge.Domain.Items.Create;
 using Fridge.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+using Ports;
+using Postgre.Adapter;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +17,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<FridgeContext>(builder.Configuration,"Database");
+builder.Services.ConfigureJwtAuth(builder.Configuration);
+
+builder.Services.AddScoped(typeof(IRepository<,>),typeof(Repository<,>)); 
+builder.Services.AddScoped<ICreateItem<ICreateItemIn, CreateItemOut>, CreateItem>();
+builder.Services.AddSwaggerConfiguration();
 
 
 var app = builder.Build();

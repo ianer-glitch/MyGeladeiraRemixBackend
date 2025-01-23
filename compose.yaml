@@ -5,7 +5,10 @@
       - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8081
-      - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
+      - ConnectionStrings_Database=$DATABASE_CONNECTION_STRING
+      - JwtConfiguration__Authority=$JWT_AUTHORITY
+      - JwtConfiguration__Audience=$JWT_AUDIENCE
+      - JwtConfiguration__SecurityKey=$JWT_SECURITY_KEY
     ports:
       - $FRIDGE_API_EXTERNAL_PORT:8081
     build:
@@ -66,12 +69,11 @@
     environment:
       - ASPNETCORE_HTTP_PORTS=8085
       - ConnectionStrings__UserService=$CONNECTION_STRINGS_USERSERVICE
-
-      - JwtConfiguration__Issuer=http://identity:8085
-      - JwtConfiguration__Authority=http://identity:8085
-      - JwtConfiguration__Audience=http://fridge.api:8081;http://fridge.api:8082;http://identity:8085
-      - JwtConfiguration__SecurityKey=f3b1adde-3bb8-488d-b708-84980cb57617
-      - JwtConfiguration__ExpirationTimeInMinutes=1440
+      - JwtConfiguration__Issuer=$JWT_ISSUER
+      - JwtConfiguration__Authority=$JWT_AUTHORITY
+      - JwtConfiguration__Audience=$JWT_AUDIENCE
+      - JwtConfiguration__SecurityKey=$JWT_SECURITY_KEY
+      - JwtConfiguration__ExpirationTimeInMinutes=$JWT_EXPIRATION_TIME_IN_MINUTES
     ports:
       - $IDENTITY_API_EXTERNAL_PORT:8085
     build:

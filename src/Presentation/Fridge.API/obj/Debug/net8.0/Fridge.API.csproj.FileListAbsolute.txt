@@ -117,3 +117,13 @@
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Fridge.Application.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Fridge.Domain.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Models.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Ports.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Postgre.Adapter.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Postgre.Adapter.pdb
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Fridge.Application.pdb
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Fridge.Domain.pdb
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Ports.pdb
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Models.pdb

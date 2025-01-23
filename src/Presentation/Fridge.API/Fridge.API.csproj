@@ -21,8 +21,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Adapters\Postgre.Adapter\Postgre.Adapter.csproj" />
+      <ProjectReference Include="..\..\Core\Fridge\Fridge.Application\Fridge.Application.csproj" />
+      <ProjectReference Include="..\..\Core\Fridge\Fridge.Domain\Fridge.Domain.csproj" />
       <ProjectReference Include="..\..\Core\Fridge\Fridge.Infrastructure\Fridge.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Shared\Extensions\Extensions.csproj" />
+      <ProjectReference Include="..\..\Shared\Ports\Ports.csproj" />
     </ItemGroup>
 
 </Project>

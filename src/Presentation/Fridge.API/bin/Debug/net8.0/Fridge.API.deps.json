@@ -9,10 +9,14 @@
       "Fridge.API/1.0.0": {
         "dependencies": {
           "Extensions": "1.0.0",
+          "Fridge.Application": "1.0.0",
+          "Fridge.Domain": "1.0.0",
           "Fridge.Infrastructure": "1.0.0",
           "Microsoft.EntityFrameworkCore": "8.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0",
+          "Ports": "1.0.0",
+          "Postgre.Adapter": "1.0.0",
           "Swashbuckle.AspNetCore": "6.6.2"
         },
         "runtime": {
@@ -662,12 +666,53 @@
           "Extensions.dll": {}
         }
       },
+      "Fridge.Application/1.0.0": {
+        "dependencies": {
+          "Fridge.Domain": "1.0.0",
+          "Fridge.Infrastructure": "1.0.0",
+          "Ports": "1.0.0"
+        },
+        "runtime": {
+          "Fridge.Application.dll": {}
+        }
+      },
+      "Fridge.Domain/1.0.0": {
+        "dependencies": {
+          "Extensions": "1.0.0",
+          "Models": "1.0.0"
+        },
+        "runtime": {
+          "Fridge.Domain.dll": {}
+        }
+      },
       "Fridge.Infrastructure/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "8.0.0"
         },
         "runtime": {
           "Fridge.Infrastructure.dll": {}
+        }
+      },
+      "Models/1.0.0": {
+        "runtime": {
+          "Models.dll": {}
+        }
+      },
+      "Ports/1.0.0": {
+        "dependencies": {
+          "Models": "1.0.0"
+        },
+        "runtime": {
+          "Ports.dll": {}
+        }
+      },
+      "Postgre.Adapter/1.0.0": {
+        "dependencies": {
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0",
+          "Ports": "1.0.0"
+        },
+        "runtime": {
+          "Postgre.Adapter.dll": {}
         }
       }
     }
@@ -1075,7 +1120,32 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Fridge.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Fridge.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Fridge.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Ports/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Postgre.Adapter/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
