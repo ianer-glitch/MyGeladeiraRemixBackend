@@ -6,7 +6,7 @@ public interface IEntity
     public DateTime? Modified { get; set; }
     public bool IsActive { get; set; }
     public Guid UserInclusionId { get; set; }
-    public Guid UserModifiedId { get; set; }    
+    public Guid? UserModifiedId { get; set; }    
     
     public void SetActive();
     public void SetInactive();
