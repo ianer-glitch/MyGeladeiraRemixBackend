@@ -35,10 +35,7 @@ public static class ServiceExtensions
 
         var jwtConfiguration = configuration.GetSection("JwtConfiguration");
         var issuer = jwtConfiguration.GetSection("Authority").Value;
-        var audience = jwtConfiguration.GetSection("Audience").Value;
-        var currentAudience = jwtConfiguration.GetSection("CurrentAudience").Value;
-        var audienceToValidate = jwtConfiguration.GetSection("Audience").Value.Split(';')
-            .FirstOrDefault(f => f.Contains(currentAudience));
+        var audiences = jwtConfiguration.GetSection("Audience").Value.Split(';');
 
         var key = new SymmetricSecurityKey
         (Encoding.UTF8.GetBytes(jwtConfiguration.GetSection("SecurityKey").Value ??
@@ -57,12 +54,13 @@ public static class ServiceExtensions
                         ValidateIssuerSigningKey = true,
 
                         ValidIssuer = issuer,
-                        ValidAudience = audienceToValidate,
+                        ValidAudiences = audiences,
                         IssuerSigningKey = key,
                     };
 
                     options.RequireHttpsMetadata = false;
                     options.IncludeErrorDetails = true;
+                    
                 });
         return services;
     }

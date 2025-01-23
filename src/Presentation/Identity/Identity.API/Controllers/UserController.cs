@@ -14,12 +14,14 @@ public class UserController(
 {
     private readonly ILogger<UserController> _logger = logger;
     private readonly IConnectionHelper _con = con;
+    
 
     [HttpPost("Login")]
     public async Task<ActionResult<string>> Login(PIsUserPasswordValidIn request)
     {
         try
         {
+        
             var client = _con.GetUserConnection<UserService.UserServiceClient>();
             var result = await client.IsUserPasswordValidAsync(request);
             if (result is not null)
