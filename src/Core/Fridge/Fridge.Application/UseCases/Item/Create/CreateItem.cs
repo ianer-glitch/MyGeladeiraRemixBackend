@@ -35,8 +35,8 @@ public class CreateItem : ICreateItem<CreateItemIn,CreateItemOut>
                                      request.UserCreationId);
             await _repository.InsertAsync(item);
             
-            var sucess = await _context.SaveChangesAsync() > 0;
-            if (sucess)
+            var success = await _context.SaveChangesAsync() > 0;
+            if (success)
                 return new CreateItemOut { Item = item };
             
             throw new Exception("Could not create item");   
