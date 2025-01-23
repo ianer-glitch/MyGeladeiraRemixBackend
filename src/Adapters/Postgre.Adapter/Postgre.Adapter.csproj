@@ -5,10 +5,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Shared\Ports\Ports.csproj" />
-      <ProjectReference Include="..\Fridge.Domain\Fridge.Domain.csproj" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
     </ItemGroup>
-
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Ports\Ports.csproj" />
+    </ItemGroup>
 </Project>

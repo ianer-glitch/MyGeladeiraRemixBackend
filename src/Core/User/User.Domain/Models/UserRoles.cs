@@ -11,7 +11,7 @@ public class UserRoles : IdentityRole<Guid>, IEntity
     
     public bool IsActive { get; set; }
     public Guid UserInclusionId { get; set; }
-    public Guid UserModifiedId { get; set; }
+    public Guid? UserModifiedId { get; set; }
     public void SetActive()
     {
         throw new NotImplementedException();
