@@ -66,9 +66,9 @@
     environment:
       - ASPNETCORE_HTTP_PORTS=8085
       - ConnectionStrings__UserService=$CONNECTION_STRINGS_USERSERVICE
-      
+      - JwtConfiguration__CurrentAudience=http://identity:8005 
       - JwtConfiguration__Issuer=http://identity:8005
-      - JwtConfiguration__Audience=http://fridge.api:8001;http://fridge.api:8002
+      - JwtConfiguration__Audience=http://fridge.api:8001;http://fridge.api:8002;http://identity:8005
       - JwtConfiguration__SecurityKey=f3b1adde-3bb8-488d-b708-84980cb57617
       - JwtConfiguration__ExpirationTimeInMinutes=120
     ports:

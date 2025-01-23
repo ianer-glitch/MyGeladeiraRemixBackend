@@ -24,6 +24,7 @@
       <ProjectReference Include="..\..\..\Adapters\Grpc.Adapter\Grpc.Adapter.csproj" />
       <ProjectReference Include="..\..\..\Core\Identity\Identity.Application\Identity.Application.csproj" />
       <ProjectReference Include="..\..\..\Core\Identity\Identity.Domain\Identity.Domain.csproj" />
+      <ProjectReference Include="..\..\..\Shared\Extensions\Extensions.csproj" />
     </ItemGroup>
 
 </Project>

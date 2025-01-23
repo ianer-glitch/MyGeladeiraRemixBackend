@@ -41,11 +41,9 @@
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Design.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
-/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
-/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Mono.TextTemplating.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/System.CodeDom.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/System.Composition.AttributedModel.dll
@@ -109,6 +107,13 @@
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Fridge.Infrastructure.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Fridge.Infrastructure.pdb
-/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.Extensions.Configuration.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Extensions.dll
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Extensions.pdb
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll

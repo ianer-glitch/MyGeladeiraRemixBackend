@@ -1,3 +1,4 @@
+using Extensions;
 using Grpc.Adapter;
 using Identity.Application.Helpers;
 using Identity.Domain.Ports;
@@ -14,6 +15,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IIdentityGrpcConnection, Connection>();
 builder.Services.AddScoped<IConnectionHelper, ConnectionHelper>();
+builder.Services.ConfigureJwtAuth(builder.Configuration);
+builder.Services.AddSwaggerConfiguration();
 
 var app = builder.Build();
 
