@@ -1,8 +1,6 @@
 namespace Fridge.Domain.Items.Create;
 
-public interface ICreateItem<TIn, TOut> 
-    where TIn : ICreateItemIn 
-    where TOut : ICreateItemOut
+public interface ICreateItem
 {
-    public Task<TOut> ExecuteAsync(TIn request);
+    public Task<ICreateItemOut> ExecuteAsync(ICreateItemIn request);
 }

@@ -6,7 +6,7 @@ using ItemModel = Fridge.Domain.Items.Item;
 
 namespace Fridge.Application.UseCases.Item.Create;
 
-public class CreateItem : ICreateItem<CreateItemIn,CreateItemOut>
+public class CreateItem : ICreateItem
 {
     private readonly FridgeContext _context;
     private readonly IRepository<ItemModel,FridgeContext> _repository;   
@@ -19,7 +19,7 @@ public class CreateItem : ICreateItem<CreateItemIn,CreateItemOut>
     }
 
 
-    public async  Task<CreateItemOut> ExecuteAsync(CreateItemIn request)
+    public async  Task<ICreateItemOut> ExecuteAsync(ICreateItemIn request)
     {
         try
         {
@@ -49,4 +49,6 @@ public class CreateItem : ICreateItem<CreateItemIn,CreateItemOut>
             throw;
         }
     }
+
+
 }

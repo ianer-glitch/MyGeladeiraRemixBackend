@@ -20,7 +20,7 @@ builder.Services.AddDbContext<FridgeContext>(builder.Configuration,"Database");
 builder.Services.ConfigureJwtAuth(builder.Configuration);
 
 builder.Services.AddScoped(typeof(IRepository<,>),typeof(Repository<,>)); 
-builder.Services.AddScoped<ICreateItem<ICreateItemIn, CreateItemOut>, CreateItem>();
+builder.Services.AddScoped<ICreateItem, CreateItem>();
 builder.Services.AddSwaggerConfiguration();
 
 

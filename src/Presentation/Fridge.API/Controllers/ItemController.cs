@@ -1,3 +1,4 @@
+using Fridge.Application.UseCases.Item.Create;
 using Fridge.Domain.Items.Create;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,15 +10,15 @@ namespace Fridge.API.Controllers;
 [Route("[controller]")]
 public class ItemController : ControllerBase
 {
-    private readonly ICreateItem<ICreateItemIn, ICreateItemOut> _createItem;
+    private readonly ICreateItem _createItem;
     
-    public ItemController(ICreateItem<ICreateItemIn,ICreateItemOut> createItem)
+    public ItemController(ICreateItem createItem)
     {
         _createItem = createItem;   
     }
 
     [HttpPost("Item")]
-    public async Task<ActionResult<ICreateItemOut>> CreateItem(ICreateItemIn input)
+    public async Task<ActionResult<CreateItemOut>> CreateItem(CreateItemIn input)
     {
         try
         {
