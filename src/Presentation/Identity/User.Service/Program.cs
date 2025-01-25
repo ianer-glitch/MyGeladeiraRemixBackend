@@ -25,11 +25,7 @@ builder.Services.AddScoped<IUserUseCase, UserUseCase>();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<UserContext>();
-    db.Database.Migrate();
-}
+app.ApplyMigrations<UserContext>();
 
 using (var scope = app.Services.CreateScope())
 {

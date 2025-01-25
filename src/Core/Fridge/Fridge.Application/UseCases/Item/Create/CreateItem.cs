@@ -13,10 +13,14 @@ public class CreateItem : ICreateItem
     private readonly IRepository<ItemModel,FridgeContext> _repository;
     private readonly IFileAdapter<IFileAdapterResult> _fileAdapter;
 
-    public CreateItem(FridgeContext context, IRepository<ItemModel,FridgeContext> repository)
+    public CreateItem(
+        FridgeContext context,
+        IRepository<ItemModel,FridgeContext> repository,
+        IFileAdapter<IFileAdapterResult> fileAdapter)
     {
         _context = context; 
-        _repository = repository;   
+        _repository = repository;
+        _fileAdapter = fileAdapter;
     }
 
 

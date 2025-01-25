@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using Extensions;
 using Fridge.Application.UseCases.Item.Create;
 using Fridge.Domain.Items.Create;
@@ -19,6 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<FridgeContext>(builder.Configuration,"Database");
+
 builder.Services.ConfigureJwtAuth(builder.Configuration);
 
 builder.Services.AddScoped(typeof(IRepository<,>),typeof(Repository<,>)); 
@@ -29,6 +31,7 @@ builder.Services.AddSwaggerConfiguration();
 
 var app = builder.Build();
 
+app.ApplyMigrations<FridgeContext>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

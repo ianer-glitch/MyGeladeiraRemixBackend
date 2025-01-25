@@ -5,7 +5,7 @@
       - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8081
-      - ConnectionStrings_Database=$DATABASE_CONNECTION_STRING
+      - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
       - JwtConfiguration__Authority=$JWT_AUTHORITY
       - JwtConfiguration__Audience=$JWT_AUDIENCE
       - JwtConfiguration__SecurityKey=$JWT_SECURITY_KEY
@@ -23,7 +23,7 @@
       - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8082
-      - ConnectionStrings_Database= $DATABASE_CONNECTION_STRING
+      - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
     ports:
       - $STATISTIC_API_EXTERNAL_PORT:8082
     build:
