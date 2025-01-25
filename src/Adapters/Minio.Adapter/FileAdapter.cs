@@ -2,17 +2,19 @@
 using Fridge.Domain.Ports.FileAdapter;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Minio.DataModel.Args;
 
 namespace Minio.Adapter;
 
 public class FileAdapter<TFile> : IFileAdapter<TFile>    
-    where TFile: class, IFileAdapterResult 
+    where TFile:  IFileAdapterResult 
 {
     private readonly MinioClient _minioClient;
     private readonly string _bucketName;
+    private readonly IServiceProvider _serviceProvider;
     
-    public FileAdapter(IConfiguration configuration)
+    public FileAdapter(IConfiguration configuration , IServiceProvider serviceProvider)
     {
         
         _bucketName = configuration.GetSection("MINIO_BUCKET_NAME").Value ?? throw new InvalidOperationException("Bucket name config is missing");
@@ -28,6 +30,8 @@ public class FileAdapter<TFile> : IFileAdapter<TFile>
             .WithCredentials(accessKey, secretKey)
             .WithSSL(secure)
             .Build() ?? throw new InvalidOperationException();    
+        
+        _serviceProvider = serviceProvider; 
     }
     
     public async Task<TFile> GetFileAsync(string objectName)
@@ -74,9 +78,9 @@ public class FileAdapter<TFile> : IFileAdapter<TFile>
                 .WithObjectSize(stream.Length)
                 .WithContentType(file.ContentType);
 
-            await _minioClient.PutObjectAsync(putObjectArgs).ConfigureAwait(false);
+            await _minioClient.PutObjectAsync(putObjectArgs);
 
-            var result = Activator.CreateInstance<TFile>();
+            var result = _serviceProvider.GetRequiredService<TFile>();
             result.Name = objectName;
             result.Size = (int)stream.Length;
             result.Success = true;

@@ -25,7 +25,9 @@ builder.Services.ConfigureJwtAuth(builder.Configuration);
 
 builder.Services.AddScoped(typeof(IRepository<,>),typeof(Repository<,>)); 
 builder.Services.AddScoped<ICreateItem, CreateItem>();
-builder.Services.AddScoped<IFileAdapter<FileAdapterResult>, FileAdapter<FileAdapterResult>>();
+
+builder.Services.AddScoped(typeof(IFileAdapter<>), typeof(FileAdapter<>));
+builder.Services.AddScoped<IFileAdapterResult,FileAdapterResult>();
 builder.Services.AddSwaggerConfiguration();
 
 
