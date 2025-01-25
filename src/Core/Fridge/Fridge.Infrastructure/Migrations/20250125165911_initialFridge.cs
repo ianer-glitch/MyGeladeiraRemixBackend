@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Fridge.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class addedItemInContext : Migration
+    public partial class initialFridge : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,8 +19,9 @@ namespace Fridge.Infrastructure.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Color = table.Column<string>(type: "text", nullable: false),
                     Expiration = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IconName = table.Column<string>(type: "text", nullable: false),
                     MinimunQuantity = table.Column<int>(type: "integer", nullable: false),
-                    DefaultQuantity = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
                     Inclusion = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Modified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),

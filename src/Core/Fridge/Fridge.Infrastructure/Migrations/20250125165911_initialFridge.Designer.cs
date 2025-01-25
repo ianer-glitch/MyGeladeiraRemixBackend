@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Fridge.Infrastructure.Migrations
 {
     [DbContext(typeof(FridgeContext))]
-    [Migration("20250125151522_addedItemInContext")]
-    partial class addedItemInContext
+    [Migration("20250125165911_initialFridge")]
+    partial class initialFridge
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,11 +35,12 @@ namespace Fridge.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("DefaultQuantity")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("Expiration")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("IconName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("Inclusion")
                         .HasColumnType("timestamp with time zone");
@@ -56,6 +57,9 @@ namespace Fridge.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("UserInclusionId")
                         .HasColumnType("uuid");
