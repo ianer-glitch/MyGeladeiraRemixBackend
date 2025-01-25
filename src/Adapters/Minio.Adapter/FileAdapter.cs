@@ -48,7 +48,7 @@ public class FileAdapter<TFile> : IFileAdapter<TFile>
 
             var presignedUrl = await _minioClient.PresignedGetObjectAsync(args).ConfigureAwait(false);
 
-            var result = Activator.CreateInstance<TFile>();
+            var result = _serviceProvider.GetRequiredService<TFile>();
             result.Link = presignedUrl;
             result.Success = true;
             return result;  
