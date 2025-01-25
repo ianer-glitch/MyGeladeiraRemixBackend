@@ -7,7 +7,7 @@ namespace Identity.API.Helpers;
 
 public static class TokenHelpers
 {
-    public static string GenerateToken(IConfiguration conf)
+    public static string GenerateToken(IConfiguration conf , IEnumerable<string> roles )
     {
         try
         {
@@ -17,7 +17,10 @@ public static class TokenHelpers
 
             var issuer = jwtConfiguration.GetSection("Issuer").Value ?? string.Empty;
             var audience = jwtConfiguration.GetSection("Audience").Value ?? string.Empty;
-            var audiencesAsClaimList = audience.Split(';').Select(s => new Claim("aud", s)); 
+            var audiencesAsClaimList = audience.Split(';').Select(s => new Claim("aud", s));
+            var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r));  
+            var claims = audiencesAsClaimList.Concat(roleClaims);
+            
             DateTime expires = DateTime.Now.AddMinutes(
                 int.Parse(
                     jwtConfiguration.GetSection("ExpirationTimeInMinutes").Value ?? string.Empty
@@ -38,7 +41,7 @@ public static class TokenHelpers
                 audience: null,//multiples audiences must be passed as claim list
                 expires: expires,
                 signingCredentials: credentials,
-                claims: audiencesAsClaimList
+                claims: claims
             );
 
             var tokenHandler = new JwtSecurityTokenHandler();

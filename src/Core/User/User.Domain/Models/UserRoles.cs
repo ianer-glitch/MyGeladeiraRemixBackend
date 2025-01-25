@@ -5,6 +5,9 @@ namespace User.Domain.Models;
 
 public class UserRoles : IdentityRole<Guid>, IEntity
 {
+    public UserRoles(string name) : base(name)
+    {
+    }
     public DateTime Inclusion { get; set; }
     public DateTime? Modified { get; set; }
 

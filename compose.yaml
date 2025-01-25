@@ -39,6 +39,8 @@
     environment:
       - ASPNETCORE_HTTP_PORTS=8083
       - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
+      - DEFAULT_ADMIN_USER=$DEFAULT_ADMIN_USER
+      - DEFAULT_ADMIN_PASSWORD=$DEFAULT_ADMIN_PASSWORD
     ports:
       - $USER_API_EXTERNAL_PORT:8083
     build:

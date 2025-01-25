@@ -18,6 +18,7 @@ public class ItemController : ControllerBase
     }
 
     [HttpPost("Item")]
+    [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<CreateItemOut>> CreateItem(CreateItemIn input)
     {
         try

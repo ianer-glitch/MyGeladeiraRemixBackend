@@ -56,6 +56,20 @@ public class UserService(IUserUseCase userUseCase) : Identity.Domain.Protos.User
             throw;
         }
     }
+    
+    public override async Task<PGetUserRolesOut> GetUserRoles(PGetUserRolesIn request ,  ServerCallContext context)
+    {
+        try
+        {
+            return await _userUseCase.GetUserRoles(request);
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+     
+        
+    }
 }
 
 

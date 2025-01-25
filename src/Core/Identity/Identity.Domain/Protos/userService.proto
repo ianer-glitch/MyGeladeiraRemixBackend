@@ -10,6 +10,19 @@ service UserService{
   rpc IsUserPasswordValid(PIsUserPasswordValidIn)returns(PIsUserPasswordValidOut);
   rpc CreateUser(PCreateUserIn)returns(PCreateUserOut);
   rpc DeleteUser(PDeleteUserIn)returns(PDeleteUserOut);
+  rpc GetUserRoles(PGetUserRolesIn)returns(PGetUserRolesOut);
+  
+}
+
+message PGetUserRolesIn{
+  string email = 1;
+}
+message PGetUserRolesOut{
+  repeated string roles = 1;
+}
+
+message PGetUserRolesOut_{
+
 }
 
 

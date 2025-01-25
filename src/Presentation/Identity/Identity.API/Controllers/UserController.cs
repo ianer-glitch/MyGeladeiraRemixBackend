@@ -24,8 +24,11 @@ public class UserController(
         
             var client = _con.GetUserConnection<UserService.UserServiceClient>();
             var result = await client.IsUserPasswordValidAsync(request);
+            
+            var claims = await client.GetUserRolesAsync(new PGetUserRolesIn(){Email = request.Email});
+            
             if (result is not null)
-                return Ok(TokenHelpers.GenerateToken(conf));
+                return Ok(TokenHelpers.GenerateToken(conf,claims.Roles.Select(s=>(string)s)));
             
             return Empty;
         }

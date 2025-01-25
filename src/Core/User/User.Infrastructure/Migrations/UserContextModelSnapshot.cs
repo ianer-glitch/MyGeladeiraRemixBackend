@@ -209,7 +209,7 @@ namespace User.Infrastructure.Migrations
                     b.Property<Guid>("UserInclusionId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserModifiedId")
+                    b.Property<Guid?>("UserModifiedId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("UserName")
@@ -258,7 +258,7 @@ namespace User.Infrastructure.Migrations
                     b.Property<Guid>("UserInclusionId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserModifiedId")
+                    b.Property<Guid?>("UserModifiedId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
