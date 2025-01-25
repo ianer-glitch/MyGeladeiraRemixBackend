@@ -36,7 +36,7 @@ public class CreateItem : ICreateItem
             
             var item = new ItemModel(request.Name,
                                      request.Color,
-                                     request.Expiration,
+                                     request.Expiration.ToUniversalTime(),
                                      request.MinimumQuantity,
                                      request.Quantity,
                                      fileResult.Name,

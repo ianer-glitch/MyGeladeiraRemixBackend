@@ -25,6 +25,8 @@
       <Compile Remove="Migrations\20250125164801_dateTimeChangeNotNullable.Designer.cs" />
       <Compile Remove="Migrations\20250125165145_dateTimeChangeNotNullable.cs" />
       <Compile Remove="Migrations\20250125165145_dateTimeChangeNotNullable.Designer.cs" />
+      <Compile Remove="Migrations\20250125170655_changedInclusionToUtcNow.cs" />
+      <Compile Remove="Migrations\20250125170655_changedInclusionToUtcNow.Designer.cs" />
     </ItemGroup>
 
     <ItemGroup>

@@ -11,7 +11,7 @@ public class Entity : IEntity,IId
     public Entity(Guid userInclusionId)
     {
         Id = Guid.NewGuid();
-        Inclusion = DateTime.Now;
+        Inclusion = DateTime.UtcNow;
         IsActive = true;    
         UserInclusionId = userInclusionId;
     }
