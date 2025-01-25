@@ -1,7 +1,9 @@
 using Extensions;
 using Fridge.Application.UseCases.Item.Create;
 using Fridge.Domain.Items.Create;
+using Fridge.Domain.Ports.FileAdapter;
 using Fridge.Infrastructure;
+using Minio.Adapter;
 using Ports;
 using Postgre.Adapter;
 
@@ -21,6 +23,7 @@ builder.Services.ConfigureJwtAuth(builder.Configuration);
 
 builder.Services.AddScoped(typeof(IRepository<,>),typeof(Repository<,>)); 
 builder.Services.AddScoped<ICreateItem, CreateItem>();
+builder.Services.AddScoped<IFileAdapter<FileAdapterResult>, FileAdapter<FileAdapterResult>>();
 builder.Services.AddSwaggerConfiguration();
 
 

@@ -1,4 +1,5 @@
 using Fridge.Domain.Items.Create;
+using Fridge.Domain.Ports.FileAdapter;
 using Fridge.Infrastructure;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Ports;
@@ -9,8 +10,8 @@ namespace Fridge.Application.UseCases.Item.Create;
 public class CreateItem : ICreateItem
 {
     private readonly FridgeContext _context;
-    private readonly IRepository<ItemModel,FridgeContext> _repository;   
-    
+    private readonly IRepository<ItemModel,FridgeContext> _repository;
+    private readonly IFileAdapter<IFileAdapterResult> _fileAdapter;
 
     public CreateItem(FridgeContext context, IRepository<ItemModel,FridgeContext> repository)
     {
@@ -26,7 +27,9 @@ public class CreateItem : ICreateItem
             var isExistingItem = _repository.Get(g=>g.Name == request.Name).Any();
             if(isExistingItem)
                 throw new ArgumentException($"Item {request.Name} already exists");
-
+        
+            var fileResult = await _fileAdapter.UploadAsync(request.Icon);
+            
             var item = new ItemModel(request.Name,
                                      request.Color,
                                      request.Expiration,

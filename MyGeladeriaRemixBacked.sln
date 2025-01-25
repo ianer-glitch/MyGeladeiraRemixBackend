@@ -65,6 +65,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ports", "src\Shared\Ports\P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fridge.Domain.UnitTests", "tests\Core\Fridge.Domain.UnitTests\Fridge.Domain.UnitTests.csproj", "{B9F8F9EA-0B3C-4EC7-8A8C-3DBCBF46D5E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minio.Adapter", "src\Adapters\Minio.Adapter\Minio.Adapter.csproj", "{B7DE92DA-231D-4F4A-890A-8321F960E212}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -195,5 +197,9 @@ Global
 		{B9F8F9EA-0B3C-4EC7-8A8C-3DBCBF46D5E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9F8F9EA-0B3C-4EC7-8A8C-3DBCBF46D5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9F8F9EA-0B3C-4EC7-8A8C-3DBCBF46D5E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7DE92DA-231D-4F4A-890A-8321F960E212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7DE92DA-231D-4F4A-890A-8321F960E212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7DE92DA-231D-4F4A-890A-8321F960E212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7DE92DA-231D-4F4A-890A-8321F960E212}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http;
+
 namespace Fridge.Domain.Items.Create;
 
 public interface ICreateItemIn
@@ -7,7 +9,7 @@ public interface ICreateItemIn
     public int MinimumQuantity { get; set; }
     public int DefaultQuantity { get; set; }
     public DateTime Expiration { get; set; }
-    
+    public IFormFile Icon { get; set; }
     public Guid UserCreationId { get; set; }    
     
 }

@@ -127,3 +127,9 @@
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Fridge.Domain.pdb
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Ports.pdb
 /home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Models.pdb
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/CommunityToolkit.HighPerformance.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Minio.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/System.IO.Hashing.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/System.Reactive.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Minio.Adapter.dll
+/home/ianerglitch/Documents/myGeladeiraRemix/MyGeladeiraRemixBackend/src/Presentation/Fridge.API/bin/Debug/net8.0/Minio.Adapter.pdb
