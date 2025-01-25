@@ -15,7 +15,7 @@ public class Item : Entity
                 string color,
                 DateTime expiration,
                 int minimunQuantity ,
-                int defaultQuantity ,
+                int quantity ,
                 string iconName,
                 Guid userInclusionId):base(userInclusionId)
     {
@@ -23,7 +23,7 @@ public class Item : Entity
         SetColor(color);    
         SetExpiration(expiration);
         MinimunQuantity = minimunQuantity;
-        DefaultQuantity = defaultQuantity;
+        Quantity = quantity;
         IconName = iconName;    
     }
     public string Name { get; set; }
@@ -32,7 +32,7 @@ public class Item : Entity
     
     public string IconName { get; set; } 
     public int MinimunQuantity { get; set; }    
-    public int DefaultQuantity { get; set; }
+    public int Quantity { get; set; }
 
     public void SetIconName(string icon)
     {

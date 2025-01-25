@@ -32,9 +32,6 @@ namespace Fridge.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("DefaultQuantity")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("Expiration")
                         .HasColumnType("timestamp with time zone");
 
@@ -57,6 +54,9 @@ namespace Fridge.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("UserInclusionId")
                         .HasColumnType("uuid");

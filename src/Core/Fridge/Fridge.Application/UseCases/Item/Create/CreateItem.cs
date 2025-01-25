@@ -38,7 +38,7 @@ public class CreateItem : ICreateItem
                                      request.Color,
                                      request.Expiration,
                                      request.MinimumQuantity,
-                                     request.DefaultQuantity,
+                                     request.Quantity,
                                      fileResult.Name,
                                      request.UserCreationId);
             
