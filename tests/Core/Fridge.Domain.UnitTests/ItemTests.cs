@@ -12,6 +12,7 @@ public class ItemTests
             DateTime.UtcNow.AddDays(5),
             1,
             4,
+            "someIcon",
             Guid.NewGuid());
     
     [Fact]
@@ -76,5 +77,23 @@ public class ItemTests
         Assert.NotEmpty(percentage);
         Assert.Contains("%",percentage);
         
+    }
+    
+    [Fact]
+    public void SetIcon_WhenIconIsEmpty_ThrowsArgumentNullException()
+    {
+        var item = GetValidItem;
+        var act = () => item.SetIconName(string.Empty);
+        Assert.Throws<ArgumentNullException>(act);
+    }
+    
+    [Fact]
+    public void SetIconName_WhenNameIsValid_DoesNotThrow()
+    {
+        var item = GetValidItem;
+        var iconName = "new icon"; 
+        item.SetIconName(iconName);
+        
+        Assert.Equal(item.IconName, iconName);
     }
 }

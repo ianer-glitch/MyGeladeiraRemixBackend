@@ -39,7 +39,9 @@ public class CreateItem : ICreateItem
                                      request.Expiration,
                                      request.MinimumQuantity,
                                      request.DefaultQuantity,
+                                     fileResult.Name,
                                      request.UserCreationId);
+            
             await _repository.InsertAsync(item);
             
             var success = await _context.SaveChangesAsync() > 0;

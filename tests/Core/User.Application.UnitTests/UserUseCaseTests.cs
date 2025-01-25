@@ -26,9 +26,9 @@ public class UserUseCaseTests
         mockUserManager.Setup(x=>x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(null as Domain.Models.User);
         mockUserManager.Setup(x => x.CheckPasswordAsync(It.IsAny<Domain.Models.User>(), It.IsAny<string>()))
             .ReturnsAsync(false);
-        
-        
-        var userUseCase = new UserUseCase(mockUserManager.Object);
+
+        var mockRoleManager =new  Mock<RoleManager<Domain.Models.UserRoles>>();
+        var userUseCase = new UserUseCase(mockUserManager.Object,mockRoleManager.Object);
         var request = new PIsUserPasswordValidIn()
         {
             Email = "some@mail.com",
@@ -56,8 +56,8 @@ public class UserUseCaseTests
         mockUserManager.Setup(x=>x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(userList.FirstOrDefault(f=>f.Email=="email@email.com"));
         mockUserManager.Setup(x => x.CheckPasswordAsync(It.IsAny<Domain.Models.User>(), It.IsAny<string>()))
             .ReturnsAsync(true);
-        
-        var userUseCase = new UserUseCase(mockUserManager.Object);
+        var mockRoleManager =new  Mock<RoleManager<Domain.Models.UserRoles>>();
+        var userUseCase = new UserUseCase(mockUserManager.Object,mockRoleManager.Object);
         var request = new PIsUserPasswordValidIn
         {
             Email = "some@mail.com",
@@ -83,7 +83,8 @@ public class UserUseCaseTests
         var mockUserManager = MockUserManager.Basic<Domain.Models.User>(userList);
         mockUserManager.Setup(x=>x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(userList.FirstOrDefault(f=>f.Email=="email@email.com"));
         
-        var userUseCase = new UserUseCase(mockUserManager.Object);
+        var mockRoleManager =new  Mock<RoleManager<Domain.Models.UserRoles>>();
+        var userUseCase = new UserUseCase(mockUserManager.Object,mockRoleManager.Object);
         var request = new PCreateUserIn()
         {
             Email = "email@email.com",
@@ -105,7 +106,9 @@ public class UserUseCaseTests
         var mockUserManager = MockUserManager.Basic<Domain.Models.User>(userList);
         mockUserManager.Setup(x=>x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(null as Domain.Models.User);
         mockUserManager.Setup(x => x.CreateAsync(It.IsAny<Domain.Models.User>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
-        var userUseCase = new UserUseCase(mockUserManager.Object);
+        
+        var mockRoleManager =new  Mock<RoleManager<Domain.Models.UserRoles>>();
+        var userUseCase = new UserUseCase(mockUserManager.Object,mockRoleManager.Object);
         var request = new PCreateUserIn()
         {
             Email = "email@email.com",
@@ -127,7 +130,10 @@ public class UserUseCaseTests
       
         var mockUserManager = MockUserManager.Basic<Domain.Models.User>(userList);
         mockUserManager.Setup(x=>x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(null as Domain.Models.User);
-        var userUseCase = new UserUseCase(mockUserManager.Object);
+        
+        var mockRoleManager =new  Mock<RoleManager<Domain.Models.UserRoles>>();
+        
+        var userUseCase = new UserUseCase(mockUserManager.Object,mockRoleManager.Object);
         var request = new PDeleteUserIn()
         {
             UserId = Guid.NewGuid().ToString(),
@@ -155,7 +161,8 @@ public class UserUseCaseTests
         mockUserManager.Setup(x=>x.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(userList.FirstOrDefault(f=>f.Id==userId));
         mockUserManager.Setup(x=>x.DeleteAsync(It.IsAny<Domain.Models.User>())).ReturnsAsync(IdentityResult.Success);   
         
-        var userUseCase = new UserUseCase(mockUserManager.Object);
+        var mockRoleManager =new  Mock<RoleManager<Domain.Models.UserRoles>>();
+        var userUseCase = new UserUseCase(mockUserManager.Object,mockRoleManager.Object);
         var request = new PDeleteUserIn()
         {
             UserId = userId.ToString(), 

@@ -16,6 +16,7 @@ public class Item : Entity
                 DateTime expiration,
                 int minimunQuantity ,
                 int defaultQuantity ,
+                string iconName,
                 Guid userInclusionId):base(userInclusionId)
     {
         SetName(name);
@@ -23,14 +24,23 @@ public class Item : Entity
         SetExpiration(expiration);
         MinimunQuantity = minimunQuantity;
         DefaultQuantity = defaultQuantity;
+        IconName = iconName;    
     }
     public string Name { get; set; }
     public string Color { get; set; }
     public DateTime Expiration { get; set; }
     
+    public string IconName { get; set; } 
     public int MinimunQuantity { get; set; }    
-    public int DefaultQuantity { get; set; }    
+    public int DefaultQuantity { get; set; }
 
+    public void SetIconName(string icon)
+    {
+        if(icon.IsNullOrEmpty())
+            throw new ArgumentNullException(nameof(icon));
+        IconName = icon;    
+    }
+    
     public void SetName(string name)
     {
         if(name.IsNullOrEmpty())
