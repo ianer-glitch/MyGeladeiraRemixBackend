@@ -13,15 +13,26 @@ public class UserUseCase(UserManager<Domain.Models.User> userManager, RoleManage
 {
     private readonly UserManager<Domain.Models.User> _userManager = userManager;
 
-    public async Task<bool> IsUserPasswordValidAsync(PIsUserPasswordValidIn request)
+    public async Task<PIsUserPasswordValidOut> IsUserPasswordValidAsync(PIsUserPasswordValidIn request)
     {
         try
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user is null)
-                return false;
+                return new PIsUserPasswordValidOut
+                {
+                    IsValid = false,
+                };
             
-            return await _userManager.CheckPasswordAsync(user, request.Password);    
+            var sucess=  await _userManager.CheckPasswordAsync(user, request.Password);    
+            
+            return new PIsUserPasswordValidOut
+            {
+                IsValid = sucess,
+                UserId = user.Id.ToString(),
+            };
+            
+            
             
         }
         catch (Exception e)

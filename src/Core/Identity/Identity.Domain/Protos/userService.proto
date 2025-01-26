@@ -33,6 +33,7 @@ message PIsUserPasswordValidIn{
 
 message PIsUserPasswordValidOut{
   bool isValid = 1;
+  string userId = 2;
 }
 
 message PCreateUserIn{

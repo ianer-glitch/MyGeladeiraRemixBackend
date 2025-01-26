@@ -28,7 +28,9 @@ public class UserController(
             var claims = await client.GetUserRolesAsync(new PGetUserRolesIn(){Email = request.Email});
             
             if (result is not null)
-                return Ok(TokenHelpers.GenerateToken(conf,claims.Roles.Select(s=>(string)s)));
+                return Ok(TokenHelpers.GenerateToken(
+                    conf,
+                    claims.Roles.Select(s=>(string)s),Guid.Parse(result.UserId)));
             
             return Empty;
         }

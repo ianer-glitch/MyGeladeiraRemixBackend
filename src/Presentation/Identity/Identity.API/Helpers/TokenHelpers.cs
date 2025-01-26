@@ -7,7 +7,7 @@ namespace Identity.API.Helpers;
 
 public static class TokenHelpers
 {
-    public static string GenerateToken(IConfiguration conf , IEnumerable<string> roles )
+    public static string GenerateToken(IConfiguration conf , IEnumerable<string> roles, Guid userId )
     {
         try
         {
@@ -20,6 +20,7 @@ public static class TokenHelpers
             var audiencesAsClaimList = audience.Split(';').Select(s => new Claim("aud", s));
             var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r));  
             var claims = audiencesAsClaimList.Concat(roleClaims);
+            claims = claims.Append(new Claim("sub", userId.ToString()));
             
             DateTime expires = DateTime.Now.AddMinutes(
                 int.Parse(

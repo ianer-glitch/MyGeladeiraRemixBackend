@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Extensions;
 using Fridge.Application.UseCases.Item.Create;
 using Fridge.Application.UseCases.Item.Get;
 using Fridge.Domain.Items.Create;
@@ -27,7 +29,8 @@ public class ItemController : ControllerBase
     {
         try
         {
-            input.UserCreationId = Guid.NewGuid();
+            
+            input.UserCreationId = User.GetId();
             var response =await _createItem.ExecuteAsync(input);
             return Ok(response);    
         }
