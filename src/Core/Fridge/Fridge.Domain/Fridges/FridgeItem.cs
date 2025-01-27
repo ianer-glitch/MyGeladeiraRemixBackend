@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Fridge.Domain.Items;
 
 namespace Fridge.Domain.Fridges;
@@ -16,7 +17,8 @@ public class FridgeItem : Item
         int minimunQuantity ,
         int quantity ,
         string iconName,
-        Guid userInclusionId) : base(name,
+        Guid userInclusionId,
+        Guid FridgeId) : base(name,
                                     color,
                                     expiration,
                                     minimunQuantity, 
@@ -26,4 +28,8 @@ public class FridgeItem : Item
     {
         
     }
+    
+    [ForeignKey("FridgeId")]
+    public Guid FridgeId { get; set; }
+    public virtual Fridge Fridge { get; set; }  
 }

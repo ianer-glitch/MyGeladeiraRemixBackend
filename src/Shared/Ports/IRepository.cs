@@ -16,9 +16,13 @@ public interface IRepository<T,TContext>
     public Task<T> InsertAsync(T entity);
 
     public T Update(T entity, Expression<Func<T, bool>> expression);
-    
-    
-    
+
+    public Task<int> SaveChangesAsync();
+
+    public  Task AddRangeAsync(IEnumerable<T> entities);
+
+
+
 
 
 

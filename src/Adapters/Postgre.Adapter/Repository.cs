@@ -31,4 +31,14 @@ public class Repository<T,TContext>(TContext context) : IRepository<T,TContext>
         return entity;
         
     }
+
+    public async Task<int> SaveChangesAsync()
+    {
+        return  await context.SaveChangesAsync();
+    }
+
+    public async Task AddRangeAsync(IEnumerable<T> entities)
+    {
+        await context.Set<T>().AddRangeAsync(entities);
+    }
 }
