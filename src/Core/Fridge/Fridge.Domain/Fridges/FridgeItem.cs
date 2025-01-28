@@ -18,7 +18,7 @@ public class FridgeItem : Item
         int quantity ,
         string iconName,
         Guid userInclusionId,
-        Guid FridgeId) : base(name,
+        Guid fridgeId) : base(name,
                                     color,
                                     expiration,
                                     minimunQuantity, 
@@ -26,7 +26,7 @@ public class FridgeItem : Item
                                     iconName,
                                     userInclusionId)
     {
-        
+        FridgeId = fridgeId;
     }
     
     [ForeignKey("FridgeId")]

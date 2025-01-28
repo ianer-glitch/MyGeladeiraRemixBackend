@@ -28,6 +28,7 @@ public class FridgeController : ControllerBase
     {
         try
         {
+            request.UserId = User.GetId();
             var result = await _addItemsToFridge.ExecuteAsync(request);
             return Ok(result);
         }

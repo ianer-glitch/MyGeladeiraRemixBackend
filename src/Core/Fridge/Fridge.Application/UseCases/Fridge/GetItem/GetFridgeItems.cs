@@ -38,6 +38,8 @@ public class GetFridgeItems : IGetFridgeItems
                                                         IconLink = s.IconName,
                                                         PercentageExpired = s.GetPercentageExpired(),
                                                         ItemId = s.Id,
+                                                        Quantity = s.Quantity,
+                                                        
                                                     }).ToList();
             items.ForEach(async void (f) =>
                 {
