@@ -23,10 +23,10 @@ public class FridgeContext : DbContext
         base.OnModelCreating(modelBuilder);
         
         modelBuilder.Entity<Item>()
-            .ToTable("Items");  
+            .ToTable("Items");
 
         modelBuilder.Entity<FridgeItem>()
-            .ToTable("FridgeItems"); 
+            .ToTable("FridgeItems");
 
     }
 }
