@@ -1,9 +1,11 @@
 using System.Collections.Immutable;
 using Extensions;
 using Fridge.Application.UseCases.Fridge.AddItem;
+using Fridge.Application.UseCases.Fridge.GetItem;
 using Fridge.Application.UseCases.Item.Create;
 using Fridge.Application.UseCases.Item.Get;
 using Fridge.Domain.Fridges.AddItem;
+using Fridge.Domain.Fridges.GetItem;
 using Fridge.Domain.Items.Create;
 using Fridge.Domain.Items.Get;
 using Fridge.Domain.Ports.FileAdapter;
@@ -36,6 +38,8 @@ builder.Services.AddScoped<IFileAdapterResult,FileAdapterResult>();
 builder.Services.AddScoped<IGetItems, GetItems>();
 
 builder.Services.AddScoped<IAddItemsToFridge, AddItemsToFridge>();
+
+builder.Services.AddScoped<IGetFridgeItems, GetFridgeItems>();
 builder.Services.AddSwaggerConfiguration();
 
 

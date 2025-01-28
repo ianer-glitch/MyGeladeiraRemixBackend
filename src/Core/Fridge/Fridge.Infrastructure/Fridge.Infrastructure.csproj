@@ -29,6 +29,7 @@
       <Compile Remove="Migrations\20250125170655_changedInclusionToUtcNow.Designer.cs" />
       <Compile Remove="Migrations\20250127222727_item-fridges-and-fridgeITems.cs" />
       <Compile Remove="Migrations\20250127222727_item-fridges-and-fridgeITems.Designer.cs" />
+      <Compile Remove="Migrations\20250128211608_item-fridges-and-fridgeITems.Designer.cs" />
     </ItemGroup>
 
     <ItemGroup>

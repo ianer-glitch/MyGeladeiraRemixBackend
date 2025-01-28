@@ -36,7 +36,7 @@ public class UserUseCaseTests
         };
 
         var act = await userUseCase.IsUserPasswordValidAsync(request);
-        Assert.False(act);  
+        Assert.False(act.IsValid);  
         
         
     }
@@ -65,7 +65,7 @@ public class UserUseCaseTests
         };
 
         var act = await userUseCase.IsUserPasswordValidAsync(request);
-        Assert.True(act);  
+        Assert.True(act.IsValid);  
 
     }
 
