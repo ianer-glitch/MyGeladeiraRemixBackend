@@ -2,6 +2,7 @@ using Extensions;
 using Fridge.Application.UseCases.Fridge.AddItem;
 using Fridge.Application.UseCases.Fridge.GetItem;
 using Fridge.Application.UseCases.Fridge.UpdateItem;
+using Fridge.Application.UseCases.Fridge.UpdateMultipleItemQuantity;
 using Fridge.Domain.Fridges.AddItem;
 using Fridge.Domain.Fridges.GetItem;
 using Fridge.Domain.Fridges.UpdateItem;
@@ -88,7 +89,7 @@ public class FridgeController : ControllerBase
     }
     
     [HttpPatch("items")]
-    public async Task<ActionResult<IUpdateFridgeItemOut>>UpdateMultipleItemsQuantities(IEnumerable<IUpdateMultipleFridgeItemsQuantitiesIn> request)
+    public async Task<ActionResult<UpdateMultipleFridgeItemsQuantitiesOut>>UpdateMultipleItemsQuantities(IEnumerable<UpdateMultipleFridgeItemsQuantitiesIn> request)
     {
         try
         {

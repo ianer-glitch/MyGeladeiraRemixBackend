@@ -3,12 +3,14 @@ using Extensions;
 using Fridge.Application.UseCases.Fridge.AddItem;
 using Fridge.Application.UseCases.Fridge.GetItem;
 using Fridge.Application.UseCases.Fridge.UpdateItem;
+using Fridge.Application.UseCases.Fridge.UpdateMultipleItemQuantity;
 using Fridge.Application.UseCases.Item.Create;
 using Fridge.Application.UseCases.Item.Get;
 using Fridge.Application.UseCases.Item.Update;
 using Fridge.Domain.Fridges.AddItem;
 using Fridge.Domain.Fridges.GetItem;
 using Fridge.Domain.Fridges.UpdateItem;
+using Fridge.Domain.Fridges.UpdateMultipleItemQuantity;
 using Fridge.Domain.Items.Create;
 using Fridge.Domain.Items.Get;
 using Fridge.Domain.Items.Update;
@@ -46,7 +48,10 @@ builder.Services.AddScoped<IAddItemsToFridge, AddItemsToFridge>();
 builder.Services.AddScoped<IGetFridgeItems, GetFridgeItems>();
 
 builder.Services.AddScoped<IUpdateFridgeItem, UpdateFridgeItem>();
+
 builder.Services.AddScoped<IUpdateItem, UpdateItem>();
+
+builder.Services.AddScoped<IUpdateMultipleFridgeItemsQuantities, UpdateMultipleFridgeItemsQuantities>();
 
 builder.Services.AddSwaggerConfiguration();
 
