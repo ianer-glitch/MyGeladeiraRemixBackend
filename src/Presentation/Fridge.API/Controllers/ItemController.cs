@@ -2,8 +2,10 @@ using System.Security.Claims;
 using Extensions;
 using Fridge.Application.UseCases.Item.Create;
 using Fridge.Application.UseCases.Item.Get;
+using Fridge.Application.UseCases.Item.Update;
 using Fridge.Domain.Items.Create;
 using Fridge.Domain.Items.Get;
+using Fridge.Domain.Items.Update;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,11 +18,13 @@ public class ItemController : ControllerBase
 {
     private readonly ICreateItem _createItem;
     private readonly IGetItems _getItems;   
+    private readonly IUpdateItem _updateItem;
     
-    public ItemController(ICreateItem createItem , IGetItems getItems)
+    public ItemController(ICreateItem createItem , IGetItems getItems, IUpdateItem updateItem)
     {
         _createItem = createItem;   
         _getItems = getItems;
+        _updateItem = updateItem;
     }
 
     [HttpPost("")]
@@ -47,6 +51,20 @@ public class ItemController : ControllerBase
         {
             var input = new GetItemsIn();
             var response =await _getItems.ExecuteAsync(input);
+            return Ok(response);    
+        }
+        catch (Exception ex)
+        {
+            return BadRequest();
+        }
+    }
+    
+    [HttpPut]
+    public async Task<ActionResult<UpdateItemOut>>UpdateItem(UpdateItemIn input)
+    {
+        try
+        {
+            var response =await _updateItem.ExecuteAsync(input);
             return Ok(response);    
         }
         catch (Exception ex)
