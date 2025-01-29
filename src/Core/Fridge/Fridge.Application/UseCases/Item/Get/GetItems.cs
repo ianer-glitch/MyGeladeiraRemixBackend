@@ -1,12 +1,3 @@
-using Fridge.Application.UseCases.Item.Create;
-using Fridge.Domain.Items.Get;
-using Fridge.Domain.Ports.FileAdapter;
-using Fridge.Infrastructure;
-using Microsoft.EntityFrameworkCore;
-using Ports;
-using ItemModel = Fridge.Domain.Items.Item;
-
-
 namespace Fridge.Application.UseCases.Item.Get;
 
 public class GetItems : IGetItems

@@ -1,9 +1,3 @@
-using Fridge.Domain.Items.Create;
-using Fridge.Domain.Ports.FileAdapter;
-using Fridge.Infrastructure;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Ports;
-using ItemModel = Fridge.Domain.Items.Item;
 
 namespace Fridge.Application.UseCases.Item.Create;
 

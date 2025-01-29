@@ -25,7 +25,7 @@ public class Repository<T,TContext>(TContext context) : IRepository<T,TContext>
         return entity;
     }
 
-    public T Update(T entity, Expression<Func<T, bool>> expression)
+    public T Update(T entity)
     {
         context.Update(entity);
         return entity;
