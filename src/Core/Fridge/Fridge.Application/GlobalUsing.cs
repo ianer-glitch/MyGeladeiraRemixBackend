@@ -9,6 +9,7 @@ global using Microsoft.EntityFrameworkCore.Infrastructure;
 global using Ports;
 global using FridgeItemModel = Fridge.Domain.Fridges.FridgeItem;
 global using FridgeModel = Fridge.Domain.Fridges.Fridge;
+global using ShoppingListModel = Fridge.Domain.ShoppingLists.ShoppingList;
 global using ItemModel = Fridge.Domain.Items.Item;
 global using Fridge.Domain.Items.Create;
 global using Microsoft.AspNetCore.Http;

@@ -1,13 +1,22 @@
+using Fridge.Application.UseCases.ShoppingList;
+using Fridge.Application.UseCases.ShoppingList.AddItems;
+using Fridge.Application.UseCases.ShoppingList.RemoveItems;
 using Fridge.Domain.Fridges.UpdateMultipleItemQuantity;
+using Fridge.Domain.ShoppingLists.AddItems;
+using Fridge.Domain.ShoppingLists.RemoveItems;
 
 namespace Fridge.Application.UseCases.Fridge.UpdateMultipleItemQuantity;
 
 public class UpdateMultipleFridgeItemsQuantities : IUpdateMultipleFridgeItemsQuantities
 {
     private readonly IRepository<FridgeItemModel,FridgeContext> _fridgeItemRepository;
-    public UpdateMultipleFridgeItemsQuantities(IRepository<FridgeItemModel,FridgeContext> fridgeItemRepository)
+    private readonly IAddItemsShoppingList _addItemsShoppingList;
+    private readonly IRemoveItemsShoppingList _removeItemsShoppingList;
+    public UpdateMultipleFridgeItemsQuantities(IRepository<FridgeItemModel,FridgeContext> fridgeItemRepository, IAddItemsShoppingList addItemsShoppingList, IRemoveItemsShoppingList removeItemsShoppingList)
     {
         _fridgeItemRepository = fridgeItemRepository;
+        _addItemsShoppingList = addItemsShoppingList;
+        _removeItemsShoppingList = removeItemsShoppingList;
     }
     public async Task<IUpdateMultipleFridgeItemsQuantitiesOut> ExecuteAsync(IEnumerable<IUpdateMultipleFridgeItemsQuantitiesIn> request)
     {
@@ -16,15 +25,31 @@ public class UpdateMultipleFridgeItemsQuantities : IUpdateMultipleFridgeItemsQua
             var items  =_fridgeItemRepository.Get(g => 
                                                                                 request.Select(s => s.ItemId)
                                                                                        .Contains(g.Id));
+            var relationalList=
+                (from req in request
+                    join ite in items on req.ItemId equals ite.Id
+                    select new
+                    {
+                        req,ite 
+                    }).ToList(); 
+            
+            relationalList.ForEach(f =>
+                {
+                    f.ite.Quantity =f.req.Quantity;   
+                });
+            
+            
+                await _addItemsShoppingList.ExecuteAsync(new AddItemsShoppingListIn
+                {
+                    FridgeItemIds = relationalList.Where(w => w.ite.ShouldAddToShoppingList).Select(s => s.ite.Id),
+                    UserId = request.Select(s => s.UserId).FirstOrDefault()
 
-            (from req in request
-                join ite in items on req.ItemId equals ite.Id
-                select new
+                });
+
+                await _removeItemsShoppingList.ExecuteAsync(new RemoveItemsShoppingListIn
                 {
-                   req,ite 
-                }).ToList().ForEach(f =>
-                {
-                    f.ite.Quantity =f.req.Quantity;    
+                    FridgeItemIds = relationalList.Where(w => !w.ite.ShouldAddToShoppingList).Select(s => s.ite.Id),
+                    UserId = request.Select(s => s.UserId).FirstOrDefault()
                 });
             
             _fridgeItemRepository.UpdateRange(items);

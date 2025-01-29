@@ -1,6 +1,6 @@
-namespace Fridge.Domain.ShoppingLists.AddItems;
+namespace Fridge.Domain.ShoppingLists.RemoveItems;
 
-public interface IAddItemsShoppingListIn
+public interface IRemoveItemsShoppingListIn
 {
     public Guid UserId { get; set; }
     public  IEnumerable<Guid> FridgeItemIds { get; set; }

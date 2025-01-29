@@ -33,6 +33,8 @@ public class Item : Entity
     public string IconName { get; set; } 
     public int MinimunQuantity { get; set; }    
     public int Quantity { get; set; }
+    
+    public bool ShouldAddToShoppingList => Quantity < MinimunQuantity;
 
     public void SetIconName(string icon)
     {
