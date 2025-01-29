@@ -7,6 +7,9 @@ using Fridge.Application.UseCases.Fridge.UpdateMultipleItemQuantity;
 using Fridge.Application.UseCases.Item.Create;
 using Fridge.Application.UseCases.Item.Get;
 using Fridge.Application.UseCases.Item.Update;
+using Fridge.Application.UseCases.ShoppingList.AddItems;
+using Fridge.Application.UseCases.ShoppingList.GetItems;
+using Fridge.Application.UseCases.ShoppingList.RemoveItems;
 using Fridge.Domain.Fridges.AddItem;
 using Fridge.Domain.Fridges.GetItem;
 using Fridge.Domain.Fridges.UpdateItem;
@@ -15,6 +18,9 @@ using Fridge.Domain.Items.Create;
 using Fridge.Domain.Items.Get;
 using Fridge.Domain.Items.Update;
 using Fridge.Domain.Ports.FileAdapter;
+using Fridge.Domain.ShoppingLists.AddItems;
+using Fridge.Domain.ShoppingLists.GetItems;
+using Fridge.Domain.ShoppingLists.RemoveItems;
 using Fridge.Infrastructure;
 using Minio.Adapter;
 using Ports;
@@ -36,22 +42,22 @@ builder.Services.AddDbContext<FridgeContext>(builder.Configuration,"Database");
 builder.Services.ConfigureJwtAuth(builder.Configuration);
 
 builder.Services.AddScoped(typeof(IRepository<,>),typeof(Repository<,>)); 
-builder.Services.AddScoped<ICreateItem, CreateItem>();
-
 builder.Services.AddScoped(typeof(IFileAdapter<>), typeof(FileAdapter<>));
 builder.Services.AddScoped<IFileAdapterResult,FileAdapterResult>();
 
+builder.Services.AddScoped<ICreateItem, CreateItem>();
 builder.Services.AddScoped<IGetItems, GetItems>();
-
-builder.Services.AddScoped<IAddItemsToFridge, AddItemsToFridge>();
-
-builder.Services.AddScoped<IGetFridgeItems, GetFridgeItems>();
-
-builder.Services.AddScoped<IUpdateFridgeItem, UpdateFridgeItem>();
-
 builder.Services.AddScoped<IUpdateItem, UpdateItem>();
 
+builder.Services.AddScoped<IAddItemsToFridge, AddItemsToFridge>();
+builder.Services.AddScoped<IGetFridgeItems, GetFridgeItems>();
+builder.Services.AddScoped<IUpdateFridgeItem, UpdateFridgeItem>();
 builder.Services.AddScoped<IUpdateMultipleFridgeItemsQuantities, UpdateMultipleFridgeItemsQuantities>();
+
+builder.Services.AddScoped<IRemoveItemsShoppingList, RemoveItemsShoppingList>();
+builder.Services.AddScoped<IGetItemsShoppingList, GetItemsShoppingList>();
+builder.Services.AddScoped<IAddItemsShoppingList, AddItemShoppingList>();
+
 
 builder.Services.AddSwaggerConfiguration();
 
