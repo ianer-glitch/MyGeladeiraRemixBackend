@@ -93,7 +93,7 @@ public class FridgeController : ControllerBase
     {
         try
         {
-            
+            request.ToList().ForEach(a=>a.UserId = User.GetId());
             var result = await _updateMultipleFridgeItemsQuantities.ExecuteAsync(request);
             return Ok(result);
         }

@@ -20,7 +20,7 @@ public class ShoppingListController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<GetItemsShoppingListOut>>> Get()
+    public async Task<ActionResult<IEnumerable<GetItemsShoppingListOut>>> GetItemsShoppingList()
     {
         try
         {

@@ -37,21 +37,30 @@ public class UpdateMultipleFridgeItemsQuantities : IUpdateMultipleFridgeItemsQua
                 {
                     f.ite.Quantity =f.req.Quantity;   
                 });
-            
-            
+
+
+            var listToAdd = relationalList.Where(w => w.ite.ShouldAddToShoppingList).Select(s => s.ite.Id);
+            if (listToAdd.Any())
+            {
                 await _addItemsShoppingList.ExecuteAsync(new AddItemsShoppingListIn
                 {
-                    FridgeItemIds = relationalList.Where(w => w.ite.ShouldAddToShoppingList).Select(s => s.ite.Id),
+                    FridgeItemIds = listToAdd,
                     UserId = request.Select(s => s.UserId).FirstOrDefault()
 
                 });
+                
+            }
 
+            var listToRemove = relationalList.Where(w => !w.ite.ShouldAddToShoppingList).Select(s => s.ite.Id);
+            if (listToRemove.Any())
+            {
                 await _removeItemsShoppingList.ExecuteAsync(new RemoveItemsShoppingListIn
-                {
-                    FridgeItemIds = relationalList.Where(w => !w.ite.ShouldAddToShoppingList).Select(s => s.ite.Id),
-                    UserId = request.Select(s => s.UserId).FirstOrDefault()
+                    {
+                        FridgeItemIds = listToRemove,
+                        UserId = request.Select(s => s.UserId).FirstOrDefault()
                 });
             
+            }
             _fridgeItemRepository.UpdateRange(items);
             
             return new UpdateMultipleFridgeItemsQuantitiesOut
