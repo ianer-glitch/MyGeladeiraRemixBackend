@@ -21,6 +21,8 @@ public interface IRepository<T,TContext>
 
     public  Task AddRangeAsync(IEnumerable<T> entities);
 
+    public void UpdateRange(IEnumerable<T> entities);
+
 
 
 

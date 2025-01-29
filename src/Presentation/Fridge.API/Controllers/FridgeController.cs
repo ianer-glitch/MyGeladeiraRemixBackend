@@ -5,6 +5,7 @@ using Fridge.Application.UseCases.Fridge.UpdateItem;
 using Fridge.Domain.Fridges.AddItem;
 using Fridge.Domain.Fridges.GetItem;
 using Fridge.Domain.Fridges.UpdateItem;
+using Fridge.Domain.Fridges.UpdateMultipleItemQuantity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,12 +21,19 @@ public class FridgeController : ControllerBase
     private readonly IAddItemsToFridge  _addItemsToFridge;
     private readonly IGetFridgeItems _getFridgeItems;
     private readonly IUpdateFridgeItem _updateFridgeItem;
-    public FridgeController(ILogger<FridgeController> logger, IAddItemsToFridge addItemsToFridge, IGetFridgeItems getFridgeItems, IUpdateFridgeItem updateFridgeItem)
+    private readonly IUpdateMultipleFridgeItemsQuantities _updateMultipleFridgeItemsQuantities;
+    public FridgeController(
+        ILogger<FridgeController> logger,
+        IAddItemsToFridge addItemsToFridge,
+        IGetFridgeItems getFridgeItems,
+        IUpdateFridgeItem updateFridgeItem, 
+        IUpdateMultipleFridgeItemsQuantities updateMultipleFridgeItemsQuantities)
     {
         _logger = logger;
         _addItemsToFridge = addItemsToFridge;
         _getFridgeItems = getFridgeItems;
         _updateFridgeItem = updateFridgeItem;
+        _updateMultipleFridgeItemsQuantities = updateMultipleFridgeItemsQuantities;
     }
     [HttpPost("items")]
     public async Task<ActionResult<AddItemsToFridgeOut>> AddItemsToFridge(AddItemsToFridgeIn request)
@@ -78,4 +86,21 @@ public class FridgeController : ControllerBase
             return BadRequest();    
         }
     }
+    
+    [HttpPatch("items")]
+    public async Task<ActionResult<IUpdateFridgeItemOut>>UpdateMultipleItemsQuantities(IEnumerable<IUpdateMultipleFridgeItemsQuantitiesIn> request)
+    {
+        try
+        {
+            
+            var result = await _updateMultipleFridgeItemsQuantities.ExecuteAsync(request);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);   
+            return BadRequest();    
+        }
+    }
+    
 }

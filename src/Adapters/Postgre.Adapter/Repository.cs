@@ -41,4 +41,9 @@ public class Repository<T,TContext>(TContext context) : IRepository<T,TContext>
     {
         await context.Set<T>().AddRangeAsync(entities);
     }
+
+    public void UpdateRange(IEnumerable<T> entities)
+    {
+        context.Set<T>().UpdateRange(entities);
+    }
 }
