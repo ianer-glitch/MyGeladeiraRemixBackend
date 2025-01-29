@@ -31,7 +31,7 @@ public class GetFridgeItems : IGetFridgeItems
             if (userFride == null)
                 throw new ArgumentNullException(nameof(userFride));
             
-            var items = _rFItem.Get(g=>g.FridgeId == userFride.Id)
+            var items = _rFItem.Get(g=>g.FridgeId == userFride.Id && g.IsActive)
                                                     .Select(s=> new GetFridgeItemsOut()
                                                     {
                                                         Color = s.Color,
