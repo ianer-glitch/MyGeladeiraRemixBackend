@@ -6,7 +6,7 @@ using RabbitMQ.Client;
 
 namespace RabbitMq.Adapter;
 
-public class SendObjectOnQueue:Base,ISendObjectOnQueue
+public class SendObjectOnQueue:BaseRabbitMq,ISendObjectOnQueue
 {
 
     public SendObjectOnQueue(IConfiguration configuration) : base(configuration)

@@ -12,11 +12,13 @@ public class UpdateMultipleFridgeItemsQuantities : IUpdateMultipleFridgeItemsQua
     private readonly IRepository<FridgeItemModel,FridgeContext> _fridgeItemRepository;
     private readonly IAddItemsShoppingList _addItemsShoppingList;
     private readonly IRemoveItemsShoppingList _removeItemsShoppingList;
-    public UpdateMultipleFridgeItemsQuantities(IRepository<FridgeItemModel,FridgeContext> fridgeItemRepository, IAddItemsShoppingList addItemsShoppingList, IRemoveItemsShoppingList removeItemsShoppingList)
+    private readonly ISendObjectOnQueue _sendObjectOnQueue;
+    public UpdateMultipleFridgeItemsQuantities(IRepository<FridgeItemModel,FridgeContext> fridgeItemRepository, IAddItemsShoppingList addItemsShoppingList, IRemoveItemsShoppingList removeItemsShoppingList, ISendObjectOnQueue sendObjectOnQueue)
     {
         _fridgeItemRepository = fridgeItemRepository;
         _addItemsShoppingList = addItemsShoppingList;
         _removeItemsShoppingList = removeItemsShoppingList;
+        _sendObjectOnQueue = sendObjectOnQueue;
     }
     public async Task<IUpdateMultipleFridgeItemsQuantitiesOut> ExecuteAsync(IEnumerable<IUpdateMultipleFridgeItemsQuantitiesIn> request)
     {
@@ -36,9 +38,10 @@ public class UpdateMultipleFridgeItemsQuantities : IUpdateMultipleFridgeItemsQua
             relationalList.ForEach(f =>
                 {
                     f.ite.Quantity =f.req.Quantity;   
+                    _sendObjectOnQueue.Execute("Item Quantity Change",EQueue.FridgeToStatistic);
                 });
 
-
+            
             var listToAdd = relationalList.Where(w => w.ite.ShouldAddToShoppingList).Select(s => s.ite.Id);
             if (listToAdd.Any())
             {

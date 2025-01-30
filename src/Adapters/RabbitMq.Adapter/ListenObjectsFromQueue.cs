@@ -6,7 +6,7 @@ using RabbitMQ.Client.Events;
 
 namespace RabbitMq.Adapter;
 
-public class ListenObjectsFromQueue : Base,IListenObjectsFromQueue
+public class ListenObjectsFromQueue : BaseRabbitMq,IListenObjectsFromQueue
 {
     public ListenObjectsFromQueue(IConfiguration configuration) : base(configuration)
     {
