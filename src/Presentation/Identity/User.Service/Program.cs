@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using User.Application.UseCases;
 using User.Infrastructure;
 using Extensions;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore;
 using User.Domain.Models;
 using User.Service.Services;
@@ -24,11 +25,27 @@ builder.Services.AddScoped<IUserUseCase, UserUseCase>();
 
 var app = builder.Build();
 
+app.ApplyMigrations<UserContext>();
+
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<UserContext>();
-    db.Database.Migrate();
+    var user = builder.Configuration.GetSection("DEFAULT_ADMIN_USER").Value;
+    var password = builder.Configuration.GetSection("DEFAULT_ADMIN_PASSWORD").Value;
+    var userService = scope.ServiceProvider.GetRequiredService<IUserUseCase>();
+    var request = new PCreateUserIn
+    {
+        Email = user,
+        Password = password,
+        BirthDate = DateTime.UtcNow.AddYears(-20).ToTimestamp(),
+        FirstName = "Admin",
+        LastName = "Admin",
+
+    };
+    await userService.CreateUserAsync(request);
+    await userService.CreateRolesAsync();
+    await userService.AddUserRoleAdministrator(request.Email!);
 }
+
 // Configure the HTTP request pipeline.
 app.MapGrpcService<GreeterUseCase>();
 app.MapGrpcService<UserService>();

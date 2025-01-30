@@ -12,11 +12,8 @@ public class UserService(IUserUseCase userUseCase) : Identity.Domain.Protos.User
     {
         try
         {
-            var sucess = await _userUseCase.IsUserPasswordValidAsync(request);
-            return new PIsUserPasswordValidOut()
-            {
-                IsValid = sucess
-            };
+            return await _userUseCase.IsUserPasswordValidAsync(request);
+            
         }
         catch (Exception e)
         {
@@ -55,6 +52,20 @@ public class UserService(IUserUseCase userUseCase) : Identity.Domain.Protos.User
         {
             throw;
         }
+    }
+    
+    public override async Task<PGetUserRolesOut> GetUserRoles(PGetUserRolesIn request ,  ServerCallContext context)
+    {
+        try
+        {
+            return await _userUseCase.GetUserRoles(request);
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+     
+        
     }
 }
 

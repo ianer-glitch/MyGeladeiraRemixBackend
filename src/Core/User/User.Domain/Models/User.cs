@@ -65,7 +65,7 @@ public class User : IdentityUser<Guid> , IEntity
     public DateTime? Modified { get; set; }
     public bool IsActive { get; set; } = true;
     public Guid UserInclusionId { get; set; }
-    public Guid UserModifiedId { get; set; }
+    public Guid? UserModifiedId { get; set; }
     public void SetActive()
     {
         IsActive = true;

@@ -8,10 +8,32 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0"/>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Fridge.Domain\Fridge.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Migrations\20250125164801_dateTimeChangeNotNullable.cs" />
+      <Compile Remove="Migrations\20250125164801_dateTimeChangeNotNullable.Designer.cs" />
+      <Compile Remove="Migrations\20250125165145_dateTimeChangeNotNullable.cs" />
+      <Compile Remove="Migrations\20250125165145_dateTimeChangeNotNullable.Designer.cs" />
+      <Compile Remove="Migrations\20250125170655_changedInclusionToUtcNow.cs" />
+      <Compile Remove="Migrations\20250125170655_changedInclusionToUtcNow.Designer.cs" />
+      <Compile Remove="Migrations\20250127222727_item-fridges-and-fridgeITems.cs" />
+      <Compile Remove="Migrations\20250127222727_item-fridges-and-fridgeITems.Designer.cs" />
+      <Compile Remove="Migrations\20250128211608_item-fridges-and-fridgeITems.Designer.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations\" />
     </ItemGroup>
 
 </Project>

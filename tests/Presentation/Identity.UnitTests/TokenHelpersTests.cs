@@ -18,7 +18,7 @@ public class TokenHelpersTests
         mockConfSection.Setup(c => c.GetSection("ExpirationTimeInMinutes").Value).Returns("10");
         mockConfSection.Setup(c => c.GetSection("SecurityKey").Value).Returns("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         
-        var token = TokenHelpers.GenerateToken(conf.Object);
+        var token = TokenHelpers.GenerateToken(conf.Object,[],Guid.NewGuid());
         Assert.NotNull(token);  
         Assert.NotEmpty(token);
         Assert.True(token.Length > 0);
@@ -30,7 +30,7 @@ public class TokenHelpersTests
     {
         var conf =  new Mock<IConfiguration>();
         
-        var act = () => TokenHelpers.GenerateToken(conf.Object);
+        var act = () => TokenHelpers.GenerateToken(conf.Object,[],Guid.NewGuid());
         
         Assert.Throws<ArgumentNullException>(act);  
     }

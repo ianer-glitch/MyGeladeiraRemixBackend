@@ -9,9 +9,11 @@
 
     <ItemGroup>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -21,8 +23,14 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Adapters\Minio.Adapter\Minio.Adapter.csproj" />
+      <ProjectReference Include="..\..\Adapters\Postgre.Adapter\Postgre.Adapter.csproj" />
+      <ProjectReference Include="..\..\Adapters\RabbitMq.Adapter\RabbitMq.Adapter.csproj" />
+      <ProjectReference Include="..\..\Core\Fridge\Fridge.Application\Fridge.Application.csproj" />
+      <ProjectReference Include="..\..\Core\Fridge\Fridge.Domain\Fridge.Domain.csproj" />
       <ProjectReference Include="..\..\Core\Fridge\Fridge.Infrastructure\Fridge.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Shared\Extensions\Extensions.csproj" />
+      <ProjectReference Include="..\..\Shared\Ports\Ports.csproj" />
     </ItemGroup>
 
 </Project>

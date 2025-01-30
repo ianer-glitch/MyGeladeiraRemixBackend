@@ -1,5 +1,6 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -13,7 +14,7 @@ public static class ServiceExtensions
     public static IServiceCollection AddDbContext<TContext>(this IServiceCollection services,
         IConfiguration configuration, string databaseKey) where TContext : DbContext
     {
-        services.AddDbContext<TContext>(options =>
+        try
         {
             var dbConnectionString =
                 configuration
@@ -21,12 +22,19 @@ public static class ServiceExtensions
                     .GetSection(databaseKey)
                     .Value ?? string.Empty;
 
+            services.AddDbContext<TContext>(options =>
+            {
+                options.UseNpgsql(dbConnectionString);
+            });
 
+            return services;
 
-            options.UseNpgsql(dbConnectionString);
-        });
-
-        return services;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw;
+        }
 
     }
 
@@ -96,6 +104,13 @@ public static class ServiceExtensions
         return services;
     }
 
-
+    public static void ApplyMigrations<TContext>(this WebApplication app) where TContext : DbContext
+    {
+        using (var scope = app.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<TContext>();
+            db.Database.Migrate();
+        }
+    }
 
 }

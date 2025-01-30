@@ -3,24 +3,36 @@ using Grpc.Core;
 using Identity.Domain.Protos;
 using Microsoft.AspNetCore.Http.Timeouts;
 using Microsoft.AspNetCore.Identity;
+using User.Domain.Models;
 
 
 namespace User.Application.UseCases;
 
-public class UserUseCase(UserManager<Domain.Models.User> userManager) : IUserUseCase
+public class UserUseCase(UserManager<Domain.Models.User> userManager, RoleManager<UserRoles> roleManager) : IUserUseCase
     
 {
     private readonly UserManager<Domain.Models.User> _userManager = userManager;
 
-    public async Task<bool> IsUserPasswordValidAsync(PIsUserPasswordValidIn request)
+    public async Task<PIsUserPasswordValidOut> IsUserPasswordValidAsync(PIsUserPasswordValidIn request)
     {
         try
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user is null)
-                return false;
+                return new PIsUserPasswordValidOut
+                {
+                    IsValid = false,
+                };
             
-            return await _userManager.CheckPasswordAsync(user, request.Password);    
+            var sucess=  await _userManager.CheckPasswordAsync(user, request.Password);    
+            
+            return new PIsUserPasswordValidOut
+            {
+                IsValid = sucess,
+                UserId = user.Id.ToString(),
+            };
+            
+            
             
         }
         catch (Exception e)
@@ -75,5 +87,56 @@ public class UserUseCase(UserManager<Domain.Models.User> userManager) : IUserUse
         {
             throw;
         }   
+    }
+
+    public  async Task<PGetUserRolesOut> GetUserRoles(PGetUserRolesIn request)
+    {
+        try
+        {
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            ArgumentNullException.ThrowIfNull(user);
+        
+            var roles = await _userManager.GetRolesAsync(user);
+            var result = new PGetUserRolesOut();    
+            result.Roles.AddRange(roles);
+            return result;
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+     
+        
+    }
+
+    public async Task<bool> AddUserRoleAdministrator(string email)
+    {
+        try
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user is null)
+                return false;
+            var success = await _userManager.AddToRoleAsync(user, "Administrator");
+            return success == IdentityResult.Success;
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+    }
+    
+    public async Task CreateRolesAsync()
+    {
+        string[] roleNames = { "Administrator" };
+        
+
+        foreach (var roleName in roleNames)
+        {
+            var roleExist = await roleManager.RoleExistsAsync(roleName);
+            if (!roleExist)
+            {
+                await roleManager.CreateAsync(new UserRoles(roleName));
+            }
+        }
     }
 }
