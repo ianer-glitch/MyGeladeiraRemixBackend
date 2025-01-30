@@ -42,8 +42,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSwaggerConfiguration();
 builder.Services.AddDbContext<FridgeContext>(builder.Configuration,"Database");
-
 builder.Services.ConfigureJwtAuth(builder.Configuration);
 
 builder.Services.AddScoped(typeof(IRepository<,>),typeof(Repository<,>)); 
@@ -68,7 +68,7 @@ builder.Services.AddScoped<IAddItemsShoppingList, AddItemShoppingList>();
 builder.Services.AddScoped<ISendObjectOnQueue,SendObjectOnQueue>();
 
 
-builder.Services.AddSwaggerConfiguration();
+
 
 
 var app = builder.Build();

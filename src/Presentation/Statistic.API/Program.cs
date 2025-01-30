@@ -1,3 +1,6 @@
+using Extensions;
+using Statistic.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerConfiguration();
+builder.Services.AddDbContext<StatisticContext>(builder.Configuration,"Database");
+builder.Services.ConfigureJwtAuth(builder.Configuration);
 
 var app = builder.Build();
 
