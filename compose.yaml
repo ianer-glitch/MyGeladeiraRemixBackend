@@ -39,8 +39,12 @@
       - service-bus
     environment:
       - ASPNETCORE_HTTP_PORTS=8082
-      
+
       - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
+
+      - JwtConfiguration__Authority=$JWT_AUTHORITY
+      - JwtConfiguration__Audience=$JWT_AUDIENCE
+      - JwtConfiguration__SecurityKey=$JWT_SECURITY_KEY
       
       - ServiceBusSettings__Username=guest
       - ServiceBusSettings__Password=guest
