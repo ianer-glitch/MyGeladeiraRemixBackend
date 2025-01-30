@@ -25,6 +25,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Adapters\Minio.Adapter\Minio.Adapter.csproj" />
       <ProjectReference Include="..\..\Adapters\Postgre.Adapter\Postgre.Adapter.csproj" />
+      <ProjectReference Include="..\..\Adapters\RabbitMq.Adapter\RabbitMq.Adapter.csproj" />
       <ProjectReference Include="..\..\Core\Fridge\Fridge.Application\Fridge.Application.csproj" />
       <ProjectReference Include="..\..\Core\Fridge\Fridge.Domain\Fridge.Domain.csproj" />
       <ProjectReference Include="..\..\Core\Fridge\Fridge.Infrastructure\Fridge.Infrastructure.csproj" />

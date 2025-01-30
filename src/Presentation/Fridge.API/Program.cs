@@ -29,6 +29,7 @@ using Fridge.Infrastructure;
 using Minio.Adapter;
 using Ports;
 using Postgre.Adapter;
+using RabbitMq.Adapter;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,6 +64,8 @@ builder.Services.AddScoped<IRemoveItemsFridge, RemoveItemsFridge>();
 builder.Services.AddScoped<IRemoveItemsShoppingList, RemoveItemsShoppingList>();
 builder.Services.AddScoped<IGetItemsShoppingList, GetItemsShoppingList>();
 builder.Services.AddScoped<IAddItemsShoppingList, AddItemShoppingList>();
+
+builder.Services.AddScoped<ISendObjectOnQueue,SendObjectOnQueue>();
 
 
 builder.Services.AddSwaggerConfiguration();

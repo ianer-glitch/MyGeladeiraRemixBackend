@@ -3,12 +3,15 @@
     image: fridge.api
     depends_on:
       - database
+      - service-bus
     environment:
       - ASPNETCORE_HTTP_PORTS=8081
       - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
+      
       - JwtConfiguration__Authority=$JWT_AUTHORITY
       - JwtConfiguration__Audience=$JWT_AUDIENCE
       - JwtConfiguration__SecurityKey=$JWT_SECURITY_KEY
+      
       - MINIO_ROOT_USER=admin
       - MINIO_ROOT_PASSWORD=admin1234
       - MINIO_ENDPOINT=minio:9000
@@ -16,6 +19,11 @@
       - MINIO_SECRET_KEY=admin1234
       - MINIO_USE_SSL=false
       - MINIO_BUCKET_NAME=my-geladeira-remix-bucket
+      
+      - ServiceBusSettings__Username=guest
+      - ServiceBusSettings__Password=guest
+      - ServiceBusSettings__Port=5672
+      - ServiceBusSettings__Hostname=service-bus
     ports:
       - $FRIDGE_API_EXTERNAL_PORT:8081
     build:
@@ -28,9 +36,16 @@
     image: statistic.api
     depends_on:
       - database
+      - service-bus
     environment:
       - ASPNETCORE_HTTP_PORTS=8082
+      
       - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
+      
+      - ServiceBusSettings__Username=guest
+      - ServiceBusSettings__Password=guest
+      - ServiceBusSettings__Port=5672
+      - ServiceBusSettings__Hostname=service-bus
     ports:
       - $STATISTIC_API_EXTERNAL_PORT:8082
     build:
