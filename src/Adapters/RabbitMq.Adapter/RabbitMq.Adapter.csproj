@@ -14,4 +14,8 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Ports\Ports.csproj" />
+    </ItemGroup>
+
 </Project>

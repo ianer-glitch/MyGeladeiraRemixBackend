@@ -1,19 +1,26 @@
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
+using Ports;
 using RabbitMQ.Client;
 
 namespace RabbitMq.Adapter;
 
-public class SendObjectOnQueue(IConfiguration configuration) : Base(configuration)
+public class SendObjectOnQueue:Base,ISendObjectOnQueue
 {
-    public void  Execute(object request, string queueName)
+
+    public SendObjectOnQueue(IConfiguration configuration) : base(configuration)
+    {
+        
+    }
+    
+    public void  Execute(object request, EQueue queue)
     {
         var factory = GetConnectionFactory();
         using var connection =  factory.CreateConnection();
         using var channel =  connection.CreateModel();
 
-        channel.QueueDeclare(queue: queueName,
+        channel.QueueDeclare(queue: queue.ToString(),
             durable: false,
             exclusive: false,
             autoDelete: false,
@@ -24,7 +31,7 @@ public class SendObjectOnQueue(IConfiguration configuration) : Base(configuratio
             
         channel.BasicPublish(
             exchange: string.Empty,
-            routingKey: queueName,
+            routingKey: queue.ToString(),
             basicProperties: null,
             body: body);
     }

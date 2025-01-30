@@ -1,24 +1,25 @@
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using Ports;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
 namespace RabbitMq.Adapter;
 
-public class ListenObjectsFromQueue : Base
+public class ListenObjectsFromQueue : Base,IListenObjectsFromQueue
 {
     public ListenObjectsFromQueue(IConfiguration configuration) : base(configuration)
     {
     }
     
-    public  void Execute<T>(Action<T> functionToRun, CancellationToken cancelToken, string queueName)
+    public  void Execute<T>(Action<T> functionToRun, CancellationToken cancelToken, EQueue queue)
     {
         
         ConnectionFactory factory = GetConnectionFactory();
         using var connection =  factory.CreateConnection();
         using var channel =  connection.CreateModel();
 
-        channel.QueueDeclare(queue: queueName,
+        channel.QueueDeclare(queue: queue.ToString(),
             durable: false,
             exclusive: false,
             autoDelete: false,
@@ -37,7 +38,7 @@ public class ListenObjectsFromQueue : Base
                 functionToRun(objectFromQueue);
             };
 
-            channel.BasicConsume(queue: queueName,
+            channel.BasicConsume(queue: queue.ToString(),
                 autoAck: true,
                 consumer: consumer);
         }
