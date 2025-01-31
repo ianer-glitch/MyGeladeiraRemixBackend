@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Statistic.Domain;
+using Statistic.Domain.ValueObjects;
 
 namespace Statistic.Infrastructure;
 
@@ -13,4 +14,6 @@ public class StatisticContext : DbContext
     {
         
     }
+    
+   
 }

@@ -1,4 +1,5 @@
 using Models;
+using Statistic.Domain.ValueObjects;
 
 namespace Statistic.Domain;
 
@@ -12,6 +13,6 @@ public class UserFoodWasteIndex : Entity
     {
         
     }
-    
-    public float UserIndex { get; set; }
+
+    public float Index { get; set; } = new FoodWasteIndex().Get();
 }
