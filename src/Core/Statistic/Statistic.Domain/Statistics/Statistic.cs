@@ -1,6 +1,6 @@
 using Models;
 
-namespace Statistic.Domain;
+namespace Statistic.Domain.Statistics;
 
 public class Statistic : Entity
 {

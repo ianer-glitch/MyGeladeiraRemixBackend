@@ -23,6 +23,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Adapters\Postgre.Adapter\Postgre.Adapter.csproj" />
+      <ProjectReference Include="..\..\Adapters\RabbitMq.Adapter\RabbitMq.Adapter.csproj" />
+      <ProjectReference Include="..\..\Core\Statistic\Statistic.Application\Statistic.Application.csproj" />
       <ProjectReference Include="..\..\Core\Statistic\Statistic.Infrastructure\Statistic.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Shared\Extensions\Extensions.csproj" />
     </ItemGroup>

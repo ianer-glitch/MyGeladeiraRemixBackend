@@ -12,7 +12,7 @@ public class ListenObjectsFromQueue : BaseRabbitMq,IListenObjectsFromQueue
     {
     }
     
-    public  void Execute<T>(Action<T> functionToRun, CancellationToken cancelToken, EQueue queue)
+    public  void Execute<TIn,TOut>(Func<TIn,TOut> functionToRun, CancellationToken cancelToken, EQueue queue)
     {
         
         ConnectionFactory factory = GetConnectionFactory();
@@ -34,7 +34,7 @@ public class ListenObjectsFromQueue : BaseRabbitMq,IListenObjectsFromQueue
             {
                 var body = ea.Body.ToArray();
                 string message = Encoding.UTF8.GetString(body);
-                var objectFromQueue = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(message);
+                var objectFromQueue = Newtonsoft.Json.JsonConvert.DeserializeObject<TIn>(message);
                 functionToRun(objectFromQueue);
             };
 

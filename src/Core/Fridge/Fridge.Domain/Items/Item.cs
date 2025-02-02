@@ -35,6 +35,8 @@ public class Item : Entity
     public int Quantity { get; set; }
     
     public bool ShouldAddToShoppingList => Quantity < MinimunQuantity;
+    
+    public bool IsExpired => Expiration > DateTime.UtcNow;
 
     public void SetIconName(string icon)
     {

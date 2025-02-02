@@ -1,4 +1,9 @@
 using Extensions;
+using Ports;
+using Postgre.Adapter;
+using RabbitMq.Adapter;
+using Statistic.Application.Statistics.CreateExpired;
+using Statistic.Domain.Statistics.Create;
 using Statistic.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +18,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerConfiguration();
 builder.Services.AddDbContext<StatisticContext>(builder.Configuration,"Database");
 builder.Services.ConfigureJwtAuth(builder.Configuration);
+builder.Services.AddScoped(typeof(IRepository<,>),typeof(Repository<,>));
+builder.Services.AddScoped<IListenObjectsFromQueue, ListenObjectsFromQueue>();
+builder.Services.AddHostedService<CreateExpiredStatistic>();
 
 var app = builder.Build();
 

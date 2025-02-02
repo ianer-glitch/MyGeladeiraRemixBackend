@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Models;
 
-namespace Statistic.Domain;
+namespace Statistic.Domain.Statistics;
 
 public class ExpiredStatistic :Entity
 {
