@@ -41,9 +41,10 @@ public class AddItemsToFridge : IAddItemsToFridge
                             s.Expiration,
                             s.MinimunQuantity,
                             s.Quantity,
-                            s.IconName
-                            ,request.UserId
-                            ,userFridge.Id)
+                            s.IconName,
+                            s.Weight,
+                            request.UserId,
+                            userFridge.Id)
                         )
                 );
 

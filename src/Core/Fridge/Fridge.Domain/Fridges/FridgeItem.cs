@@ -18,13 +18,16 @@ public class FridgeItem : Item
         int minimunQuantity ,
         int quantity ,
         string iconName,
-        Guid userInclusionId,
-        Guid fridgeId) : base(name,
+        float itemWeight,
+        Guid fridgeId,
+        Guid userInclusionId
+        ) : base(name,
                                     color,
                                     expiration,
                                     minimunQuantity, 
                                     quantity, 
                                     iconName,
+                                    itemWeight,
                                     userInclusionId)
     {
         FridgeId = fridgeId;

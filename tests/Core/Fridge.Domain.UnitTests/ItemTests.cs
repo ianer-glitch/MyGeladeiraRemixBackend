@@ -12,7 +12,8 @@ public class ItemTests
             DateTime.UtcNow.AddDays(5),
             1,
             4,
-            "someIcon",
+            "someIcon"
+            ,1,
             Guid.NewGuid());
     
     [Fact]
@@ -95,5 +96,22 @@ public class ItemTests
         item.SetIconName(iconName);
         
         Assert.Equal(item.IconName, iconName);
+    }
+
+    [Fact]
+    public void SetWeight_WhenWeightIsZero_ThrowsArgumentException()
+    {
+        var item = GetValidItem;
+        var act = () => item.SetWeight(0);
+        Assert.Throws<ArgumentException>(act);
+    }
+
+    [Fact]
+    public void SetWeight_WhenWeightIsPositive_DoesNotThrow()
+    {
+        var item = GetValidItem;
+        var weight = 100;
+        item.SetWeight(weight);
+        Assert.Equal(weight,item.Weight);
     }
 }

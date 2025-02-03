@@ -17,6 +17,7 @@ public class Item : Entity
                 int minimunQuantity ,
                 int quantity ,
                 string iconName,
+                float weight,
                 Guid userInclusionId):base(userInclusionId)
     {
         SetName(name);
@@ -25,6 +26,7 @@ public class Item : Entity
         MinimunQuantity = minimunQuantity;
         Quantity = quantity;
         IconName = iconName;    
+        SetWeight(weight);
     }
     public string Name { get; set; }
     public string Color { get; set; }
@@ -65,6 +67,13 @@ public class Item : Entity
         if(expiration < DateTime.Now)
             throw new ArgumentException("expiration should be in the future", nameof(expiration));  
         Expiration = expiration;
+    }
+
+    public void SetWeight(float weight)
+    {
+        if(float.IsNaN(weight) || weight <= 0)
+            throw new ArgumentException("Weight must be grater than 0", nameof(weight));
+        Weight = weight;
     }
 
     public string GetPercentageExpired()

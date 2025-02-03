@@ -34,6 +34,7 @@ public class CreateItem : ICreateItem
                                      request.MinimumQuantity,
                                      request.Quantity,
                                      fileResult.Name,
+                                     request.Weight,
                                      request.UserCreationId);
             
             await _repository.InsertAsync(item);
