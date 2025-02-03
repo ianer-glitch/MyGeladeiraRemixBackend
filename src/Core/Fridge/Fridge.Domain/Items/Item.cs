@@ -34,6 +34,7 @@ public class Item : Entity
     public int MinimunQuantity { get; set; }    
     public int Quantity { get; set; }
     
+    public float Weight { get; set; }
     public bool ShouldAddToShoppingList => Quantity < MinimunQuantity;
     
     public bool IsExpired => Expiration > DateTime.UtcNow;

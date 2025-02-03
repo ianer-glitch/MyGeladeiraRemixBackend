@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Events\Events.csproj" />
       <ProjectReference Include="..\..\Shared\Ports\Ports.csproj" />
     </ItemGroup>
 

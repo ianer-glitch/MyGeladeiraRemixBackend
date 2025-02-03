@@ -4,6 +4,7 @@ using Fridge.Application.UseCases.ShoppingList.RemoveItems;
 using Fridge.Domain.Fridges.UpdateMultipleItemQuantity;
 using Fridge.Domain.ShoppingLists.AddItems;
 using Fridge.Domain.ShoppingLists.RemoveItems;
+using Ports.Expired;
 
 namespace Fridge.Application.UseCases.Fridge.UpdateMultipleItemQuantity;
 
@@ -39,7 +40,12 @@ public class UpdateMultipleFridgeItemsQuantities : IUpdateMultipleFridgeItemsQua
                 {
                     f.ite.Quantity =f.req.Quantity;   
                     // if(f.ite.IsExpired)
-                        _sendObjectOnQueue.Execute("Item Quantity Change",EQueue.ExpiredStatustic);
+                        _sendObjectOnQueue.Execute(new CreateExpiredStatisticIn
+                        {
+                            ItemId = f.ite.Id,
+                            UserId = request.Select(s => s.UserId).FirstOrDefault(),
+                            ItemWeight = f.ite.Weight,
+                        },EQueue.ExpiredStatistic);
                 });
 
             

@@ -5,5 +5,5 @@ namespace Ports;
 public enum EQueue
 {
     [Description("ExpiredStatustic")]
-    ExpiredStatustic = 0,
+    ExpiredStatistic = 0,
 }

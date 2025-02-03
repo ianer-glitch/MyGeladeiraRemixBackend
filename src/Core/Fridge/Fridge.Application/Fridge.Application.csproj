@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\Events\Events.csproj" />
       <ProjectReference Include="..\..\..\Shared\Ports\Ports.csproj" />
       <ProjectReference Include="..\Fridge.Domain\Fridge.Domain.csproj" />
       <ProjectReference Include="..\Fridge.Infrastructure\Fridge.Infrastructure.csproj" />

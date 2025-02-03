@@ -69,6 +69,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minio.Adapter", "src\Adapte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMq.Adapter", "src\Adapters\RabbitMq.Adapter\RabbitMq.Adapter.csproj", "{50DD1611-9362-47D9-BE6D-E6CEACB7AF7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "src\Shared\Events\Events.csproj", "{ED150B00-EB15-465E-8437-3DA530830D82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -207,5 +209,9 @@ Global
 		{50DD1611-9362-47D9-BE6D-E6CEACB7AF7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50DD1611-9362-47D9-BE6D-E6CEACB7AF7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50DD1611-9362-47D9-BE6D-E6CEACB7AF7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED150B00-EB15-465E-8437-3DA530830D82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED150B00-EB15-465E-8437-3DA530830D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED150B00-EB15-465E-8437-3DA530830D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED150B00-EB15-465E-8437-3DA530830D82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

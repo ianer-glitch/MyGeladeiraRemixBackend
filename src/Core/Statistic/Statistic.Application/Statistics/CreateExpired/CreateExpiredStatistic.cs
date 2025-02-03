@@ -52,7 +52,7 @@ public class CreateExpiredStatistic :IHostedService,ICreateExpiredStatistic
             var  _listenObjectsFromQueue= scope.ServiceProvider.GetRequiredService<IListenObjectsFromQueue>();  
             _listenObjectsFromQueue
                 .Execute<ICreateExpiredStatisticIn,Task<ICreateExpiredStatisticOut>>
-                    (ExecuteAsync,cancellationToken,EQueue.ExpiredStatustic);
+                    (ExecuteAsync,cancellationToken,EQueue.ExpiredStatistic);
             
         }
         
