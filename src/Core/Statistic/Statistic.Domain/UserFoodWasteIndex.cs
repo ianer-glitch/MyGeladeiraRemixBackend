@@ -14,5 +14,5 @@ public class UserFoodWasteIndex : Entity
         
     }
 
-    public float Index { get; set; } = new FoodWasteIndex().Get();
+    public float Index { get; set; } 
 }
