@@ -50,6 +50,8 @@
       - ServiceBusSettings__Password=guest
       - ServiceBusSettings__Port=5672
       - ServiceBusSettings__Hostname=service-bus
+      
+      - NATIONAL_FOOD_WASTE_INDEX=$NATIONAL_FOOD_WASTE_INDEX
     ports:
       - $STATISTIC_API_EXTERNAL_PORT:8082
     build:

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ports;
@@ -13,10 +14,11 @@ namespace Statistic.Application.Statistics.CreateExpired;
 public class CreateExpiredStatistic :IHostedService,ICreateExpiredStatistic
 {
     private readonly IServiceProvider _serviceProvider; 
-    
-    public CreateExpiredStatistic(IServiceProvider serviceProvider)
+    private readonly IConfiguration _configuration;
+    public CreateExpiredStatistic(IServiceProvider serviceProvider , IConfiguration configuration)
     {
         _serviceProvider = serviceProvider;
+        _configuration = configuration;
     }
     public async Task<ICreateExpiredStatisticOut> ExecuteAsync(ICreateExpiredStatisticIn request)
     {
@@ -61,10 +63,17 @@ public class CreateExpiredStatistic :IHostedService,ICreateExpiredStatistic
 
         try
         {
-            var national = 5;
+            
             var itemWeights = _rExpired.Get(g => g.Inclusion > DateTime.Now.AddMonths(-1))
                                                       .AsNoTracking()
                                                       .Select(s => s.ItemWeight);
+            
+            var nationalConfig = _configuration.GetSection("NATIONAL_FOOD_WASTE_INDEX").Value;
+            if(string.IsNullOrEmpty(nationalConfig))
+                throw new ArgumentNullException(nationalConfig);
+            
+            var national = float.Parse(nationalConfig);
+            
             var index = new FoodWasteIndex()
                 .SetNationalIndexPerMonth(national)
                 .SetInitiaUserIndexPerMonth(national)
