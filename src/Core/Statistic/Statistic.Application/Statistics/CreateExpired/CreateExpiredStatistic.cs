@@ -58,7 +58,7 @@ public class CreateExpiredStatistic :IHostedService,ICreateExpiredStatistic
         }
     }
 
-    private Task CreateFoodWasteIndexAsync(
+    private async Task CreateFoodWasteIndexAsync(
         IRepository<Domain.Statistics.ExpiredStatistic, StatisticContext> _rExpired,
         IRepository<UserFoodWasteIndex, StatisticContext> _rUserStatistics,Guid userId)
     {
@@ -82,10 +82,10 @@ public class CreateExpiredStatistic :IHostedService,ICreateExpiredStatistic
                 .CalculateMonthUserIndex(itemWeights)
                 .GetIndex();
             
-            _rUserStatistics.InsertAsync(new UserFoodWasteIndex(index,userId));
-            _rUserStatistics.SaveChangesAsync();
+            await _rUserStatistics.InsertAsync(new UserFoodWasteIndex(index,userId));
+            await _rUserStatistics.SaveChangesAsync();
             
-            return Task.CompletedTask;
+            
 
         }
         catch (Exception ex)
@@ -94,18 +94,19 @@ public class CreateExpiredStatistic :IHostedService,ICreateExpiredStatistic
         }
     }
 
-    public  Task StartAsync(CancellationToken cancellationToken)
+    public async Task StartAsync(CancellationToken cancellationToken)
     {
         var scope = _serviceProvider.CreateScope();
+        var  _listenObjectsFromQueue= scope.ServiceProvider.GetRequiredService<IListenObjectsFromQueue>();
         
-        var  _listenObjectsFromQueue= scope.ServiceProvider.GetRequiredService<IListenObjectsFromQueue>();  
-        _listenObjectsFromQueue
-            .Execute<ICreateExpiredStatisticIn,Task<ICreateExpiredStatisticOut>>
-                (ExecuteAsync,cancellationToken,EQueue.ExpiredStatistic);
+        await Task.Run(async () =>
+        {
+            await _listenObjectsFromQueue
+                .ExecuteAsync<ICreateExpiredStatisticIn,ICreateExpiredStatisticOut>
+                    (ExecuteAsync,cancellationToken,EQueue.ExpiredStatistic);
+        });
         
         scope.Dispose();
-        
-        return Task.CompletedTask;
             
     }
 
