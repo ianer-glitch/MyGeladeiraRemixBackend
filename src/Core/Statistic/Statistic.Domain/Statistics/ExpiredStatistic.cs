@@ -5,7 +5,7 @@ namespace Statistic.Domain.Statistics;
 
 public class ExpiredStatistic :Entity
 {
-    public ExpiredStatistic(Guid itemId,float itemWeight ,Guid statisticId , Guid userId) :base(userId)
+    public ExpiredStatistic(Guid itemId,double itemWeight ,Guid statisticId , Guid userId) :base(userId)
     {
         ItemId = itemId;
         ItemWeight = itemWeight;
@@ -17,7 +17,7 @@ public class ExpiredStatistic :Entity
     }
     
     public Guid ItemId { get; set; }
-    public float ItemWeight { get; set; }
+    public double  ItemWeight { get; set; }
     
     [ForeignKey("StatisticId")]
     public Guid StatisticId { get; set; }

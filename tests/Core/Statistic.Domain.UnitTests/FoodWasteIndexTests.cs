@@ -1,4 +1,4 @@
-using Statistic.Domain.ValueObjects;
+using Statistic.Domain.FoodWasteIndexes.ValueObjects;
 
 namespace Statistic.Domain.UnitTests;
 

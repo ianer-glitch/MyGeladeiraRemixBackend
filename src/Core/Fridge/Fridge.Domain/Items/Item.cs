@@ -17,7 +17,7 @@ public class Item : Entity
                 int minimunQuantity ,
                 int quantity ,
                 string iconName,
-                float weight,
+                double weight,
                 Guid userInclusionId):base(userInclusionId)
     {
         SetName(name);
@@ -36,7 +36,7 @@ public class Item : Entity
     public int MinimunQuantity { get; set; }    
     public int Quantity { get; set; }
     
-    public float Weight { get; set; }
+    public double Weight { get; set; }
     public bool ShouldAddToShoppingList => Quantity < MinimunQuantity;
     
     public bool IsExpired => Expiration > DateTime.UtcNow;
@@ -69,9 +69,9 @@ public class Item : Entity
         Expiration = expiration;
     }
 
-    public void SetWeight(float weight)
+    public void SetWeight(double weight)
     {
-        if(float.IsNaN(weight) || weight <= 0)
+        if(double.IsNaN(weight) || weight <= 0)
             throw new ArgumentException("Weight must be grater than 0", nameof(weight));
         Weight = weight;
     }

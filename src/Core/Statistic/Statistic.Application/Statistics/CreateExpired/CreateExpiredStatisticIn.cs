@@ -6,5 +6,5 @@ public class CreateExpiredStatisticIn : ICreateExpiredStatisticIn
 {
     public Guid ItemId { get; set; }
     public Guid UserId { get; set; }
-    public float ItemWeight { get; set; }
+    public double ItemWeight { get; set; }
 }

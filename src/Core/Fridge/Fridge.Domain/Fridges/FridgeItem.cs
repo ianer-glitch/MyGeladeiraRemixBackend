@@ -18,7 +18,7 @@ public class FridgeItem : Item
         int minimunQuantity ,
         int quantity ,
         string iconName,
-        float itemWeight,
+        double itemWeight,
         Guid fridgeId,
         Guid userInclusionId
         ) : base(name,

@@ -4,9 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ports;
 using Statistic.Domain;
+using Statistic.Domain.FoodWasteIndexes;
+using Statistic.Domain.FoodWasteIndexes.ValueObjects;
 using Statistic.Domain.Statistics;
 using Statistic.Domain.Statistics.Create;
-using Statistic.Domain.ValueObjects;
 using Statistic.Infrastructure;
 
 namespace Statistic.Application.Statistics.CreateExpired;

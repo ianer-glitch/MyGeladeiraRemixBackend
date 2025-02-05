@@ -1,4 +1,4 @@
-namespace Statistic.Domain.ValueObjects;
+namespace Statistic.Domain.FoodWasteIndexes.ValueObjects;
 
 public class FoodWasteIndex
 {

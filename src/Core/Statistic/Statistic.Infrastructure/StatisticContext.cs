@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Statistic.Domain;
+using Statistic.Domain.FoodWasteIndexes;
 using Statistic.Domain.Statistics;
-using Statistic.Domain.ValueObjects;
 
 namespace Statistic.Infrastructure;
 
