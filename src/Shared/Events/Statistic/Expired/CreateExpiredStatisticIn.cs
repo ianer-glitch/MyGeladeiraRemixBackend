@@ -1,4 +1,5 @@
 using Statistic.Domain.Statistics.Create;
+using Statistic.Domain.Statistics.CreateExpired;
 
 namespace Ports.Expired;
 

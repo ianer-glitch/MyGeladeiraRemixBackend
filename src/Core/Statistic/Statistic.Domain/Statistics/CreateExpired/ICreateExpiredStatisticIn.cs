@@ -1,4 +1,4 @@
-namespace Statistic.Domain.Statistics.Create;
+namespace Statistic.Domain.Statistics.CreateExpired;
 
 public interface ICreateExpiredStatisticIn
 {

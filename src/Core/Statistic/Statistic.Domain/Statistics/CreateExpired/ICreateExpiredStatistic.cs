@@ -1,3 +1,5 @@
+using Statistic.Domain.Statistics.CreateExpired;
+
 namespace Statistic.Domain.Statistics.Create;
 
 public interface ICreateExpiredStatistic
