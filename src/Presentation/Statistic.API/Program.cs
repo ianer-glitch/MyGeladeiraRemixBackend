@@ -3,8 +3,10 @@ using Ports;
 using Postgre.Adapter;
 using RabbitMq.Adapter;
 using Statistic.Application.Statistics.CreateExpired;
+using Statistic.Application.Statistics.GetByAllUser;
 using Statistic.Application.Statistics.GetByUser;
 using Statistic.Domain.Statistics.Create;
+using Statistic.Domain.Statistics.GetByAllUser;
 using Statistic.Domain.Statistics.GetByUser;
 using Statistic.Infrastructure;
 
@@ -24,6 +26,7 @@ builder.Services.AddScoped(typeof(IRepository<,>),typeof(Repository<,>));
 builder.Services.AddScoped<IListenObjectsFromQueue, ListenObjectsFromQueue>();
 builder.Services.AddHostedService<CreateExpiredStatistic>();
 builder.Services.AddScoped<IGetStatisticByUser, GetStatisticByUser>();
+builder.Services.AddScoped<IGetStatisticByAllUser,GetStatisticByAllUser>();
 
 var app = builder.Build();
 app.ApplyMigrations<StatisticContext>();
