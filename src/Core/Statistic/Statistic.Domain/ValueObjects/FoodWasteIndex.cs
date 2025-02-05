@@ -2,28 +2,30 @@ namespace Statistic.Domain.ValueObjects;
 
 public class FoodWasteIndex
 {
-    private float NationalIndex { get; set; }
-    private float UserIndex { get; set; }   
+    private double NationalIndex { get; set; }
+    private double UserIndex { get; set; }   
     
-    public FoodWasteIndex SetNationalIndexPerMonth(float nationalIndexPerYear)
+    public FoodWasteIndex SetNationalIndexPerMonth(double nationalIndexPerYear)
     {
         NationalIndex = nationalIndexPerYear/12;
         return this;
     }
 
-    public FoodWasteIndex SetInitiaUserIndexPerMonth(float initiaUserIndexPerYear)
+    public FoodWasteIndex SetInitiaUserIndexPerMonth(double initiaUserIndexPerYear)
     {
         UserIndex = initiaUserIndexPerYear/12;
         return this;
     }
 
-    public FoodWasteIndex  CalculateMonthUserIndex(IEnumerable<float> itemWeights)
+    public FoodWasteIndex  CalculateMonthUserIndex(IEnumerable<double> itemWeights)
     {
-        UserIndex = (100*itemWeights.Sum())/NationalIndex;
+        var tempIndex = (100 * itemWeights.Sum()) / NationalIndex; 
+        
+        UserIndex = double.Round(tempIndex, 2);
         return this;
     }
 
-    public float GetIndex()
+    public double GetIndex()
     {
         return UserIndex;
     }

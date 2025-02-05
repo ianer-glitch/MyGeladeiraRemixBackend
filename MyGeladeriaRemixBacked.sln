@@ -71,6 +71,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMq.Adapter", "src\Ada
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "src\Shared\Events\Events.csproj", "{ED150B00-EB15-465E-8437-3DA530830D82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statistic.Domain.UnitTests", "tests\Core\Statistic.Domain.UnitTests\Statistic.Domain.UnitTests.csproj", "{89277EA6-1B9F-438C-835E-A9B80C7280CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -213,5 +215,9 @@ Global
 		{ED150B00-EB15-465E-8437-3DA530830D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED150B00-EB15-465E-8437-3DA530830D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED150B00-EB15-465E-8437-3DA530830D82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89277EA6-1B9F-438C-835E-A9B80C7280CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89277EA6-1B9F-438C-835E-A9B80C7280CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89277EA6-1B9F-438C-835E-A9B80C7280CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89277EA6-1B9F-438C-835E-A9B80C7280CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
