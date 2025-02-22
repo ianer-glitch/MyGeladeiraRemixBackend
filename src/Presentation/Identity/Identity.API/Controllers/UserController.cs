@@ -1,5 +1,6 @@
 using Identity.API.Helpers;
 using Identity.Domain.Ports;
+using Identity.Domain.Login;
 using Identity.Domain.Protos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ public class UserController(
     
 
     [HttpPost("Login")]
-    public async Task<ActionResult<string>> Login(PIsUserPasswordValidIn request)
+    public async Task<ActionResult<LoginOut>> Login(PIsUserPasswordValidIn request)
     {
         try
         {
@@ -26,11 +27,19 @@ public class UserController(
             var result = await client.IsUserPasswordValidAsync(request);
             
             var claims = await client.GetUserRolesAsync(new PGetUserRolesIn(){Email = request.Email});
-            
+
             if (result is not null)
-                return Ok(TokenHelpers.GenerateToken(
-                    conf,
-                    claims.Roles.Select(s=>(string)s),Guid.Parse(result.UserId)));
+            {
+                var resultoken = new LoginOut()
+                {
+                    Token = TokenHelpers.GenerateToken(
+                        conf,
+                        claims.Roles.Select(s => (string)s), Guid.Parse(result.UserId))
+                };
+                
+                return Ok(resultoken);
+                
+            }
             
             return Empty;
         }
