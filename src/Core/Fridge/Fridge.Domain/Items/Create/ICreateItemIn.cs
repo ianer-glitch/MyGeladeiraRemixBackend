@@ -12,6 +12,6 @@ public interface ICreateItemIn
     public double Weight { get; set; }
     public DateTime Expiration { get; set; }
     public IFormFile Icon { get; set; }
-    public Guid UserCreationId { get; set; }    
+    public Guid? UserCreationId { get; set; }    
     
 }

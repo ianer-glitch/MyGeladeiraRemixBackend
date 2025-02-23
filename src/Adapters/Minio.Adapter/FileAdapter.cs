@@ -11,6 +11,7 @@ public class FileAdapter<TFile> : IFileAdapter<TFile>
     where TFile:  IFileAdapterResult 
 {
     private readonly MinioClient _minioClient;
+    private readonly MinioClient _minioClienteExternal;
     private readonly string _bucketName;
     private readonly IServiceProvider _serviceProvider;
     
@@ -19,20 +20,32 @@ public class FileAdapter<TFile> : IFileAdapter<TFile>
         
         _bucketName = configuration.GetSection("MINIO_BUCKET_NAME").Value ?? throw new InvalidOperationException("Bucket name config is missing");
         
+        var endpointExternal = configuration.GetSection("MINIO_ENDPOINT_EXTERNAL").Value;
+        var portExternal = configuration.GetSection("MINIO_ENDPOINT_PORT_EXTERNAL").Value;
+        
         var endpoint = configuration.GetSection("MINIO_ENDPOINT").Value;
+        var port = configuration.GetSection("MINIO_ENDPOINT_PORT").Value;
         var accessKey = configuration.GetSection("MINIO_ACCESS_KEY").Value;
         var secretKey = configuration.GetSection("MINIO_SECRET_KEY").Value;;
         var secure = bool.Parse(configuration.GetSection("MINIO_USE_SSL").Value);
 
         
         _minioClient = (MinioClient?)new MinioClient()
-            .WithEndpoint(endpoint)
+            .WithEndpoint(endpoint,int.Parse(port))
             .WithCredentials(accessKey, secretKey)
             .WithSSL(secure)
-            .Build() ?? throw new InvalidOperationException();    
+            .Build() ?? throw new InvalidOperationException();   
+        
+        _minioClienteExternal = (MinioClient?)new MinioClient()
+            .WithEndpoint(endpointExternal,int.Parse(portExternal))
+            .WithCredentials(accessKey, secretKey)
+            .WithSSL(secure)
+            .Build() ?? throw new InvalidOperationException();   
         
         _serviceProvider = serviceProvider; 
     }
+
+    
     
     public async Task<TFile> GetFileAsync(string objectName)
     {
@@ -45,8 +58,9 @@ public class FileAdapter<TFile> : IFileAdapter<TFile>
                 .WithObject(objectName)
                 .WithBucket(_bucketName)
                 .WithExpiry(900); // 15 minutos
+            
 
-            var presignedUrl = await _minioClient.PresignedGetObjectAsync(args).ConfigureAwait(false);
+            var presignedUrl = await _minioClienteExternal.PresignedGetObjectAsync(args).ConfigureAwait(false);
 
             var result = _serviceProvider.GetRequiredService<TFile>();
             result.Link = presignedUrl;
@@ -78,8 +92,9 @@ public class FileAdapter<TFile> : IFileAdapter<TFile>
                 .WithObjectSize(stream.Length)
                 .WithContentType(file.ContentType);
 
-            await _minioClient.PutObjectAsync(putObjectArgs);
-
+            var response = await _minioClient.PutObjectAsync(putObjectArgs);
+            
+            
             var result = _serviceProvider.GetRequiredService<TFile>();
             result.Name = objectName;
             result.Size = (int)stream.Length;

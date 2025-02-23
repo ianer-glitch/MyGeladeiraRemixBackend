@@ -67,7 +67,7 @@ builder.Services.AddScoped<IAddItemsShoppingList, AddItemShoppingList>();
 
 builder.Services.AddScoped<ISendObjectOnQueue,SendObjectOnQueue>();
 
-
+builder.Services.ConfigureCors();
 
 
 
@@ -80,6 +80,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 

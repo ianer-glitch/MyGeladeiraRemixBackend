@@ -17,17 +17,8 @@ builder.Services.AddScoped<IIdentityGrpcConnection, Connection>();
 builder.Services.AddScoped<IConnectionHelper, ConnectionHelper>();
 builder.Services.ConfigureJwtAuth(builder.Configuration);
 builder.Services.AddSwaggerConfiguration();
+builder.Services.ConfigureCors();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll",
-        policy =>
-        {
-            policy.AllowAnyOrigin() // Allow all origins (use with caution)
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
-});
 
 var app = builder.Build();
 app.UseCors("AllowAll");

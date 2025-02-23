@@ -27,6 +27,7 @@ builder.Services.AddScoped<IListenObjectsFromQueue, ListenObjectsFromQueue>();
 builder.Services.AddHostedService<CreateExpiredStatistic>();
 builder.Services.AddScoped<IGetStatisticByUser, GetStatisticByUser>();
 builder.Services.AddScoped<IGetStatisticByAllUser,GetStatisticByAllUser>();
+builder.Services.ConfigureCors();
 
 var app = builder.Build();
 app.ApplyMigrations<StatisticContext>();
@@ -37,6 +38,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 

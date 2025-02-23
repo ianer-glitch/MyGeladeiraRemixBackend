@@ -12,13 +12,16 @@
       - JwtConfiguration__Audience=$JWT_AUDIENCE
       - JwtConfiguration__SecurityKey=$JWT_SECURITY_KEY
       
-      - MINIO_ROOT_USER=admin
-      - MINIO_ROOT_PASSWORD=admin1234
-      - MINIO_ENDPOINT=minio:9000
-      - MINIO_ACCESS_KEY=admin1234
-      - MINIO_SECRET_KEY=admin1234
-      - MINIO_USE_SSL=false
-      - MINIO_BUCKET_NAME=my-geladeira-remix-bucket
+      - MINIO_ROOT_USER=$MINIO_ACCESS_KEY
+      - MINIO_ROOT_PASSWORD=$MINIO_SECRET_KEY
+      - MINIO_ENDPOINT_EXTERNAL=$MINIO_ENDPOINT_EXTERNAL
+      - MINIO_ENDPOINT_PORT_EXTERNAL=$MINIO_ENDPOINT_PORT_EXTERNAL 
+      - MINIO_ENDPOINT=$MINIO_ENDPOINT
+      - MINIO_ENDPOINT_PORT=$MINIO_ENDPOINT_PORT
+      - MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY=$MINIO_SECRET_KEY
+      - MINIO_USE_SSL=$MINIO_USE_SSL
+      - MINIO_BUCKET_NAME=$MINIO_BUCKET_NAME
       
       - ServiceBusSettings__Username=guest
       - ServiceBusSettings__Password=guest
@@ -146,14 +149,16 @@
     container_name: minio
     ports:
       - "8086:8086"
+      - $MINIO_ENDPOINT_PORT_EXTERNAL:9000
     environment:
-      - MINIO_ROOT_USER=admin
-      - MINIO_ROOT_PASSWORD=admin1234
-      - MINIO_ENDPOINT=minio:9000
-#      - MINIO_ACCESS_KEY=admin1234
-#      - MINIO_SECRET_KEY=admin1234
-      - MINIO_USE_SSL=false
-      - MINIO_BUCKET_NAME=my-geladeira-remix-bucket
+      - MINIO_ROOT_USER=$MINIO_ACCESS_KEY
+      - MINIO_ROOT_PASSWORD=$MINIO_SECRET_KEY
+      - MINIO_ENDPOINT=$MINIO_ENDPOINT
+      - MINIO_ENDPOINT_PORT=$MINIO_ENDPOINT_PORT
+      - MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY=$MINIO_SECRET_KEY
+      - MINIO_USE_SSL=$MINIO_USE_SSL
+      - MINIO_BUCKET_NAME=$MINIO_BUCKET_NAME
     volumes:
       - ./volumes/minio:/var/lib/minio/data
     command: server /data --console-address ":8086"

@@ -25,8 +25,10 @@ public class CreateItem : ICreateItem
             var isExistingItem = _repository.Get(g=>g.Name == request.Name).Any();
             if(isExistingItem)
                 throw new ArgumentException($"Item {request.Name} already exists");
-        
+            
             var fileResult = await _fileAdapter.UploadAsync(request.Icon);
+
+            request.Weight = 1;
             
             var item = new ItemModel(request.Name,
                                      request.Color,
@@ -35,7 +37,7 @@ public class CreateItem : ICreateItem
                                      request.Quantity,
                                      fileResult.Name,
                                      request.Weight,
-                                     request.UserCreationId);
+                                     (Guid)request.UserCreationId);
             
             await _repository.InsertAsync(item);
             
