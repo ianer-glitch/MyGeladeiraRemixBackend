@@ -21,6 +21,10 @@ public class GetItems : IGetItems
                 Name = s.Name,
                 Icon = s.IconName,
                 Color = s.Color,
+                Expiration = s.Expiration,
+                Quantity = s.Quantity,
+                MinimumQuantity = s.MinimunQuantity,
+                Weight = s.Weight,  
             }).ToList();
 
             list.ForEach(async void (f) =>

@@ -5,9 +5,11 @@ namespace Fridge.Application.UseCases.Item.Update;
 public class UpdateItem : IUpdateItem
 {
     private readonly IRepository<ItemModel, FridgeContext> _rItem;
-    public UpdateItem(IRepository<ItemModel, FridgeContext> rItem)
+    private readonly IFileAdapter<IFileAdapterResult> _fileAdapter;
+    public UpdateItem(IRepository<ItemModel, FridgeContext> rItem, IFileAdapter<IFileAdapterResult> fileAdapter)
     {
         _rItem = rItem;
+        _fileAdapter = fileAdapter;
     }
     public async  Task<IUpdateItemOut> ExecuteAsync(IUpdateItemIn request)
     {
@@ -23,6 +25,13 @@ public class UpdateItem : IUpdateItem
             currenctItem.Quantity = request.Quantity;
             currenctItem.MinimunQuantity = request.Quantity;
             currenctItem.Expiration = request.Expiration;
+            if (request.Icon != null)
+            {
+                var fileResult = await _fileAdapter.UploadAsync(request.Icon);
+                currenctItem.IconName = fileResult.Name; 
+                
+            }
+            
             
             _rItem.Update(currenctItem);
 

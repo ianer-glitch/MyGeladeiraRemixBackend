@@ -73,7 +73,7 @@ public class ItemController : ControllerBase
     }
     
     [HttpPut]
-    public async Task<ActionResult<UpdateItemOut>>UpdateItem(UpdateItemIn input)
+    public async Task<ActionResult<UpdateItemOut>>UpdateItem([FromForm]UpdateItemIn input)
     {
         try
         {
