@@ -33,8 +33,10 @@ public class AddItemsToFridge : IAddItemsToFridge
                 if(await _rFridge.SaveChangesAsync() == 0)
                     throw new  Exception("Could not create Fridge for user" + request.UserId);
             }
-            var itemsToAddInFridge = _rItem.Get(g=>request.ItemIds.Contains(g.Id));
+            var itemsAlreadyInFridge = _rFridgeItem.Get(g => true).Select(s => s.ItemId);
+            var itemIdListToAdd = request.ItemIds.Where(w => !itemsAlreadyInFridge.Contains(w));
             
+            var itemsToAddInFridge = _rItem.Get(g=>itemIdListToAdd.Contains(g.Id));
             
             await _rFridgeItem.AddRangeAsync(itemsToAddInFridge
                         .Select(s=> new FridgeItem(s.Name,
