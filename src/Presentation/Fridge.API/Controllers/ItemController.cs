@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Fridge.API.Controllers;
 
 [ApiController]
-[Authorize(Roles = "Administrator")]
+
 [Route("[controller]")]
 public class ItemController : ControllerBase
 {
@@ -39,7 +39,7 @@ public class ItemController : ControllerBase
     }
 
     [HttpPost]
-    
+    [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<CreateItemOut>> CreateItem([FromForm]CreateItemIn input)
     {
         try
@@ -73,6 +73,7 @@ public class ItemController : ControllerBase
     }
     
     [HttpPut]
+    [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<UpdateItemOut>>UpdateItem([FromForm]UpdateItemIn input)
     {
         try
@@ -88,6 +89,7 @@ public class ItemController : ControllerBase
     }
 
     [HttpDelete]
+    [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<DeleteItemOut>> DeleteItem(DeleteItemIn input)
     {
         try

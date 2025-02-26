@@ -4,7 +4,7 @@ using Models;
 
 namespace Fridge.Domain.Items;
 
-public class Item : Entity 
+public class Item : Entity,IItem
 {
     public Item()
     {

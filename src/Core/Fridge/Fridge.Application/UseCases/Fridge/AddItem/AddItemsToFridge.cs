@@ -35,6 +35,7 @@ public class AddItemsToFridge : IAddItemsToFridge
             }
             var itemsToAddInFridge = _rItem.Get(g=>request.ItemIds.Contains(g.Id));
             
+            
             await _rFridgeItem.AddRangeAsync(itemsToAddInFridge
                         .Select(s=> new FridgeItem(s.Name,
                             s.Color,
@@ -43,8 +44,9 @@ public class AddItemsToFridge : IAddItemsToFridge
                             s.Quantity,
                             s.IconName,
                             s.Weight,
-                            request.UserId,
-                            userFridge.Id)
+                            s.Id,
+                            userFridge.Id,
+                            request.UserId)
                         )
                 );
 
