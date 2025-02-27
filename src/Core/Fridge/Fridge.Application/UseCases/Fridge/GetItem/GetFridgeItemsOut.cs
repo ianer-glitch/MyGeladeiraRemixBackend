@@ -10,4 +10,6 @@ public class GetFridgeItemsOut : IGetFridgeItemsOut
     public required string PercentageExpired { get; set; }
     public int Quantity { get; set; }
     public Guid ItemId { get; set; }
+    public int MinimumQuantity { get; set; }
+    public string Name { get; set; }
 }

@@ -39,6 +39,8 @@ public class GetFridgeItems : IGetFridgeItems
                                                         PercentageExpired = s.GetPercentageExpired(),
                                                         ItemId = s.Id,
                                                         Quantity = s.Quantity,
+                                                        Name = s.Name,
+                                                        MinimumQuantity = s.MinimunQuantity,
                                                         
                                                     }).ToList();
             items.ForEach(async void (f) =>

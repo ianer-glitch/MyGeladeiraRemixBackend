@@ -57,7 +57,7 @@ public class FridgeController : ControllerBase
     }
 
     [HttpGet("items")]
-    public async Task<ActionResult> GetFridgeItems()
+    public async Task<ActionResult<GetFridgeItemsOut>> GetFridgeItems()
     {
         try
         {
