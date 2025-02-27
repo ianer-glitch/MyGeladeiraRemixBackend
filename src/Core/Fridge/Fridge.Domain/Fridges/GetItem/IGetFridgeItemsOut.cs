@@ -10,4 +10,6 @@ public interface IGetFridgeItemsOut
     public int MinimumQuantity { get; set; }
     
     public  string Name { get; set; }
+    
+    public DateTime Expiration { get; set; }
 }

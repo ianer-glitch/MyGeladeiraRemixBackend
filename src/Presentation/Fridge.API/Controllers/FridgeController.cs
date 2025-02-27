@@ -77,7 +77,7 @@ public class FridgeController : ControllerBase
     }
     
     [HttpPut("items")]
-    public async Task<ActionResult<IUpdateFridgeItemOut>> GetFridgeItems(UpdateFridgeItemIn request)
+    public async Task<ActionResult<UpdateFridgeItemOut>> UpdateFridgeItem(UpdateFridgeItemIn request)
     {
         try
         {

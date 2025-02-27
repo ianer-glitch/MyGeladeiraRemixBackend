@@ -41,6 +41,7 @@ public class GetFridgeItems : IGetFridgeItems
                                                         Quantity = s.Quantity,
                                                         Name = s.Name,
                                                         MinimumQuantity = s.MinimunQuantity,
+                                                        Expiration  = s.Expiration
                                                         
                                                     }).ToList();
             items.ForEach(async void (f) =>
