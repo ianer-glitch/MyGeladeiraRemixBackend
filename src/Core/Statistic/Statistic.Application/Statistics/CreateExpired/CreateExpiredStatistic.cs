@@ -99,12 +99,11 @@ public class CreateExpiredStatistic :IHostedService,ICreateExpiredStatistic
         var scope = _serviceProvider.CreateScope();
         var  _listenObjectsFromQueue= scope.ServiceProvider.GetRequiredService<IListenObjectsFromQueue>();
         
-        await Task.Run(async () =>
-        {
-            await _listenObjectsFromQueue
-                .ExecuteAsync<ICreateExpiredStatisticIn,ICreateExpiredStatisticOut>
-                    (ExecuteAsync,cancellationToken,EQueue.ExpiredStatistic);
-        });
+        
+        await _listenObjectsFromQueue
+            .ExecuteAsync<ICreateExpiredStatisticIn,ICreateExpiredStatisticOut>
+                (ExecuteAsync,cancellationToken,EQueue.ExpiredStatistic);
+      
         
         scope.Dispose();
             

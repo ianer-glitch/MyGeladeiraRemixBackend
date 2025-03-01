@@ -1,3 +1,4 @@
+using Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Statistic.Application.Statistics.GetByAllUser;
@@ -24,10 +25,14 @@ public class StatisticController : ControllerBase
     }
 
     [HttpGet("User")]
-    public async Task<ActionResult<GetStatisticByUserOut>> GetStatisticByAllUser(GetStatisticByUserIn request)
+    public async Task<ActionResult<GetStatisticByUserOut>> GetStatisticByUser()
     {
         try
         {
+            var request = new GetStatisticByUserIn()
+            {
+                UserId = User.GetId()
+            };
             var result = await _getStatisticByUser.ExecuteAsync(request);
             return Ok(result);
         }
@@ -40,7 +45,7 @@ public class StatisticController : ControllerBase
     
     [HttpGet("AllUser")]
     [Authorize(Roles = "Administrator")]
-    public async Task<ActionResult<GetStatisticByAllUserOut>> GetStatisticByUser(GetStatisticByAllUserIn request)
+    public async Task<ActionResult<GetStatisticByAllUserOut>> GetStatisticByAllUser(GetStatisticByAllUserIn request)
     {
         try
         {

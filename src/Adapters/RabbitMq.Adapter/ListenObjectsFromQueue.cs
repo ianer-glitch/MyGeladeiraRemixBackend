@@ -27,24 +27,27 @@ public class ListenObjectsFromQueue : BaseRabbitMq, IListenObjectsFromQueue
             arguments: null);
 
 
-        while (!cancelToken.IsCancellationRequested)
+        var consumer = new EventingBasicConsumer(channel);
+        Task.Run(() =>
         {
-            var consumer = new EventingBasicConsumer(channel);
-
-            
-            consumer.Received += async (model, ea) =>
+            while (!cancelToken.IsCancellationRequested)
             {
-                var body = ea.Body.ToArray();
-                string message = Encoding.UTF8.GetString(body);
-                var objectFromQueue = Newtonsoft.Json.JsonConvert.DeserializeObject<TIn>(message);
-                await functionToRun(objectFromQueue);
-            };
 
-            channel.BasicConsume(queue: queue.ToString(),
-                autoAck: true,
-                consumer: consumer);
-        }
-        
+                
+                consumer.Received += async (model, ea) =>
+                {
+                    var body = ea.Body.ToArray();
+                    string message = Encoding.UTF8.GetString(body);
+                    var objectFromQueue = Newtonsoft.Json.JsonConvert.DeserializeObject<TIn>(message);
+                    await functionToRun(objectFromQueue);
+                };
+
+            }
+            
+        });
+        channel.BasicConsume(queue: queue.ToString(),
+            autoAck: true,
+            consumer: consumer);
         return Task.CompletedTask;
 
     }
