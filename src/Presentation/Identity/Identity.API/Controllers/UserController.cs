@@ -50,14 +50,14 @@ public class UserController(
         }
     }
     
-    [HttpPost("CreateUser")]
-    public async Task<ActionResult<string>> CreateUser([FromBody]PCreateUserIn request)
+    [HttpPost]
+    public async Task<ActionResult<PCreateUserOut>> CreateUser([FromBody]PCreateUserIn request)
     {
         try
         {
             var client = _con.GetUserConnection<UserService.UserServiceClient>();
             var result = await client.CreateUserAsync(request);
-            return Ok(result.Success);
+            return Ok(result);
         }
         catch (Exception e)
         {

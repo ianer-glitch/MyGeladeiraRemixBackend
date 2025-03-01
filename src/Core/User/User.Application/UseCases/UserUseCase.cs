@@ -1,4 +1,5 @@
 
+using System.Globalization;
 using Grpc.Core;
 using Identity.Domain.Protos;
 using Microsoft.AspNetCore.Http.Timeouts;
@@ -49,11 +50,22 @@ public class UserUseCase(UserManager<Domain.Models.User> userManager, RoleManage
             var existingUser = await _userManager.FindByEmailAsync(req.Email);
             if (existingUser is not null)
                 return false;
+            
+            DateTime birthDate = DateTime.UtcNow;
+            DateTime.TryParseExact(
+                req.BirthDate,
+                "dd/MM/yyyy",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AdjustToUniversal,
+                out birthDate);
+            
+            birthDate = DateTime.SpecifyKind(birthDate, DateTimeKind.Utc);
+        
 
             var user = new Domain.Models.User(
                 req.FirstName,
                 req.LastName,
-                req.BirthDate.ToDateTime(),
+                birthDate,
                 req.Email);
 
             var success = await _userManager.CreateAsync(user, req.Password);

@@ -89,7 +89,7 @@ public class UserUseCaseTests
         {
             Email = "email@email.com",
             Password = "12345",
-            BirthDate = DateTime.UtcNow.ToTimestamp(),
+            BirthDate = DateTime.UtcNow.ToString("MM/dd/yyyy"),
             LastName = "lastname",
             FirstName = "firstname",
         };
@@ -113,7 +113,7 @@ public class UserUseCaseTests
         {
             Email = "email@email.com",
             Password = "12345",
-            BirthDate = DateTime.Parse("1999-01-01").ToUniversalTime().ToTimestamp(),
+            BirthDate = DateTime.UtcNow.ToString("MM/dd/yyyy"),
             LastName = "lastname",
             FirstName = "firstname",
         };

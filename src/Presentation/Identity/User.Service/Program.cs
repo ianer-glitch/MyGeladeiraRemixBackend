@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using User.Application.UseCases;
@@ -32,11 +33,13 @@ using (var scope = app.Services.CreateScope())
     var user = builder.Configuration.GetSection("DEFAULT_ADMIN_USER").Value;
     var password = builder.Configuration.GetSection("DEFAULT_ADMIN_PASSWORD").Value;
     var userService = scope.ServiceProvider.GetRequiredService<IUserUseCase>();
+    
     var request = new PCreateUserIn
     {
+        
         Email = user,
         Password = password,
-        BirthDate = DateTime.UtcNow.AddYears(-20).ToTimestamp(),
+        BirthDate = "01/01/1900",
         FirstName = "Admin",
         LastName = "Admin",
 
