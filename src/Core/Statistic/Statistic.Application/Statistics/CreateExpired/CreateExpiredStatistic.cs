@@ -66,7 +66,7 @@ public class CreateExpiredStatistic :IHostedService,ICreateExpiredStatistic
         try
         {
             
-            var itemWeights = _rExpired.Get(g => g.Inclusion > DateTime.Now.AddMonths(-1))
+            var itemWeights = _rExpired.Get(g => g.Inclusion > DateTime.UtcNow.AddMonths(-1))
                                                       .AsNoTracking()
                                                       .Select(s => s.ItemWeight);
             
@@ -100,10 +100,9 @@ public class CreateExpiredStatistic :IHostedService,ICreateExpiredStatistic
         var  _listenObjectsFromQueue= scope.ServiceProvider.GetRequiredService<IListenObjectsFromQueue>();
         
         
-        await _listenObjectsFromQueue
-            .ExecuteAsync<ICreateExpiredStatisticIn,ICreateExpiredStatisticOut>
-                (ExecuteAsync,cancellationToken,EQueue.ExpiredStatistic);
-      
+            await _listenObjectsFromQueue
+                .ExecuteAsync<ICreateExpiredStatisticIn,ICreateExpiredStatisticOut>
+                    (ExecuteAsync,cancellationToken,EQueue.ExpiredStatistic,_serviceProvider);
         
         scope.Dispose();
             
