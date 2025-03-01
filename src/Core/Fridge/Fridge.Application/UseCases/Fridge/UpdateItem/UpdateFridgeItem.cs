@@ -5,6 +5,7 @@ using Fridge.Application.UseCases.ShoppingList.AddItems;
 using Fridge.Application.UseCases.ShoppingList.RemoveItems;
 using Fridge.Domain.ShoppingLists.AddItems;
 using Fridge.Domain.ShoppingLists.RemoveItems;
+using Ports.Expired;
 
 namespace Fridge.Application.UseCases.Fridge.UpdateItem;
 
@@ -13,11 +14,13 @@ public class UpdateFridgeItem : IUpdateFridgeItem
     private readonly IRepository<FridgeItem,FridgeContext> _repository;
     private readonly IAddItemsShoppingList _addItemsShoppingList;
     private readonly IRemoveItemsShoppingList _removeItemsShoppingList;
-    public UpdateFridgeItem(IRepository<FridgeItem, FridgeContext> repository, IAddItemsShoppingList addItemsShoppingList, IRemoveItemsShoppingList removeItemsShoppingList)
+    private readonly ISendObjectOnQueue _sendObjectOnQueue;
+    public UpdateFridgeItem(IRepository<FridgeItem, FridgeContext> repository, IAddItemsShoppingList addItemsShoppingList, IRemoveItemsShoppingList removeItemsShoppingList, ISendObjectOnQueue sendObjectOnQueue)
     {
         _repository = repository;
         _addItemsShoppingList = addItemsShoppingList;
         _removeItemsShoppingList = removeItemsShoppingList;
+        _sendObjectOnQueue = sendObjectOnQueue;
     }
     public async Task<IUpdateFridgeItemOut> ExecuteAsync(IUpdateFridgeItemIn request)
     {
@@ -34,6 +37,7 @@ public class UpdateFridgeItem : IUpdateFridgeItem
             currenctItem.Expiration = request.Expiration.ToUniversalTime();
             
             await AddOrRemoveFromShoppingList(currenctItem,request.UserId);
+            await HandleExpiredItem(currenctItem, request.UserId);
             
             _repository.Update(currenctItem);
             
@@ -66,6 +70,21 @@ public class UpdateFridgeItem : IUpdateFridgeItem
                 FridgeItemIds = Enumerable.Empty<Guid>().Append(currenctItem.Id),
                 UserId = userId
             });
+        }
+    }
+
+
+    private async Task HandleExpiredItem(FridgeItem currenctItem, Guid userId)
+    {
+        if (currenctItem.IsExpired)
+        {
+            _sendObjectOnQueue.Execute(new CreateExpiredStatisticIn
+            {
+                ItemId = currenctItem.Id,
+                UserId = userId,
+                ItemWeight = currenctItem.Weight,
+            },EQueue.ExpiredStatistic);                    
+
         }
     }
 }

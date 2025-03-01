@@ -38,14 +38,16 @@ public class UpdateMultipleFridgeItemsQuantities : IUpdateMultipleFridgeItemsQua
             
             relationalList.ForEach(f =>
                 {
-                    f.ite.Quantity =f.req.Quantity;   
-                    // if(f.ite.IsExpired)
+                    f.ite.Quantity =f.req.Quantity;
+                    if (f.ite.IsExpired)
+                    {
                         _sendObjectOnQueue.Execute(new CreateExpiredStatisticIn
                         {
                             ItemId = f.ite.Id,
                             UserId = request.Select(s => s.UserId).FirstOrDefault(),
                             ItemWeight = f.ite.Weight,
                         },EQueue.ExpiredStatistic);
+                    }
                 });
 
             
