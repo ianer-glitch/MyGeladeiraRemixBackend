@@ -21,9 +21,9 @@ public class GetStatisticByUser : IGetStatisticByUser
     {
         try
         {
-            var userIndex = _rUserFoodWasteIndex.Get(g => g.UserInclusionId == request.UserId).FirstOrDefault();
-            if (userIndex == null)
-                throw new ArgumentNullException($"{nameof(userIndex)} not found");
+            
+            
+                
 
 
             
@@ -33,9 +33,12 @@ public class GetStatisticByUser : IGetStatisticByUser
             
             var national = float.Parse(nationalConfig); 
             
+            var userIndex = _rUserFoodWasteIndex.Get(g => g.UserInclusionId == request.UserId).FirstOrDefault();
+            
+            
             var result = new GetStatisticByUserOut
                 {
-                    UserFoodWasteIndex = userIndex.Index,
+                    UserFoodWasteIndex = userIndex?.Index ?? national,
                     NationalFoodWasteIndex = national,
                 };
             
