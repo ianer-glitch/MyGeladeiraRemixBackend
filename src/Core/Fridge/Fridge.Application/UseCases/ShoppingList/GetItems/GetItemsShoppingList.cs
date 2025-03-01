@@ -6,11 +6,15 @@ public class GetItemsShoppingList : IGetItemsShoppingList
 {
     private readonly IRepository<ShoppingListModel,FridgeContext> _shoppingListRepository;
     private readonly IRepository<FridgeItem, FridgeContext> _fridgeItemRepository;
-    public GetItemsShoppingList(IRepository<ShoppingListModel, FridgeContext> shoppingListRepository,
-        IRepository<FridgeItem, FridgeContext> fridgeItemRepository)
+    private readonly IFileAdapter<IFileAdapterResult> _fileAdapter;
+
+    public GetItemsShoppingList(
+        IRepository<ShoppingListModel, FridgeContext> shoppingListRepository,
+        IRepository<FridgeItem, FridgeContext> fridgeItemRepository, IFileAdapter<IFileAdapterResult> fileAdapter)
     {
         _shoppingListRepository = shoppingListRepository;
         _fridgeItemRepository = fridgeItemRepository;
+        _fileAdapter = fileAdapter;
     }
     public async  Task<IEnumerable<IGetItemsShoppingListOut>> ExecuteAsync(IGetItemsShoppingListIn request)
     {
@@ -23,12 +27,27 @@ public class GetItemsShoppingList : IGetItemsShoppingList
             
             var items = _fridgeItemRepository.Get(g => g.ShoppingListId == userShoppingList.Id);
 
-            return items.Select(s => new GetItemsShoppingListOut
+            var itemsOut = items.Select(s => new GetItemsShoppingListOut
             {
                 ItemId = s.Id,
                 ItemColor = s.Color,
                 ItemName = s.Name,
+                IconName = s.IconName,
+            }).ToList();
+
+            itemsOut.ForEach(async f =>
+            {
+                if (string.IsNullOrEmpty(f.IconName)) return;
+                
+                var file = await _fileAdapter.GetFileAsync(f.IconName!);
+                f.IconLink = file.Link;
+
             });
+
+            return itemsOut;
+
+
+
         }
         catch (Exception e)
         {

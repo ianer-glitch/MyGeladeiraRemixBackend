@@ -30,7 +30,7 @@ public class UpdateFridgeItem : IUpdateFridgeItem
             
             currenctItem.Modified = DateTime.UtcNow;
             currenctItem.Quantity = request.Quantity;
-            currenctItem.MinimunQuantity = request.Quantity;
+            currenctItem.MinimunQuantity = request.MinimunQuantity;
             currenctItem.Expiration = request.Expiration.ToUniversalTime();
             
             await AddOrRemoveFromShoppingList(currenctItem,request.UserId);

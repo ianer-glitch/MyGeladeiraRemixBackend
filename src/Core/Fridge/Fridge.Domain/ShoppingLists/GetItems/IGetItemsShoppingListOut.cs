@@ -5,4 +5,6 @@ public interface IGetItemsShoppingListOut
     public string ItemName { get; set; }
     public string ItemColor { get; set; }
     public Guid ItemId { get; set; }
+    public  string? IconLink { get; set; }
+    public string? IconName { get; set; }
 }
