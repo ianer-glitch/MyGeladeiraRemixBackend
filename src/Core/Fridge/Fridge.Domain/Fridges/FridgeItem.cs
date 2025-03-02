@@ -98,12 +98,27 @@ public class FridgeItem :Entity,IItem
 
     public string GetPercentageExpired()
     {
-        var currentDate = DateTime.Now.Ticks;
-        var exp =  Expiration.Ticks;
+        var expDate = Expiration;
+
+        if (expDate < DateTime.Now)
+            return "100%";
+        long totalTime;
+        if (Modified is null)
+        {
+            totalTime = expDate.Subtract(Inclusion).Ticks;
+        }
+        else
+        {
+            totalTime = expDate.Subtract((DateTime)Modified).Ticks;
+        }
         
-        // Calculate percentage of time passed (as a percentage)
-        double result = (100 * currentDate/exp) ;
-        return $"%{result}";
+        var totalToExpire = expDate.Subtract(DateTime.Now).Ticks ;
+        
+        var result =100 - totalToExpire*100/totalTime;
+        return $"{result}%";
+        
 
     }
+
+    
 }
