@@ -27,6 +27,7 @@ public class UpdateFridgeItem : IUpdateFridgeItem
         try
         {
             var currenctItem =  await _repository.Get(g => g.Id == request.ItemId).FirstOrDefaultAsync();
+            await HandleExpiredItem(currenctItem, request.UserId);
             
             if(currenctItem == null)
                 throw new ArgumentNullException(nameof(currenctItem));    
@@ -37,7 +38,6 @@ public class UpdateFridgeItem : IUpdateFridgeItem
             currenctItem.Expiration = request.Expiration.ToUniversalTime();
             
             await AddOrRemoveFromShoppingList(currenctItem,request.UserId);
-            await HandleExpiredItem(currenctItem, request.UserId);
             
             _repository.Update(currenctItem);
             
