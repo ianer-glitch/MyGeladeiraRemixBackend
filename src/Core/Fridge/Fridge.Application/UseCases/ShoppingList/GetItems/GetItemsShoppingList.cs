@@ -25,7 +25,7 @@ public class GetItemsShoppingList : IGetItemsShoppingList
             if(userShoppingList == null)
                 throw new ArgumentNullException(nameof(userShoppingList));
             
-            var items = _fridgeItemRepository.Get(g => g.ShoppingListId == userShoppingList.Id);
+            var items = _fridgeItemRepository.Get(g => g.ShoppingListId == userShoppingList.Id && g.IsActive);
 
             var itemsOut = items.Select(s => new GetItemsShoppingListOut
             {

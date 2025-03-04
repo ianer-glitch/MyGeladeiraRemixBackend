@@ -90,7 +90,7 @@ public class ItemController : ControllerBase
 
     [HttpDelete]
     [Authorize(Roles = "Administrator")]
-    public async Task<ActionResult<DeleteItemOut>> DeleteItem(DeleteItemIn input)
+    public async Task<ActionResult<DeleteItemOut>> DeleteItem([FromBody]DeleteItemIn input)
     {
         try
         {

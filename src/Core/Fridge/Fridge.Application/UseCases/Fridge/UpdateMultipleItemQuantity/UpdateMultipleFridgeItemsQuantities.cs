@@ -35,20 +35,6 @@ public class UpdateMultipleFridgeItemsQuantities : IUpdateMultipleFridgeItemsQua
                     {
                         req,ite 
                     }).ToList(); 
-            
-            relationalList.ForEach(f =>
-                {
-                    f.ite.Quantity =f.req.Quantity;
-                    if (f.ite.IsExpired)
-                    {
-                        _sendObjectOnQueue.Execute(new CreateExpiredStatisticIn
-                        {
-                            ItemId = f.ite.Id,
-                            UserId = request.Select(s => s.UserId).FirstOrDefault(),
-                            ItemWeight = f.ite.Weight,
-                        },EQueue.ExpiredStatistic);
-                    }
-                });
 
             
             var listToAdd = relationalList.Where(w => w.ite.ShouldAddToShoppingList).Select(s => s.ite.Id);
@@ -73,6 +59,21 @@ public class UpdateMultipleFridgeItemsQuantities : IUpdateMultipleFridgeItemsQua
                 });
             
             }
+            
+            relationalList.ForEach(f =>
+            {
+                f.ite.Quantity =f.req.Quantity;
+                if (f.ite.IsExpired)
+                {
+                    _sendObjectOnQueue.Execute(new CreateExpiredStatisticIn
+                    {
+                        ItemId = f.ite.Id,
+                        UserId = request.Select(s => s.UserId).FirstOrDefault(),
+                        ItemWeight = f.ite.Weight,
+                    },EQueue.ExpiredStatistic);
+                }
+            });
+            
             _fridgeItemRepository.UpdateRange(items);
             
             return new UpdateMultipleFridgeItemsQuantitiesOut

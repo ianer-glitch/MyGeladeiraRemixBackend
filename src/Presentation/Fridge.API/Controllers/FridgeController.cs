@@ -93,7 +93,7 @@ public class FridgeController : ControllerBase
     }
     
     [HttpPatch("items")]
-    public async Task<ActionResult<UpdateMultipleFridgeItemsQuantitiesOut>>UpdateMultipleItemsQuantities(IEnumerable<UpdateMultipleFridgeItemsQuantitiesIn> request)
+    public async Task<ActionResult<UpdateMultipleFridgeItemsQuantitiesOut>>UpdateMultipleFridgeItemsQuantities(IEnumerable<UpdateMultipleFridgeItemsQuantitiesIn> request)
     {
         try
         {

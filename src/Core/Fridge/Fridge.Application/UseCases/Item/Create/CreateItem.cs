@@ -22,7 +22,7 @@ public class CreateItem : ICreateItem
     {
         try
         {
-            var isExistingItem = _repository.Get(g=>g.Name == request.Name).Any();
+            var isExistingItem = _repository.Get(g=>g.Name == request.Name && g.IsActive).Any();
             if(isExistingItem)
                 throw new ArgumentException($"Item {request.Name} already exists");
             
