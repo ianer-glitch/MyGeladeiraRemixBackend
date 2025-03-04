@@ -28,7 +28,6 @@ public class CreateItem : ICreateItem
             
             var fileResult = await _fileAdapter.UploadAsync(request.Icon);
 
-            request.Weight = 1;
             
             var item = new ItemModel(request.Name,
                                      request.Color,

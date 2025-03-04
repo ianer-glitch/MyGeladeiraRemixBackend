@@ -29,7 +29,7 @@ public class GetFridgeItems : IGetFridgeItems
                                                  .AsNoTracking()
                                                  .FirstOrDefaultAsync();
             if (userFride == null)
-                throw new ArgumentNullException(nameof(userFride));
+                return Enumerable.Empty<GetFridgeItemsOut>();
             
             var items = _rFItem.Get(g=>g.FridgeId == userFride.Id && g.IsActive)
                                                     .Select(s=> new GetFridgeItemsOut()

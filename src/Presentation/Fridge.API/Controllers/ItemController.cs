@@ -57,6 +57,7 @@ public class ItemController : ControllerBase
     }
 
     [HttpGet]
+    
     public async Task<ActionResult<IEnumerable<GetItemsOut>>> GetItems()
     {
         try

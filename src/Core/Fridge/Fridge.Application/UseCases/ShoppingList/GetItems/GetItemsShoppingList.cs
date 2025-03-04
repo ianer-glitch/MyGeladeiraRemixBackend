@@ -23,7 +23,7 @@ public class GetItemsShoppingList : IGetItemsShoppingList
             var userShoppingList = await _shoppingListRepository.Get(f=>f.UserId == request.UserId)
                                                                 .FirstOrDefaultAsync();
             if(userShoppingList == null)
-                throw new ArgumentNullException(nameof(userShoppingList));
+               return Enumerable.Empty<GetItemsShoppingListOut>();
             
             var items = _fridgeItemRepository.Get(g => g.ShoppingListId == userShoppingList.Id && g.IsActive);
 
