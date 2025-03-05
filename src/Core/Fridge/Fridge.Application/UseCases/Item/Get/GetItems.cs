@@ -14,7 +14,7 @@ public class GetItems : IGetItems
     {
         try
         {
-            var items =_repository.Get(x=>x.IsActive);
+            var items =_repository.Get(x=>x.IsActive).ToList();
             var list = items.Select(s => new GetItemsOut
             {
                 Id = s.Id,

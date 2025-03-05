@@ -11,6 +11,7 @@
       <ProjectReference Include="..\..\..\Shared\Ports\Ports.csproj" />
       <ProjectReference Include="..\Fridge.Domain\Fridge.Domain.csproj" />
       <ProjectReference Include="..\Fridge.Infrastructure\Fridge.Infrastructure.csproj" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
 </Project>

@@ -9,6 +9,7 @@ using Fridge.Application.UseCases.Item.Create;
 using Fridge.Application.UseCases.Item.Delete;
 using Fridge.Application.UseCases.Item.Get;
 using Fridge.Application.UseCases.Item.Update;
+using Fridge.Application.UseCases.Recipe.AskRecipe;
 using Fridge.Application.UseCases.ShoppingList.AddItems;
 using Fridge.Application.UseCases.ShoppingList.GetItems;
 using Fridge.Application.UseCases.ShoppingList.RemoveItems;
@@ -22,11 +23,13 @@ using Fridge.Domain.Items.Delete;
 using Fridge.Domain.Items.Get;
 using Fridge.Domain.Items.Update;
 using Fridge.Domain.Ports.FileAdapter;
+using Fridge.Domain.Recipes.AskRecipes;
 using Fridge.Domain.ShoppingLists.AddItems;
 using Fridge.Domain.ShoppingLists.GetItems;
 using Fridge.Domain.ShoppingLists.RemoveItems;
 using Fridge.Infrastructure;
 using Minio.Adapter;
+using OpenAI.Adapter;
 using Ports;
 using Postgre.Adapter;
 using RabbitMq.Adapter;
@@ -66,6 +69,8 @@ builder.Services.AddScoped<IGetItemsShoppingList, GetItemsShoppingList>();
 builder.Services.AddScoped<IAddItemsShoppingList, AddItemShoppingList>();
 
 builder.Services.AddScoped<ISendObjectOnQueue,SendObjectOnQueue>();
+builder.Services.AddScoped<IChatGpt, ChatGpt>();
+builder.Services.AddScoped<IAskRecipes, AskRecipes>();
 
 builder.Services.ConfigureCors();
 

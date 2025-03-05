@@ -26,6 +26,7 @@ public class FridgeController : ControllerBase
     private readonly IUpdateFridgeItem _updateFridgeItem;
     private readonly IUpdateMultipleFridgeItemsQuantities _updateMultipleFridgeItemsQuantities;
     private readonly IRemoveItemsFridge _removeItemsFridge;
+    
     public FridgeController(
         ILogger<FridgeController> logger,
         IAddItemsToFridge addItemsToFridge,
