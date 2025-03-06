@@ -1,11 +1,13 @@
 using Extensions;
 using Fridge.Application.UseCases.Fridge.AddItem;
 using Fridge.Application.UseCases.Fridge.GetItem;
+using Fridge.Application.UseCases.Fridge.GetRecommendedItem;
 using Fridge.Application.UseCases.Fridge.RemoveItems;
 using Fridge.Application.UseCases.Fridge.UpdateItem;
 using Fridge.Application.UseCases.Fridge.UpdateMultipleItemQuantity;
 using Fridge.Domain.Fridges.AddItem;
 using Fridge.Domain.Fridges.GetItem;
+using Fridge.Domain.Fridges.GetRecommendedItem;
 using Fridge.Domain.Fridges.RemoveItem;
 using Fridge.Domain.Fridges.UpdateItem;
 using Fridge.Domain.Fridges.UpdateMultipleItemQuantity;
@@ -26,13 +28,14 @@ public class FridgeController : ControllerBase
     private readonly IUpdateFridgeItem _updateFridgeItem;
     private readonly IUpdateMultipleFridgeItemsQuantities _updateMultipleFridgeItemsQuantities;
     private readonly IRemoveItemsFridge _removeItemsFridge;
+    private readonly IGetRecommendedItems _getRecommendedItems;
     
     public FridgeController(
         ILogger<FridgeController> logger,
         IAddItemsToFridge addItemsToFridge,
         IGetFridgeItems getFridgeItems,
         IUpdateFridgeItem updateFridgeItem, 
-        IUpdateMultipleFridgeItemsQuantities updateMultipleFridgeItemsQuantities, IRemoveItemsFridge removeItemsFridge)
+        IUpdateMultipleFridgeItemsQuantities updateMultipleFridgeItemsQuantities, IRemoveItemsFridge removeItemsFridge, IGetRecommendedItems getRecommendedItems)
     {
         _logger = logger;
         _addItemsToFridge = addItemsToFridge;
@@ -40,6 +43,7 @@ public class FridgeController : ControllerBase
         _updateFridgeItem = updateFridgeItem;
         _updateMultipleFridgeItemsQuantities = updateMultipleFridgeItemsQuantities;
         _removeItemsFridge = removeItemsFridge;
+        _getRecommendedItems = getRecommendedItems;
     }
     [HttpPost("items")]
     public async Task<ActionResult<AddItemsToFridgeOut>> AddItemsToFridge(AddItemsToFridgeIn request)
@@ -116,6 +120,26 @@ public class FridgeController : ControllerBase
         {
             request.UserId = User.GetId();
             var result = await _removeItemsFridge.ExecuteAsync(request);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);   
+            return BadRequest();    
+        }
+    }
+    
+    [HttpGet("recommended-items")]
+    public async Task<ActionResult<GetFridgeItemsOut>> GetRecommendedItems()
+    {
+        try
+        {
+            var request = new GetRecommendedItemsIn
+            {
+                UserId = User.GetId()
+            };
+            
+            var result = await _getRecommendedItems.ExecuteAsync(request);
             return Ok(result);
         }
         catch (Exception ex)

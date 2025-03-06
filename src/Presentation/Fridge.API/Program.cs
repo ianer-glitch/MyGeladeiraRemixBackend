@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using Extensions;
 using Fridge.Application.UseCases.Fridge.AddItem;
 using Fridge.Application.UseCases.Fridge.GetItem;
+using Fridge.Application.UseCases.Fridge.GetRecommendedItem;
 using Fridge.Application.UseCases.Fridge.RemoveItems;
 using Fridge.Application.UseCases.Fridge.UpdateItem;
 using Fridge.Application.UseCases.Fridge.UpdateMultipleItemQuantity;
@@ -15,6 +16,7 @@ using Fridge.Application.UseCases.ShoppingList.GetItems;
 using Fridge.Application.UseCases.ShoppingList.RemoveItems;
 using Fridge.Domain.Fridges.AddItem;
 using Fridge.Domain.Fridges.GetItem;
+using Fridge.Domain.Fridges.GetRecommendedItem;
 using Fridge.Domain.Fridges.RemoveItem;
 using Fridge.Domain.Fridges.UpdateItem;
 using Fridge.Domain.Fridges.UpdateMultipleItemQuantity;
@@ -71,7 +73,7 @@ builder.Services.AddScoped<IAddItemsShoppingList, AddItemShoppingList>();
 builder.Services.AddScoped<ISendObjectOnQueue,SendObjectOnQueue>();
 builder.Services.AddScoped<IChatGpt, ChatGpt>();
 builder.Services.AddScoped<IAskRecipes, AskRecipes>();
-
+builder.Services.AddScoped<IGetRecommendedItems, GetRecommendedItems>();
 builder.Services.ConfigureCors();
 
 
