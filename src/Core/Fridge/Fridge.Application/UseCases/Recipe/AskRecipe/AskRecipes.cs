@@ -27,13 +27,8 @@ public class AskRecipes : IAskRecipes
             if (string.IsNullOrEmpty(itemNames))
                 return new List<IAskRecipesOut>();
             var assistMessage =
-                $"You are an assistant that generates recipes in valid JSON format to be used with JSON.parse(). The response should be only a list of recipe templates, containing the title (title), ingredients (ingredients, a list of strings), and the method of preparation (method). The response should be in Brazilian Portuguese, with the following ingredients: {itemNames}. Do not include anything other than the list model in JSON format";
-            var responseInJson = await _chatGpt.AskAssistant(assistMessage);  
-            
-            if (string.IsNullOrEmpty(responseInJson))
-                return new List<IAskRecipesOut>();
-            
-            var r =  Newtonsoft.Json.JsonConvert.DeserializeObject<List<AskRecipesOut>>(responseInJson);
+                $"Você é um assistente que gera receitas no formato JSON. A resposta deve ser apenas uma lista de modelos de receita, contendo o título (title), ingredientes (ingredients, uma lista de strings) e o método de preparo (method). A resposta deve estar em português brasileiro, com os seguintes ingredientes: {itemNames}. Não inclua nada além do modelo da lista em formato JSON.";
+            var r = await _chatGpt.AskAssistant<List<AskRecipesOut>>(assistMessage);  
             return new List<IAskRecipesOut>().Concat(r).ToList();
         }
         catch (Exception ex)
