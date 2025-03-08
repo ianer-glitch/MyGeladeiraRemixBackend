@@ -21,7 +21,7 @@ public class RecipesController : ControllerBase
     }
 
     [HttpGet()]
-    public async Task<ActionResult<AskRecipesOut>> AskRecipes()
+    public async Task<ActionResult<List<AskRecipesOut>>> AskRecipes()
     {
         try
         {
