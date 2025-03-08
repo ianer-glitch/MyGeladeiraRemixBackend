@@ -16,7 +16,7 @@ public class GetRecommendedItemWeight:IGetRecommendedItemWeight
         try
         {
             var assistMessage =
-                $"Você é um assistente que retorna o peso médio de uma alimento em formato númerico, em gramas.Responda de forma precisa apenas o valor do peso desse alimento :{request.Name}";
+                $"Você é um assistente que retorna o peso médio de um alimento em formato númerico, em gramas.Responda de forma precisa apenas o valor do peso desse alimento :{request.Name}";
             var r = await _chatGpt.AskAssistant(assistMessage);
             return new GetRecommendedItemWeightOut
             {

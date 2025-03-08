@@ -130,7 +130,7 @@ public class FridgeController : ControllerBase
     }
     
     [HttpGet("recommended-items")]
-    public async Task<ActionResult<GetFridgeItemsOut>> GetRecommendedItems()
+    public async Task<ActionResult<List<GetRecommendedItemsOut>>> GetRecommendedItems()
     {
         try
         {
