@@ -9,6 +9,7 @@ using Fridge.Application.UseCases.Fridge.UpdateMultipleItemQuantity;
 using Fridge.Application.UseCases.Item.Create;
 using Fridge.Application.UseCases.Item.Delete;
 using Fridge.Application.UseCases.Item.Get;
+using Fridge.Application.UseCases.Item.GetRecommendedWeight;
 using Fridge.Application.UseCases.Item.Update;
 using Fridge.Application.UseCases.Recipe.AskRecipe;
 using Fridge.Application.UseCases.ShoppingList.AddItems;
@@ -23,6 +24,7 @@ using Fridge.Domain.Fridges.UpdateMultipleItemQuantity;
 using Fridge.Domain.Items.Create;
 using Fridge.Domain.Items.Delete;
 using Fridge.Domain.Items.Get;
+using Fridge.Domain.Items.GetRecommendedWeight;
 using Fridge.Domain.Items.Update;
 using Fridge.Domain.Ports.FileAdapter;
 using Fridge.Domain.Recipes.AskRecipes;
@@ -74,6 +76,8 @@ builder.Services.AddScoped<ISendObjectOnQueue,SendObjectOnQueue>();
 builder.Services.AddScoped<IChatGpt, ChatGpt>();
 builder.Services.AddScoped<IAskRecipes, AskRecipes>();
 builder.Services.AddScoped<IGetRecommendedItems, GetRecommendedItems>();
+builder.Services.AddScoped<IGetRecommendedItemWeight, GetRecommendedItemWeight>();
+
 builder.Services.ConfigureCors();
 
 
