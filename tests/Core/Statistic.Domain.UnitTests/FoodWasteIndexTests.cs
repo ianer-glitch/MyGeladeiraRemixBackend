@@ -5,32 +5,25 @@ namespace Statistic.Domain.UnitTests;
 public class FoodWasteIndexTests
 {
     [Fact]
-    public void CalculateUserMonthIndex_whenIsValid_shouldReturn()
+    public void CalculateUserMonthIndex_whenIsValid_shouldReturnIndex()
     {
-        float nationalYearIndex = 60;
-        float userOldIndex = 60;
+        const float nationalYearIndex = 60;
 
-        var itemWeights = new List<double>()
+        var itemWeightsInGram = new List<double>()
         {
-            0.1,0.2,0.3
+            500,500
         };
 
-        var result = 12;
-
-        var index = new FoodWasteIndex()
-            .SetNationalIndexPerMonth(nationalYearIndex)
-            .SetInitiaUserIndexPerMonth(userOldIndex)
-            .CalculateMonthUserIndex(itemWeights)
-            .GetIndex();
+        const int result = 20;
         
-        Assert.Equal(result, index);
+        var userIndex = new FoodWasteIndex()
+            .SetInitial(nationalYearIndex)
+            .PerMonth()
+            .Calculate(itemWeightsInGram)
+            .GetCurrent();
 
-
-
-
-
-
-
-
+        
+        
+        Assert.Equal(result, userIndex);
     }
 }

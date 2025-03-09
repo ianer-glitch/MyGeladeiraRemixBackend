@@ -2,32 +2,36 @@ namespace Statistic.Domain.FoodWasteIndexes.ValueObjects;
 
 public class FoodWasteIndex
 {
-    private double NationalIndex { get; set; }
-    private double UserIndex { get; set; }   
+    private double Initial { get; set; }
+    private double Current { get; set; }   
     
-    public FoodWasteIndex SetNationalIndexPerMonth(double nationalIndexPerYear)
+    public FoodWasteIndex SetInitial(double initialIndex)
     {
-        NationalIndex = nationalIndexPerYear/12;
+        Initial = initialIndex;
         return this;
     }
 
-    public FoodWasteIndex SetInitiaUserIndexPerMonth(double initiaUserIndexPerYear)
+    public FoodWasteIndex PerMonth()
     {
-        UserIndex = initiaUserIndexPerYear/12;
-        return this;
-    }
-
-    public FoodWasteIndex  CalculateMonthUserIndex(IEnumerable<double> itemWeights)
-    {
-        var tempIndex = (100 * itemWeights.Sum()) / NationalIndex; 
+        Initial = Initial/12;
+        Current = Current / 12;
         
-        UserIndex = double.Round(tempIndex, 2);
         return this;
     }
 
-    public double GetIndex()
+    public FoodWasteIndex  Calculate(IEnumerable<double> itemWeightsInGram)
     {
-        return UserIndex;
+        var itemWeightsInKg = (itemWeightsInGram.Sum())/1000;
+        
+        var tempIndex = (100 * itemWeightsInKg) / Initial; 
+        
+        Current = double.Round(tempIndex, 2);
+        return this;
+    }
+
+    public double GetCurrent()
+    {
+        return Current;
     }
 
     

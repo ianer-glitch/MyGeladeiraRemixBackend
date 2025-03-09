@@ -75,14 +75,13 @@ public class CreateExpiredStatistic :IHostedService,ICreateExpiredStatistic
                 throw new ArgumentNullException(nationalConfig);
             
             var national = float.Parse(nationalConfig);
+            var userIndex = new FoodWasteIndex()
+                .SetInitial(national)
+                .PerMonth()
+                .Calculate(itemWeights)
+                .GetCurrent();
             
-            var index = new FoodWasteIndex()
-                .SetNationalIndexPerMonth(national)
-                .SetInitiaUserIndexPerMonth(national)
-                .CalculateMonthUserIndex(itemWeights)
-                .GetIndex();
-            
-            await _rUserStatistics.InsertAsync(new UserFoodWasteIndex(index,userId));
+            await _rUserStatistics.InsertAsync(new UserFoodWasteIndex(userIndex,userId));
             await _rUserStatistics.SaveChangesAsync();
             
             
