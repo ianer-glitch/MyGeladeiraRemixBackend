@@ -20,13 +20,14 @@ public class RecipesController : ControllerBase
         _askRecipes = askRecipes;
     }
 
-    [HttpGet()]
-    public async Task<ActionResult<List<AskRecipesOut>>> AskRecipes()
+    [HttpGet("{responseLanguage}")]
+    public async Task<ActionResult<List<AskRecipesOut>>> AskRecipes(string responseLanguage)
     {
         try
         {
             var request = new AskRecipesIn
             {
+                ResponseLanguage = responseLanguage,
                 UserId = User.GetId()
             };
             

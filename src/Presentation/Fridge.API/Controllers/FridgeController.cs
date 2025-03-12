@@ -129,14 +129,16 @@ public class FridgeController : ControllerBase
         }
     }
     
-    [HttpGet("recommended-items")]
-    public async Task<ActionResult<List<GetRecommendedItemsOut>>> GetRecommendedItems()
+    [HttpGet("recommended-items/{responseLanguage}")]
+    public async Task<ActionResult<List<GetRecommendedItemsOut>>> GetRecommendedItems( string responseLanguage)
     {
         try
         {
             var request = new GetRecommendedItemsIn
             {
+                ResponseLanguage = responseLanguage,
                 UserId = User.GetId()
+                
             };
             
             var result = await _getRecommendedItems.ExecuteAsync(request);

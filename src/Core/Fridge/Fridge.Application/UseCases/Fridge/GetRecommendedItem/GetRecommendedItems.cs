@@ -26,7 +26,7 @@ public class GetRecommendedItems : IGetRecommendedItems
             if (string.IsNullOrEmpty(itemNames))
                 return new List<IGetRecommendedItemsOut>();
             var assistMessage =
-                $"Você é um assistente que recomenda alimentos não processados(como tomate ou cenoura, não pode ser receitas) em formato JSON.Me recomende alimentos sabendo que eu tenho na geladeira {itemNames} A resposta deve ser apenas uma lista de alimentos, contendo o nome (Name),e uma cor em hexadecimal(Color) que corresponde a cor do alimento. A resposta deve estar em português brasileiro, em caso de cor branca retorne a cor  #d9d9d9 e quantidade mnáxima deve ser 10 items ";
+                $"Você é um assistente que recomenda alimentos não processados(como tomate ou cenoura, não pode ser receitas) em formato JSON.Me recomende alimentos sabendo que eu tenho na geladeira {itemNames} A resposta deve ser apenas uma lista de alimentos, contendo o nome (Name),e uma cor em hexadecimal(Color) que corresponde a cor do alimento. A resposta deve na linguagem {request.ResponseLanguage}, em caso de cor branca retorne a cor  #d9d9d9 e quantidade mnáxima deve ser 10 items ";
             var r = await _chatGpt.AskAssistant<List<GetRecommendedItemsOut>>(assistMessage);  
             return new List<IGetRecommendedItemsOut>().Concat(r).ToList();
         }
