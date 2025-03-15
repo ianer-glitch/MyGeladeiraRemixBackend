@@ -6,7 +6,7 @@
       - service-bus
     environment:
       - ASPNETCORE_HTTP_PORTS=8081
-      - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
+      - ConnectionStrings__Database=$FRIDGE_DATABASE_CONNECTION_STRING
       
       - JwtConfiguration__Authority=$JWT_AUTHORITY
       - JwtConfiguration__Audience=$JWT_AUDIENCE
@@ -22,11 +22,11 @@
       - MINIO_SECRET_KEY=$MINIO_SECRET_KEY
       - MINIO_USE_SSL=$MINIO_USE_SSL
       - MINIO_BUCKET_NAME=$MINIO_BUCKET_NAME
-      
-      - ServiceBusSettings__Username=guest
-      - ServiceBusSettings__Password=guest
-      - ServiceBusSettings__Port=5672
-      - ServiceBusSettings__Hostname=service-bus
+
+      - ServiceBusSettings__Username=$SERVICE_BUS_USERNAME
+      - ServiceBusSettings__Password=$SERVICE_BUS_PASSWORD
+      - ServiceBusSettings__Port=$SERVICE_BUS_PORT
+      - ServiceBusSettings__Hostname=$SERVICE_BUS_HOSTNAME
         
       - OPEN_API__KEY=$OPEN_API__KEY
       - OPEN_API__ASSISTANT_NAME=$OPEN_API__ASSISTANT_NAME
@@ -50,16 +50,16 @@
     environment:
       - ASPNETCORE_HTTP_PORTS=8082
 
-      - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
+      - ConnectionStrings__Database=$STATISTIC_DATABASE_CONNECTION_STRING
 
       - JwtConfiguration__Authority=$JWT_AUTHORITY
       - JwtConfiguration__Audience=$JWT_AUDIENCE
       - JwtConfiguration__SecurityKey=$JWT_SECURITY_KEY
       
-      - ServiceBusSettings__Username=guest
-      - ServiceBusSettings__Password=guest
-      - ServiceBusSettings__Port=5672
-      - ServiceBusSettings__Hostname=service-bus
+      - ServiceBusSettings__Username=$SERVICE_BUS_USERNAME
+      - ServiceBusSettings__Password=$SERVICE_BUS_PASSWORD
+      - ServiceBusSettings__Port=$SERVICE_BUS_PORT
+      - ServiceBusSettings__Hostname=$SERVICE_BUS_HOSTNAME
       
       - NATIONAL_FOOD_WASTE_INDEX=$NATIONAL_FOOD_WASTE_INDEX
     ports:
@@ -76,7 +76,7 @@
       - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8083
-      - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
+      - ConnectionStrings__Database=$USER_DATABASE_CONNECTION_STRING
       - DEFAULT_ADMIN_USER=$DEFAULT_ADMIN_USER
       - DEFAULT_ADMIN_PASSWORD=$DEFAULT_ADMIN_PASSWORD
     ports:
@@ -93,7 +93,7 @@
       - database
     environment:
       - ASPNETCORE_HTTP_PORTS=8084
-      - ConnectionStrings__Database=$DATABASE_CONNECTION_STRING
+      - ConnectionStrings__Database=$PLAN_DATABASE_CONNECTION_STRING
     ports:
       - $PLAN_API_EXTERNAL_PORT:8084
     build:
