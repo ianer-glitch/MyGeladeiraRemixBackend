@@ -18,7 +18,7 @@ public class FileAdapter<TFile> : IFileAdapter<TFile>
     public FileAdapter(IConfiguration configuration , IServiceProvider serviceProvider)
     {
         
-        _bucketName = configuration.GetSection("MINIO_BUCKET_NAME").Value ?? throw new InvalidOperationException("Bucket name config is missing");
+        
         
         var endpointExternal = configuration.GetSection("MINIO_ENDPOINT_EXTERNAL").Value;
         var portExternal = configuration.GetSection("MINIO_ENDPOINT_PORT_EXTERNAL").Value;
@@ -42,10 +42,22 @@ public class FileAdapter<TFile> : IFileAdapter<TFile>
             .WithSSL(secure)
             .Build() ?? throw new InvalidOperationException();   
         
+        _bucketName = configuration.GetSection("MINIO_BUCKET_NAME").Value ?? throw new InvalidOperationException("Bucket name config is missing");
+
+        EnsureBucketExistsAsync().GetAwaiter().GetResult();
+        
         _serviceProvider = serviceProvider; 
     }
 
-    
+    private async Task EnsureBucketExistsAsync()
+    {
+        var bucketExists = await _minioClient.BucketExistsAsync(new BucketExistsArgs().WithBucket(_bucketName));
+
+        if (!bucketExists)
+        {
+            await _minioClient.MakeBucketAsync(new MakeBucketArgs().WithBucket(_bucketName));
+        }
+    }
     
     public async Task<TFile> GetFileAsync(string objectName)
     {
@@ -84,6 +96,8 @@ public class FileAdapter<TFile> : IFileAdapter<TFile>
             var objectName = $"{Path.GetFileNameWithoutExtension(file.FileName)}_{Guid.NewGuid()}{Path.GetExtension(file.FileName).ToLower()}";
 
             using var stream = file.OpenReadStream();
+            
+            
 
             var putObjectArgs = new PutObjectArgs()
                 .WithBucket(_bucketName)

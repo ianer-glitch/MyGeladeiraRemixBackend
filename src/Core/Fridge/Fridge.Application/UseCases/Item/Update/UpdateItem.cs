@@ -1,4 +1,5 @@
 using Fridge.Domain.Items.Update;
+using Microsoft.Extensions.Logging;
 
 namespace Fridge.Application.UseCases.Item.Update;
 
@@ -7,16 +8,19 @@ public class UpdateItem : IUpdateItem
     private readonly IRepository<ItemModel, FridgeContext> _rItem;
     private readonly IRepository<FridgeItem, FridgeContext> _rFridgeItem;
     private readonly IFileAdapter<IFileAdapterResult> _fileAdapter;
-    public UpdateItem(IRepository<ItemModel, FridgeContext> rItem, IFileAdapter<IFileAdapterResult> fileAdapter, IRepository<FridgeItem, FridgeContext> rFridgeItem)
+    private readonly ILogger<UpdateItem> _logger;
+    public UpdateItem(IRepository<ItemModel, FridgeContext> rItem, IFileAdapter<IFileAdapterResult> fileAdapter, IRepository<FridgeItem, FridgeContext> rFridgeItem, ILogger<UpdateItem> logger)
     {
         _rItem = rItem;
         _fileAdapter = fileAdapter;
         _rFridgeItem = rFridgeItem;
+        _logger = logger;
     }
     public async  Task<IUpdateItemOut> ExecuteAsync(IUpdateItemIn request)
     {
         try
         {
+            _logger.LogInformation("Updating item {Name}", request.Name);
             var currenctItem = await _rItem.Get(g => g.Id == request.ItemId).FirstOrDefaultAsync();
 
             if (currenctItem == null)
@@ -31,8 +35,10 @@ public class UpdateItem : IUpdateItem
             
             if (request.Icon != null)
             {
+                _logger.LogInformation("Updating item icon {Icon}", request.Icon);
                 var fileResult = await _fileAdapter.UploadAsync(request.Icon);
                 currenctItem.IconName = fileResult.Name; 
+                _logger.LogInformation("Updated Icon :{Icon}", fileResult.Name);
             }
             
             

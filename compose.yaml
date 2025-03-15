@@ -42,8 +42,11 @@
   statistic.api:
     image: statistic.api
     depends_on:
-      - database
-      - service-bus
+      service-bus:
+        condition: service_healthy
+      database:
+          condition: service_started
+          
     environment:
       - ASPNETCORE_HTTP_PORTS=8082
 
@@ -139,6 +142,13 @@
     ports:
       - 5004:5672
       - 5005:15672
+    
+    healthcheck:
+        test: [ "CMD", "rabbitmqctl", "status" ]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+        
     volumes:
       - ./volumes/ServiceBus/data/:/var/lib/rabbitmq/
       - ./volumes/ServiceBus/log/:/var/log/rabbitmq
