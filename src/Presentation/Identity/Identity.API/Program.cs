@@ -2,9 +2,10 @@ using Extensions;
 using Grpc.Adapter;
 using Identity.Application.Helpers;
 using Identity.Domain.Ports;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-
+Log.Logger = ServiceExtensions.GetLoggerConfiguration().CreateLogger();
 // Add services to the container.
 
 builder.Services.AddControllers();

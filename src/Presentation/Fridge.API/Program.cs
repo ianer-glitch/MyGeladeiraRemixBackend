@@ -43,10 +43,7 @@ using Serilog.Sinks.Async;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Log.Logger = new LoggerConfiguration()
-    .WriteTo.Async(a => a.Console()) 
-    .Enrich.FromLogContext()
-    .CreateLogger();
+Log.Logger = ServiceExtensions.GetLoggerConfiguration().CreateLogger();
 
 // Add services to the container.
 

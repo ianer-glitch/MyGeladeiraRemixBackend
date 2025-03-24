@@ -2,6 +2,7 @@ using Extensions;
 using Ports;
 using Postgre.Adapter;
 using RabbitMq.Adapter;
+using Serilog;
 using Statistic.Application.Statistics.CreateExpired;
 using Statistic.Application.Statistics.GetByAllUser;
 using Statistic.Application.Statistics.GetByUser;
@@ -12,7 +13,7 @@ using Statistic.Domain.Statistics.GetByUser;
 using Statistic.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
-
+Log.Logger = ServiceExtensions.GetLoggerConfiguration().CreateLogger();
 // Add services to the container.
 
 builder.Services.AddControllers();

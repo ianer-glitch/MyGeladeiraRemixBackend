@@ -6,6 +6,7 @@ using User.Infrastructure;
 using Extensions;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using User.Domain.Models;
 using User.Service.Services;
 using GreeterUseCase = User.Application.UseCases.GreeterUseCase;
@@ -13,7 +14,7 @@ using UserUseCase = User.Application.UseCases.UserUseCase;
 using UserService = User.Service.Services.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
-
+Log.Logger = ServiceExtensions.GetLoggerConfiguration().CreateLogger();
 // Add services to the container.
 builder.Services.AddGrpc();
 builder.Services.AddDbContext<UserContext>(builder.Configuration, "Database");

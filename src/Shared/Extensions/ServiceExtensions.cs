@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 namespace Extensions;
 using Microsoft.Extensions.DependencyInjection;
@@ -127,5 +128,13 @@ public static class ServiceExtensions
         });
 
         return services;
+    }
+    
+    public static LoggerConfiguration GetLoggerConfiguration()
+    {
+        return new LoggerConfiguration()
+            .WriteTo.Async(a => a.Console())
+            .Enrich.FromLogContext();
+
     }
 }
