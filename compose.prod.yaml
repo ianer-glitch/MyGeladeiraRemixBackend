@@ -1,0 +1,164 @@
+﻿services:
+  fridge.api:
+    image: ianerglitch/fridge.api
+    depends_on:
+      - service-bus
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8081
+      - ConnectionStrings__Database=$FRIDGE_DATABASE_CONNECTION_STRING
+      
+      - JwtConfiguration__Authority=$JWT_AUTHORITY
+      - JwtConfiguration__Audience=$JWT_AUDIENCE
+      - JwtConfiguration__SecurityKey=$JWT_SECURITY_KEY
+      
+      - MINIO_ROOT_USER=$MINIO_ACCESS_KEY
+      - MINIO_ROOT_PASSWORD=$MINIO_SECRET_KEY
+      - MINIO_ENDPOINT_EXTERNAL=$MINIO_ENDPOINT_EXTERNAL
+      - MINIO_ENDPOINT_PORT_EXTERNAL=$MINIO_ENDPOINT_PORT_EXTERNAL 
+      - MINIO_ENDPOINT=$MINIO_ENDPOINT
+      - MINIO_ENDPOINT_PORT=$MINIO_ENDPOINT_PORT
+      - MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY=$MINIO_SECRET_KEY
+      - MINIO_USE_SSL=$MINIO_USE_SSL
+      - MINIO_BUCKET_NAME=$MINIO_BUCKET_NAME
+
+      - ServiceBusSettings__Username=$SERVICE_BUS_USERNAME
+      - ServiceBusSettings__Password=$SERVICE_BUS_PASSWORD
+      - ServiceBusSettings__Port=$SERVICE_BUS_PORT
+      - ServiceBusSettings__Hostname=$SERVICE_BUS_HOSTNAME
+        
+      - OPEN_API__KEY=$OPEN_API__KEY
+      - OPEN_API__ASSISTANT_NAME=$OPEN_API__ASSISTANT_NAME
+      - OPEN_API__ASSISTANT_INSTRUCTIONS=$OPEN_API__ASSISTANT_INSTRUCTIONS
+    ports:
+      - $FRIDGE_API_EXTERNAL_PORT:8081
+    build:
+      context: .
+      dockerfile: src/Presentation/Fridge.API/Dockerfile
+    networks:
+      default:
+
+  statistic.api:
+    image: ianerglitch/statistic.api
+    depends_on:
+      service-bus:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8082
+
+      - ConnectionStrings__Database=$STATISTIC_DATABASE_CONNECTION_STRING
+
+      - JwtConfiguration__Authority=$JWT_AUTHORITY
+      - JwtConfiguration__Audience=$JWT_AUDIENCE
+      - JwtConfiguration__SecurityKey=$JWT_SECURITY_KEY
+      
+      - ServiceBusSettings__Username=$SERVICE_BUS_USERNAME
+      - ServiceBusSettings__Password=$SERVICE_BUS_PASSWORD
+      - ServiceBusSettings__Port=$SERVICE_BUS_PORT
+      - ServiceBusSettings__Hostname=$SERVICE_BUS_HOSTNAME
+      
+      - NATIONAL_FOOD_WASTE_INDEX=$NATIONAL_FOOD_WASTE_INDEX
+    ports:
+      - $STATISTIC_API_EXTERNAL_PORT:8082
+    build:
+      context: .
+      dockerfile: src/Presentation/Statistic.API/Dockerfile
+    networks:
+      default:
+      
+  user.service:
+    image: ianerglitch/user.service
+    
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8083
+      - ConnectionStrings__Database=$USER_DATABASE_CONNECTION_STRING
+      - DEFAULT_ADMIN_USER=$DEFAULT_ADMIN_USER
+      - DEFAULT_ADMIN_PASSWORD=$DEFAULT_ADMIN_PASSWORD
+    ports:
+      - $USER_API_EXTERNAL_PORT:8083
+    build:
+      context: .
+      dockerfile: src/Presentation/Identity/User.Service/Dockerfile
+    networks:
+      default:
+
+  plan.service:
+    image: ianerglitch/plan.service
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8084
+      - ConnectionStrings__Database=$PLAN_DATABASE_CONNECTION_STRING
+    ports:
+      - $PLAN_API_EXTERNAL_PORT:8084
+    build:
+      context: .
+      dockerfile: src/Presentation/Identity/Plan.Service/Dockerfile
+    networks:
+      default:
+
+  identity.api:
+    image: ianerglitch/identity.api
+
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8085
+      - ConnectionStrings__UserService=$CONNECTION_STRINGS_USERSERVICE
+      - JwtConfiguration__Issuer=$JWT_ISSUER
+      - JwtConfiguration__Authority=$JWT_AUTHORITY
+      - JwtConfiguration__Audience=$JWT_AUDIENCE
+      - JwtConfiguration__SecurityKey=$JWT_SECURITY_KEY
+      - JwtConfiguration__ExpirationTimeInMinutes=$JWT_EXPIRATION_TIME_IN_MINUTES
+    ports:
+      - $IDENTITY_API_EXTERNAL_PORT:8085
+    build:
+      context: .
+      dockerfile: src/Presentation/Identity/Identity.API/Dockerfile
+    networks:
+      default:
+
+  
+  
+  service-bus:
+    image: rabbitmq:3-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=$SERVICE_BUS_USERNAME
+      - RABBITMQ_DEFAULT_PASS=$SERVICE_BUS_PASSWORD
+    ports:
+      - 5004:5672
+      - 5005:15672
+    
+    healthcheck:
+        test: [ "CMD", "rabbitmqctl", "status" ]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+        
+    volumes:
+      - ./volumes/ServiceBus/data/:/var/lib/rabbitmq/
+      - ./volumes/ServiceBus/log/:/var/log/rabbitmq
+    
+    networks:
+      default:
+        
+        
+  
+  file.storage.service:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - $MINIO_ENDPOINT_PORT_EXTERNAL:9000
+    environment:
+      - MINIO_ROOT_USER=$MINIO_ACCESS_KEY
+      - MINIO_ROOT_PASSWORD=$MINIO_SECRET_KEY
+      - MINIO_ENDPOINT=$MINIO_ENDPOINT
+      - MINIO_ENDPOINT_PORT=$MINIO_ENDPOINT_PORT
+      - MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY=$MINIO_SECRET_KEY
+      - MINIO_USE_SSL=$MINIO_USE_SSL
+      - MINIO_BUCKET_NAME=$MINIO_BUCKET_NAME
+    volumes:
+      - ./volumes/minio:/var/lib/minio/data
+    command: server /data --console-address ":8086"
+    networks:
+      default:
+networks:
+  default:
+    driver: "bridge"

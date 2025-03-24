@@ -29,7 +29,7 @@ public class UpdateItem : IUpdateItem
             currenctItem.Name = request.Name;   
             currenctItem.Color = request.Color;
             currenctItem.Quantity = request.Quantity;
-            currenctItem.MinimunQuantity = request.Quantity;
+            currenctItem.MinimunQuantity = request.MinimumQuantity;
             currenctItem.Expiration = request.Expiration;
             
             

@@ -58,9 +58,10 @@ public class AddItemsToFridge : IAddItemsToFridge
             var success = await _rFridgeItem.SaveChangesAsync() > 0;
             if (!success)
                 _logger.LogInformation("Items could not be added to fridge.");
+            
             return new AddItemsToFridgeOut()
             {
-                Success = success
+                Success = true
             };
 
         }
