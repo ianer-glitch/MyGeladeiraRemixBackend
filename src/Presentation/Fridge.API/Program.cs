@@ -37,9 +37,16 @@ using OpenAI.Adapter;
 using Ports;
 using Postgre.Adapter;
 using RabbitMq.Adapter;
+using Serilog;
+using Serilog.Sinks.Async;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Async(a => a.Console()) 
+    .Enrich.FromLogContext()
+    .CreateLogger();
 
 // Add services to the container.
 
@@ -86,11 +93,11 @@ var app = builder.Build();
 
 app.ApplyMigrations<FridgeContext>();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();

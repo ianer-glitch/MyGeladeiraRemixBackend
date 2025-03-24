@@ -139,6 +139,9 @@
   
   service-bus:
     image: rabbitmq:3-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=$SERVICE_BUS_USERNAME
+      - RABBITMQ_DEFAULT_PASS=$SERVICE_BUS_PASSWORD
     ports:
       - 5004:5672
       - 5005:15672

@@ -1,6 +1,7 @@
 using Fridge.Domain.Fridges;
 using Fridge.Domain.Fridges.AddItem;
 using Fridge.Infrastructure;
+using Microsoft.Extensions.Logging;
 using Ports;
 
 namespace Fridge.Application.UseCases.Fridge.AddItem;
@@ -10,21 +11,24 @@ public class AddItemsToFridge : IAddItemsToFridge
     private readonly IRepository<FridgeItem,FridgeContext> _rFridgeItem;
     private readonly IRepository<Domain.Fridges.Fridge,FridgeContext> _rFridge;
     private readonly IRepository<Domain.Items.Item,FridgeContext> _rItem;
-
+    private readonly ILogger<AddItemsToFridge> _logger;
 
     public AddItemsToFridge(IRepository<FridgeItem, FridgeContext> rFridgeItem,
         IRepository<Domain.Fridges.Fridge, FridgeContext> rFridge,
-        IRepository<Domain.Items.Item, FridgeContext> rItem)
+        IRepository<Domain.Items.Item, FridgeContext> rItem, ILogger<AddItemsToFridge> logger)
     {
         _rFridgeItem = rFridgeItem;
         _rFridge = rFridge;
         _rItem = rItem;
+        _logger = logger;
     }
     
     public async Task<IAddItemsToFridgeOut> ExecuteAsync(IAddItemsToFridgeIn request)
     {
         try
         {
+            var itemIds = string.Join(',', request.ItemIds);    
+            _logger.LogInformation("Adding items {itemIds} to fridge.",itemIds);
             var userFridge =  _rFridge.Get(g=>g.UserId == request.UserId).FirstOrDefault();
             if (userFridge == null)
             {
@@ -51,15 +55,18 @@ public class AddItemsToFridge : IAddItemsToFridge
                             request.UserId)
                         )
                 );
-
+            var success = await _rFridgeItem.SaveChangesAsync() > 0;
+            if (!success)
+                _logger.LogInformation("Items could not be added to fridge.");
             return new AddItemsToFridgeOut()
             {
-                Success = await _rFridgeItem.SaveChangesAsync() > 0
+                Success = success
             };
 
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message,e.InnerException);
             throw;
         }
     }

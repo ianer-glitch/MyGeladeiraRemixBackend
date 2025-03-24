@@ -5,6 +5,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7A7B379B-9929-40FF-AD60-3169A632C835}"
 	ProjectSection(SolutionItems) = preProject
 		compose.yaml = compose.yaml
+		compose.prod.yaml = compose.prod.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fridge.Domain", "src\Core\Fridge\Fridge.Domain\Fridge.Domain.csproj", "{07BA4B93-181E-4259-AEC5-162746A83347}"
