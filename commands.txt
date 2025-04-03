@@ -1,0 +1,5 @@
+dotnet ef migrations add initial --project src/Core/Fridge/Fridge.Infrastructure/Fridge.Infrastructure.csproj  --startup-project src/Presentation/Fridge.API/Fridge.API.csproj 
+
+dotnet ef migrations add initial  --project src/Core/Statistic/Statistic.Infrastructure/Statistic.Infrastructure.csproj  --startup-project src/Presentation/Statistic.API/Statistic.API.csproj 
+
+dotnet ef migrations add initial  --project src/Core/User/User.Infrastructure/User.Infrastructure.csproj  --startup-project src/Presentation/Identity/User.Service/User.Service.csproj 

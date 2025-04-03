@@ -1,6 +1,7 @@
 using Extensions;
+using Mssql.Adapter;
 using Ports;
-using Postgre.Adapter;
+
 using RabbitMq.Adapter;
 using Serilog;
 using Statistic.Application.Statistics.CreateExpired;

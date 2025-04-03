@@ -45,7 +45,7 @@ public class AddItemsToFridge : IAddItemsToFridge
             await _rFridgeItem.AddRangeAsync(itemsToAddInFridge
                         .Select(s=> new FridgeItem(s.Name,
                             s.Color,
-                            s.Expiration,
+                            s.CurrecntExpirationDate,
                             s.MinimunQuantity,
                             s.Quantity,
                             s.IconName,

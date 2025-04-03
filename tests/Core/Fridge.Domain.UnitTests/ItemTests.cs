@@ -52,33 +52,9 @@ public class ItemTests
         Assert.Equal(item.Color, itemColor);
     }
     
-    [Fact]
-    public void SetExpiration_WhenExpirationLessThanToday_ThrowsArgumentException(){
-    
-        var item = GetValidItem;
-        var act = () => item.SetExpiration(DateTime.UtcNow.AddDays(-1));
-        Assert.Throws<ArgumentException>(act);
-    }
-    
-    [Fact]
-    public void SetExpiration_WhenExpirationMoreThanToday_DoesNotThrow(){
-    
-        var item = GetValidItem;
-        var date = DateTime.UtcNow.AddDays(1);
-        item.SetExpiration(date);
-        Assert.Equal(date,item.Expiration);
-    }
+   
 
-    [Fact]
-    public void GetPercentageExpired_ShouldReturn_stringWithPercentageExpired()
-    {
-        var item  = GetValidItem;
-        var percentage = item.GetPercentageExpired();
-        Assert.NotNull(percentage);
-        Assert.NotEmpty(percentage);
-        Assert.Contains("%",percentage);
-        
-    }
+   
     
     [Fact]
     public void SetIcon_WhenIconIsEmpty_ThrowsArgumentNullException()

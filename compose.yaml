@@ -122,18 +122,32 @@
     networks:
       default:
 
+#  database:
+#    image: postgres
+#    restart: always
+#    environment:
+#      POSTGRES_USER: $POSTGRES_USER
+#      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+#      POSTGRES_DB: $POSTGRES_DB
+#    
+#    volumes:
+#      - ./volumes/database:/var/lib/postgresql/data
+#    ports:
+#      - 5011:5432
+#    networks:
+#      default:
+  
   database:
-    image: postgres
+    image: mcr.microsoft.com/mssql/server:2022-latest
     restart: always
     environment:
-      POSTGRES_USER: $POSTGRES_USER
-      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-      POSTGRES_DB: $POSTGRES_DB
-    
+      SA_PASSWORD: $MSSQL_SA_PASSWORD
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
     volumes:
-      - ./volumes/database:/var/lib/postgresql/data
+      - ./volumes/mssql:/var/opt/mssql
     ports:
-      - 5011:5432
+      - 5011:1433
     networks:
       default:
   
@@ -158,7 +172,8 @@
     
     networks:
       default:
-        
+    
+      
         
   
   file.storage.service:

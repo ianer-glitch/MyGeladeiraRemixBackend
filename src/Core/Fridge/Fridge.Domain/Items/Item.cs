@@ -4,43 +4,43 @@ using Models;
 
 namespace Fridge.Domain.Items;
 
-public class Item : Entity,IItem
+public class Item : Entity
 {
     public Item()
     {
-        
+
     }
 
     public Item(string name,
-                string color,
-                DateTime expiration,
-                int minimunQuantity ,
-                int quantity ,
-                string iconName,
-                double weight,
-                Guid userInclusionId):base(userInclusionId)
+        string color,
+        DateTime expiration,
+        int minimunQuantity,
+        int quantity,
+        string iconName,
+        double weight,
+        Guid userInclusionId) : base(userInclusionId)
     {
         SetName(name);
-        SetColor(color);    
-        SetExpiration(expiration);
+        SetColor(color);
+        Expiration = expiration;
         MinimunQuantity = minimunQuantity;
         Quantity = quantity;
-        IconName = iconName;    
+        IconName = iconName;
         SetWeight(weight);
+        SetTimeToExpire(Expiration);
     }
+
     public string Name { get; set; }
     public string Color { get; set; }
-    public DateTime Expiration { get; set; }
-    
-    public string IconName { get; set; } 
-    public int MinimunQuantity { get; set; }    
+    public string IconName { get; set; }
+    public int MinimunQuantity { get; set; }
     public int Quantity { get; set; }
-    
+
+    public int TimeToExpireInDays { get; set; }
+
+    public DateTime Expiration { get; set; }
     public double Weight { get; set; }
     public bool ShouldAddToShoppingList => Quantity < MinimunQuantity;
-    
-    public bool IsExpired => Expiration > DateTime.UtcNow;
-
     public void SetIconName(string icon)
     {
         if(icon.IsNullOrEmpty())
@@ -62,12 +62,7 @@ public class Item : Entity,IItem
         Color = color;
     }
 
-    public void SetExpiration(DateTime expiration)
-    {
-        if(expiration < DateTime.Now)
-            throw new ArgumentException("expiration should be in the future", nameof(expiration));  
-        Expiration = expiration;
-    }
+  
 
     public void SetWeight(double weight)
     {
@@ -76,27 +71,14 @@ public class Item : Entity,IItem
         Weight = weight;
     }
 
-    public string GetPercentageExpired()
+    public void SetTimeToExpire(DateTime expiration)
     {
-        var expDate = Expiration;
-
-        if (expDate < DateTime.Now)
-            return "100%";
-        long totalTime;
-        if (Modified is null)
-        {
-            totalTime = expDate.Subtract(Inclusion).Ticks;
-        }
-        else
-        {
-            totalTime = expDate.Subtract((DateTime)Modified).Ticks;
-        }
-        
-        var totalToExpire = expDate.Subtract(DateTime.Now).Ticks ;
-        
-        var result =100 - totalToExpire*100/totalTime;
-        return $"{result}%";
-        
-
+        TimeToExpireInDays = (expiration.Date - DateTime.Today).Days;
     }
+
+    public DateTime CurrecntExpirationDate=> DateTime.UtcNow.AddDays(TimeToExpireInDays);
+
+   
+
+ 
 }

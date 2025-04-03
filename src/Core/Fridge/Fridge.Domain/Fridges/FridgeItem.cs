@@ -35,6 +35,7 @@ public class FridgeItem :Entity,IItem
         Quantity = quantity;
         IconName = iconName;    
         SetWeight(itemWeight);
+        SetTimeToExpire(Expiration);
         
     }
     
@@ -52,6 +53,8 @@ public class FridgeItem :Entity,IItem
     public string Name { get; set; }
     public string Color { get; set; }
     public DateTime Expiration { get; set; }
+    
+    public int TimeToExpireInDays { get; set; }
     public string IconName { get; set; }
     public int MinimunQuantity { get; set; }
     public int Quantity { get; set; }
@@ -119,6 +122,17 @@ public class FridgeItem :Entity,IItem
         
 
     }
-
+    
+    public void SetTimeToExpire(DateTime expiration)
+    {
+        TimeToExpireInDays = (expiration.Date - DateTime.Today).Days;
+    }
+    
+    public DateTime CurrecntExpirationDate=> DateTime.UtcNow.AddDays(TimeToExpireInDays);  
+      
+    public void UpdateItemExpiration()
+    {
+        Expiration = CurrecntExpirationDate;
+    }
     
 }

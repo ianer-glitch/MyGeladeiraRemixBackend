@@ -35,10 +35,11 @@ using Fridge.Infrastructure;
 using Minio.Adapter;
 using OpenAI.Adapter;
 using Ports;
-using Postgre.Adapter;
+
 using RabbitMq.Adapter;
 using Serilog;
 using Serilog.Sinks.Async;
+using Mssql.Adapter;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -81,6 +82,8 @@ builder.Services.AddScoped<IChatGpt, ChatGpt>();
 builder.Services.AddScoped<IAskRecipes, AskRecipes>();
 builder.Services.AddScoped<IGetRecommendedItems, GetRecommendedItems>();
 builder.Services.AddScoped<IGetRecommendedItemWeight, GetRecommendedItemWeight>();
+
+
 
 builder.Services.ConfigureCors();
 

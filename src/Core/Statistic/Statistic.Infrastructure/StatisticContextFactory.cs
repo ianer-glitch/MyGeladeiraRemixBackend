@@ -8,7 +8,7 @@ public class StatisticContextFactory :IDesignTimeDbContextFactory<StatisticConte
     public StatisticContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<StatisticContext>();
-        optionsBuilder.UseNpgsql("");
+        optionsBuilder.UseSqlServer("");
         return new StatisticContext(optionsBuilder.Options);
     }
 }

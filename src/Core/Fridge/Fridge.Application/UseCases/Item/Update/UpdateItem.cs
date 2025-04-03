@@ -31,6 +31,7 @@ public class UpdateItem : IUpdateItem
             currenctItem.Quantity = request.Quantity;
             currenctItem.MinimunQuantity = request.MinimumQuantity;
             currenctItem.Expiration = request.Expiration;
+            currenctItem.SetTimeToExpire(request.Expiration);
             
             
             if (request.Icon != null)

@@ -25,7 +25,8 @@ public static class ServiceExtensions
 
             services.AddDbContext<TContext>(options =>
             {
-                options.UseNpgsql(dbConnectionString);
+                options.UseSqlServer(dbConnectionString);
+                // options.UseNpgsql(dbConnectionString);
             });
 
             return services;

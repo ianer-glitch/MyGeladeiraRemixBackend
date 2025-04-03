@@ -8,7 +8,7 @@ public class FridgeContextFactory : IDesignTimeDbContextFactory<FridgeContext>
     public FridgeContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<FridgeContext>();
-        optionsBuilder.UseNpgsql("");
+        optionsBuilder.UseSqlServer("");
         return new FridgeContext(optionsBuilder.Options);
     }
 }
