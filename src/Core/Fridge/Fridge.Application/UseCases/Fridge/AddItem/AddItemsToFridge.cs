@@ -37,7 +37,7 @@ public class AddItemsToFridge : IAddItemsToFridge
                 if(await _rFridge.SaveChangesAsync() == 0)
                     throw new  Exception("Could not create Fridge for user" + request.UserId);
             }
-            var itemsAlreadyInFridge = _rFridgeItem.Get(g => g.IsActive).Select(s => s.ItemId);
+            var itemsAlreadyInFridge = _rFridgeItem.Get(g => g.IsActive && g.FridgeId == userFridge.Id).Select(s => s.ItemId);
             var itemIdListToAdd = request.ItemIds.Where(w => !itemsAlreadyInFridge.Contains(w));
             
             var itemsToAddInFridge = _rItem.Get(g=>itemIdListToAdd.Contains(g.Id));
@@ -56,8 +56,25 @@ public class AddItemsToFridge : IAddItemsToFridge
                         )
                 );
             var success = await _rFridgeItem.SaveChangesAsync() > 0;
+
             if (!success)
-                _logger.LogInformation("Items could not be added to fridge.");
+            {
+                var errorItems = itemsToAddInFridge.Select(s => @$"Name : {s.Name}
+                        Color : {s.Color}
+                        Expiration : {s.Expiration}
+                        MinimunQuantity : {s.MinimunQuantity}
+                        Quantity : {s.Quantity}
+                        IconName : {s.IconName}
+                        Weight : {s.Weight}
+                        Id : {s.Id}
+                        userFridgeId : {userFridge.Id}
+                        userId : {request.UserId}");
+
+                var errorItemsMessage = string.Join(',', errorItems);
+                
+                _logger.LogInformation("Items : {errorItemsMessage} could not be added to fridge.",errorItemsMessage);
+                
+            }
             
             return new AddItemsToFridgeOut()
             {
