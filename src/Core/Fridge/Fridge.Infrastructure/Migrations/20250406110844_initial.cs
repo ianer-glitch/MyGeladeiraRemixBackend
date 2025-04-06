@@ -11,8 +11,12 @@ namespace Fridge.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "FridgeSchema");
+
             migrationBuilder.CreateTable(
                 name: "Fridges",
+                schema: "FridgeSchema",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -30,6 +34,7 @@ namespace Fridge.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Items",
+                schema: "FridgeSchema",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -38,7 +43,7 @@ namespace Fridge.Infrastructure.Migrations
                     IconName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MinimunQuantity = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    TimeToExpire = table.Column<TimeSpan>(type: "time", nullable: false),
+                    TimeToExpireInDays = table.Column<int>(type: "int", nullable: false),
                     Expiration = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Weight = table.Column<double>(type: "float", nullable: false),
                     Inclusion = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -54,6 +59,7 @@ namespace Fridge.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ShoppingList",
+                schema: "FridgeSchema",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -71,6 +77,7 @@ namespace Fridge.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "FridgeItems",
+                schema: "FridgeSchema",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -80,7 +87,7 @@ namespace Fridge.Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Expiration = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TimeToExpire = table.Column<TimeSpan>(type: "time", nullable: false),
+                    TimeToExpireInDays = table.Column<int>(type: "int", nullable: false),
                     IconName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MinimunQuantity = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
@@ -97,34 +104,40 @@ namespace Fridge.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_FridgeItems_Fridges_FridgeId",
                         column: x => x.FridgeId,
+                        principalSchema: "FridgeSchema",
                         principalTable: "Fridges",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_FridgeItems_Items_ItemId",
                         column: x => x.ItemId,
+                        principalSchema: "FridgeSchema",
                         principalTable: "Items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_FridgeItems_ShoppingList_ShoppingListId",
                         column: x => x.ShoppingListId,
+                        principalSchema: "FridgeSchema",
                         principalTable: "ShoppingList",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_FridgeItems_FridgeId",
+                schema: "FridgeSchema",
                 table: "FridgeItems",
                 column: "FridgeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FridgeItems_ItemId",
+                schema: "FridgeSchema",
                 table: "FridgeItems",
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FridgeItems_ShoppingListId",
+                schema: "FridgeSchema",
                 table: "FridgeItems",
                 column: "ShoppingListId");
         }
@@ -133,16 +146,20 @@ namespace Fridge.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FridgeItems");
+                name: "FridgeItems",
+                schema: "FridgeSchema");
 
             migrationBuilder.DropTable(
-                name: "Fridges");
+                name: "Fridges",
+                schema: "FridgeSchema");
 
             migrationBuilder.DropTable(
-                name: "Items");
+                name: "Items",
+                schema: "FridgeSchema");
 
             migrationBuilder.DropTable(
-                name: "ShoppingList");
+                name: "ShoppingList",
+                schema: "FridgeSchema");
         }
     }
 }

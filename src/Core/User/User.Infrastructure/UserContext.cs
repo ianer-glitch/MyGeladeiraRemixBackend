@@ -13,9 +13,12 @@ public class UserContext : IdentityDbContext<Domain.Models.User,UserRoles,Guid>
         
     }
     
-    protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(builder);
-        builder.Entity<UserClaims>().ToTable("AspNetUserClaims"); 
+        modelBuilder.HasDefaultSchema("UserSchema");
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<UserClaims>().ToTable("AspNetUserClaims"); 
     }
+    
+    
 }

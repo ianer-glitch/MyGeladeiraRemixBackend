@@ -15,4 +15,12 @@ public class FridgeContext : DbContext
     public DbSet<Domain.Fridges.Fridge> Fridges { get; set; }
     public DbSet<FridgeItem> FridgeItems { get; set; }
     
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("FridgeSchema");
+        base.OnModelCreating(modelBuilder);
+    }
+
+
+    
 }

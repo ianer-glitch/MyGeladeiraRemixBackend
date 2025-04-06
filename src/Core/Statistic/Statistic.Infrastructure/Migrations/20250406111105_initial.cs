@@ -11,8 +11,12 @@ namespace Statistic.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "StatisticSchema");
+
             migrationBuilder.CreateTable(
                 name: "Statistics",
+                schema: "StatisticSchema",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -29,6 +33,7 @@ namespace Statistic.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserFoodWasteIndexes",
+                schema: "StatisticSchema",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -46,6 +51,7 @@ namespace Statistic.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ExpiredStatistics",
+                schema: "StatisticSchema",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -64,6 +70,7 @@ namespace Statistic.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_ExpiredStatistics_Statistics_StatisticId",
                         column: x => x.StatisticId,
+                        principalSchema: "StatisticSchema",
                         principalTable: "Statistics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -71,6 +78,7 @@ namespace Statistic.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExpiredStatistics_StatisticId",
+                schema: "StatisticSchema",
                 table: "ExpiredStatistics",
                 column: "StatisticId");
         }
@@ -79,13 +87,16 @@ namespace Statistic.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ExpiredStatistics");
+                name: "ExpiredStatistics",
+                schema: "StatisticSchema");
 
             migrationBuilder.DropTable(
-                name: "UserFoodWasteIndexes");
+                name: "UserFoodWasteIndexes",
+                schema: "StatisticSchema");
 
             migrationBuilder.DropTable(
-                name: "Statistics");
+                name: "Statistics",
+                schema: "StatisticSchema");
         }
     }
 }

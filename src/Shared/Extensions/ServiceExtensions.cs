@@ -28,6 +28,8 @@ public static class ServiceExtensions
                 options.UseSqlServer(dbConnectionString);
                 // options.UseNpgsql(dbConnectionString);
             });
+            
+            
 
             return services;
 

@@ -12,7 +12,7 @@ using Statistic.Infrastructure;
 namespace Statistic.Infrastructure.Migrations
 {
     [DbContext(typeof(StatisticContext))]
-    [Migration("20250403162802_initial")]
+    [Migration("20250406111105_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -20,6 +20,7 @@ namespace Statistic.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("StatisticSchema")
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -51,7 +52,7 @@ namespace Statistic.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserFoodWasteIndexes");
+                    b.ToTable("UserFoodWasteIndexes", "StatisticSchema");
                 });
 
             modelBuilder.Entity("Statistic.Domain.Statistics.ExpiredStatistic", b =>
@@ -88,7 +89,7 @@ namespace Statistic.Infrastructure.Migrations
 
                     b.HasIndex("StatisticId");
 
-                    b.ToTable("ExpiredStatistics");
+                    b.ToTable("ExpiredStatistics", "StatisticSchema");
                 });
 
             modelBuilder.Entity("Statistic.Domain.Statistics.Statistic", b =>
@@ -114,7 +115,7 @@ namespace Statistic.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Statistics");
+                    b.ToTable("Statistics", "StatisticSchema");
                 });
 
             modelBuilder.Entity("Statistic.Domain.Statistics.ExpiredStatistic", b =>

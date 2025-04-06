@@ -16,5 +16,11 @@ public class StatisticContext : DbContext
         
     }
     
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("StatisticSchema");
+        base.OnModelCreating(modelBuilder);
+    }
+    
    
 }

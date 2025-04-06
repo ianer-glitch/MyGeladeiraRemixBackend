@@ -12,7 +12,7 @@ using User.Infrastructure;
 namespace User.Infrastructure.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20250403162738_initial")]
+    [Migration("20250406111144_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -20,6 +20,7 @@ namespace User.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("UserSchema")
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -46,7 +47,7 @@ namespace User.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("AspNetRoleClaims", "UserSchema");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
@@ -75,7 +76,7 @@ namespace User.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("AspNetUserClaims", "UserSchema");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserClaim<Guid>");
 
@@ -100,7 +101,7 @@ namespace User.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("AspNetUserLogins", "UserSchema");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
@@ -115,7 +116,7 @@ namespace User.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("AspNetUserRoles", "UserSchema");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -134,7 +135,7 @@ namespace User.Infrastructure.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("AspNetUserTokens", "UserSchema");
                 });
 
             modelBuilder.Entity("User.Domain.Models.User", b =>
@@ -229,7 +230,7 @@ namespace User.Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("AspNetUsers", "UserSchema");
                 });
 
             modelBuilder.Entity("User.Domain.Models.UserRoles", b =>
@@ -272,7 +273,7 @@ namespace User.Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("AspNetRoles", "UserSchema");
                 });
 
             modelBuilder.Entity("User.Domain.Models.UserClaims", b =>
@@ -294,7 +295,7 @@ namespace User.Infrastructure.Migrations
                     b.Property<Guid>("UserModifiedId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("AspNetUserClaims", "UserSchema");
 
                     b.HasDiscriminator().HasValue("UserClaims");
                 });

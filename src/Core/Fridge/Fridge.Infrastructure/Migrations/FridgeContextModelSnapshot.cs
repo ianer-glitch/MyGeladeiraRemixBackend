@@ -17,6 +17,7 @@ namespace Fridge.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("FridgeSchema")
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -48,7 +49,7 @@ namespace Fridge.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Fridges");
+                    b.ToTable("Fridges", "FridgeSchema");
                 });
 
             modelBuilder.Entity("Fridge.Domain.Fridges.FridgeItem", b =>
@@ -116,7 +117,7 @@ namespace Fridge.Infrastructure.Migrations
 
                     b.HasIndex("ShoppingListId");
 
-                    b.ToTable("FridgeItems");
+                    b.ToTable("FridgeItems", "FridgeSchema");
                 });
 
             modelBuilder.Entity("Fridge.Domain.Items.Item", b =>
@@ -169,7 +170,7 @@ namespace Fridge.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Items");
+                    b.ToTable("Items", "FridgeSchema");
                 });
 
             modelBuilder.Entity("Fridge.Domain.ShoppingLists.ShoppingList", b =>
@@ -198,7 +199,7 @@ namespace Fridge.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShoppingList");
+                    b.ToTable("ShoppingList", "FridgeSchema");
                 });
 
             modelBuilder.Entity("Fridge.Domain.Fridges.FridgeItem", b =>
