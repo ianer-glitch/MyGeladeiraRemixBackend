@@ -78,6 +78,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAI.Adapter", "src\Adapt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mssql.Adapter", "src\Adapters\Mssql.Adapter\Mssql.Adapter.csproj", "{190E4F06-D96C-436B-BA3B-7A4CAC8F3DCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Postgre.Adapter.UnitTests", "tests\Adapters\Postgre.Adapter.UnitTests\Postgre.Adapter.UnitTests.csproj", "{44F76C5A-1B59-4B0F-9D18-6889FC8EE6AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -232,5 +234,9 @@ Global
 		{190E4F06-D96C-436B-BA3B-7A4CAC8F3DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{190E4F06-D96C-436B-BA3B-7A4CAC8F3DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{190E4F06-D96C-436B-BA3B-7A4CAC8F3DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F76C5A-1B59-4B0F-9D18-6889FC8EE6AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44F76C5A-1B59-4B0F-9D18-6889FC8EE6AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44F76C5A-1B59-4B0F-9D18-6889FC8EE6AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44F76C5A-1B59-4B0F-9D18-6889FC8EE6AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
