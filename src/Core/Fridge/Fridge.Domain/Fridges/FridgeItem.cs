@@ -62,7 +62,7 @@ public class FridgeItem :Entity,IItem
     
     public bool ShouldAddToShoppingList => Quantity < MinimunQuantity;
     
-    public bool IsExpired => Expiration > DateTime.UtcNow;
+    public bool IsExpired =>  DateTime.UtcNow  > Expiration;
     
     public void SetIconName(string icon)
     {
