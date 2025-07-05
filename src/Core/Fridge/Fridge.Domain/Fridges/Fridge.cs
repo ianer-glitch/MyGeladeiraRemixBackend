@@ -14,4 +14,6 @@ public class Fridge : Entity
         UserId = userId;
     }
     public Guid UserId { get; set; }
+    
+    
 }
